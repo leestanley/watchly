@@ -1,5 +1,5 @@
-import Post from './components/Post';
-import WritePost from './components/WritePost';
+import Post from '../../components/Post';
+import WritePost from '../../components/WritePost';
 
 const HomePage = () => {
     return (
