@@ -1,0 +1,138 @@
+.post-container {
+    border: 1px solid #DDD;
+    border-radius: 12px;
+    background-color: #F7F7F7;
+    margin: 5vw;
+
+    .post-header {
+        display: flex;
+        justify-content: space-between;
+        margin: 1vw;
+
+        .poster-info {
+            display: flex;
+            align-items: center;
+
+            p {
+                margin: 0 5px;
+            }
+
+            .poster-pic {
+                height: 10vw;
+                width: 10vw;
+                border-radius: 50%;
+            }
+
+            .poster-name {
+                font-weight: 600;
+            }
+        }
+
+        .more-icon {
+            font-size: 36px;
+        }
+    }
+
+    .post-body {
+        margin: 1vw;
+        border-bottom: 1px solid #DDD;
+
+        .post-main {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+            .post-img {
+                border-radius: 12px;
+                height: 25vh;
+                width: 40vw;
+            }
+
+            .post-content {
+                margin: 0 2vw;
+
+                .content-header {
+                    display: flex;
+                    justify-content: space-between;
+
+                    .content-details {
+                        .content-title {
+                            font-weight: 600;
+                            font-size: 1em;
+                        }
+
+                        .content-date {
+                            font-size: 0.9em;
+                        }
+                    }
+
+                    .post-rating {
+                        font-size: 1.5em;
+                        font-weight: 600;
+                    }
+                }
+
+                .post-text {
+                    font-size: 0.8em;
+                }
+            }
+        }
+
+        .post-tags {
+            margin: 3px 0;
+        }
+    }
+
+    .comment-section {
+        .comment {
+            display: flex;
+            justify-content: space-between;
+            margin: 1vw;
+
+            .comment-info {
+                display: flex;
+
+                .commenter-pic {
+                    height: 10vw;
+                    width: 10vw;
+                    border-radius: 50%;
+                }
+
+                .comment-details {
+                    .commenter-name {
+                        font-weight: 600;
+                    }
+
+                    .comment-content {
+                        font-size: 0.8em;
+                    }
+
+                    .comment-reply {
+                        .bold-reply {
+                            font-weight: 600;
+                        }
+                    }
+
+                    p {
+                        margin: 0 5px;
+                    }
+                }
+            }
+
+            .comment-more-icon {
+                font-size: 24px;
+            }
+        }
+
+        .write-comment {
+            text-align: center;
+
+            .comment-input {
+                width: 95%;
+                margin: 1vh;
+                border-radius: 5px;
+                border: 1px solid #DDD;
+            }
+        }
+    }
+}
