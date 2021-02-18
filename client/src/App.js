@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import SearchPage from "./pages/SearchPage";
-
+import HomePage from './pages/HomePage';
 
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
             <SearchPage />
           </Route>
           <Route path="/">
-            <h1>This is the homage page - replace this with a component</h1>
+            <HomePage />
           </Route>
         </Switch>
       </div>

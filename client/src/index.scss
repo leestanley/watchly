@@ -1,16 +1,17 @@
 @import '~antd/dist/antd.css';
 
 // Set font to Poppins everywhere
-* { 
+* {
   font-family: 'Poppins', sans-serif;
+  p {
+    margin: 0;
+  }
 }
 
 // Use below for color variables and defaults
 
-
 $black: #333333 !default;
 $border-radius: 0.25rem !default;
-
 
 // Use the below for headings
 
@@ -19,4 +20,3 @@ $border-radius: 0.25rem !default;
   font-weight: 500;
   color: $black;
 }
-

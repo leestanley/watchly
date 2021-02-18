@@ -1,0 +1,33 @@
+.write-post-container {
+    border: 1px solid #DDD;
+    border-radius: 12px;
+    background-color: #F7F7F7;
+    margin: 5vw;
+
+    .write-post-header {
+        font-weight: 600;
+        margin: 2vw;
+    }
+
+    .write-post-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 2vw;
+
+        .post-input {
+            border-radius: 5px;
+            border: 1px solid #DDD;
+        }
+
+        .post-options {
+            display: flex;
+            justify-content: space-around;
+            margin: 1vw;
+
+            p {
+                font-size: 0.8em;
+            }
+        }
+    }
+}
