@@ -11,7 +11,7 @@ function SearchPage() {
       <SearchCard />
       <ShowCard />
       <FriendCard />
-      <h2>Global Reviews</h2>
+      <h2 style={{"marginTop": "2vh"}}>Global Reviews</h2>
       <Post />
     </div>
   );
