@@ -1,12 +1,17 @@
-.title {
-    margin-top: 2.5%;
-    margin-left: 5%;
-    font-family: "Poppins", sans-serif;
+.TitleCard {
+    display: flex;
+    justify-content: space-between;
+
+    h2 {
+        font-size: 32px;
+        font-weight: 600;
+    }
+
+    .profilePicture {
+        width: 49px;
+        height: 49px;
+        // Remove for a6
+        filter: grayscale(100%)
+    }
 }
 
-#profilePicture {
-    float: right;
-    margin-right: 5%;
-    width: 49;
-    height: 49;
-}

@@ -3,9 +3,17 @@
 // Set font to Poppins everywhere
 * {
   font-family: 'Poppins', sans-serif;
-  p {
-    margin: 0;
-  }
+}
+
+p {
+  margin: 0;
+}
+
+.App {
+  width: 100vw;
+  height: 100vh;
+  padding: 2vh 5vw;
+  overflow: hidden;
 }
 
 // Use below for color variables and defaults

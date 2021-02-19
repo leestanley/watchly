@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button } from 'antd';
 import { EllipsisOutlined } from '@ant-design/icons';
 import pfp from '../../assets/tmpprofilepic.jpg';

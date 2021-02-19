@@ -1,11 +1,18 @@
 import './style.scss';
 
-import Search from '../../components/SearchCard';
+import SearchCard from '../../components/SearchCard';
+import ShowCard from '../../components/ShowCard';
+import FriendCard from '../../components/FriendCard';
+import Post from '../../components/Post';
 
 function SearchPage() {
   return (
     <div className="SearchPage">
-      <Search />
+      <SearchCard />
+      <ShowCard />
+      <FriendCard />
+      <h2>Global Reviews</h2>
+      <Post />
     </div>
   );
 }

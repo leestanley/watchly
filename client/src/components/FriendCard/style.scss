@@ -1,0 +1,23 @@
+.FriendCard {
+  .f-row {
+    display: flex;
+  }
+}
+
+.Friend {
+  margin-right: 7vw;
+  text-align: center;
+
+  .profilePicture {
+    margin-bottom: 12px;
+    filter: grayscale(100%)
+  }
+
+  h4 {
+    line-height: 12px;
+  }
+
+  p {
+    line-height: 16px;
+  }
+}
