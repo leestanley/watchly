@@ -4,7 +4,7 @@ import defaultProfilePic from '../../assets/default_profile.png'
 
 function Title() {
     return (
-        <div class="TitleCard">
+        <div className="TitleCard">
             <h2>Watchly</h2>
             <img src={defaultProfilePic} className="profilePicture" alt="profile-pic" />
         </div>

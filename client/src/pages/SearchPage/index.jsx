@@ -8,7 +8,7 @@ import Post from '../../components/Post';
 function SearchPage() {
   return (
     <div className="SearchPage">
-      <SearchCard />
+      <SearchCard title="Search for a TV Show or Movie" />
       <ShowCard />
       <FriendCard />
       <h2 style={{"marginTop": "2vh"}}>Global Reviews</h2>

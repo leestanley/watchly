@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 
 import SearchPage from './pages/SearchPage';
 import HomePage from './pages/HomePage';
+import ListPage from './pages/ListPage';
 
 function App() {
   return (
@@ -12,6 +13,9 @@ function App() {
       <div className="App">
         <Title />
         <Switch>
+          <Route path="/list">
+            <ListPage />
+          </Route>
           <Route path="/search">
             <SearchPage />
           </Route>

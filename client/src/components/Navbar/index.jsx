@@ -47,9 +47,9 @@ import {
 
 function Navbar(props) {
   return (
-    <div class="navbar-container">
+    <div className="navbar-container">
       <div className="row">
-        <Link to="/">
+        <Link to="/list">
           <DatabaseOutlined className="nav-icons" />
         </Link>
         <Link to="/">

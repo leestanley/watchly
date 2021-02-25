@@ -1,0 +1,52 @@
+.filter-bar {
+    display: flex;
+    justify-content: space-between;
+    margin: 2vh 0;
+}
+
+.ListCard {
+    border: 1px solid #DDD;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+
+    .card-left {
+        display: flex;
+        align-items: center;
+        margin: 2vh;
+
+        .card-ranking {
+            font-weight: 500;
+            font-size: 1.4em;
+        }
+
+        .card-img {
+            border-radius: 12px;
+            height: 9.375vh;
+            width: 15vw;
+            margin: 0 2vh;
+        }
+
+        .card-info {
+            .card-title {
+                font-size: 1.2em;
+                font-weight: 500;
+            }
+
+            .card-date {
+                font-size: 0.8em;
+            }
+        }
+    }
+
+    .card-right {
+        display: flex;
+        align-items: center;
+        margin: 3vh;
+
+        .card-rating {
+            font-size: 1.6em;
+            font-weight: 500;
+        }
+    }
+}
