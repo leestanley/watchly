@@ -1,4 +1,4 @@
-import { Button } from 'antd';
+import { Button, notification } from 'antd';
 import { Link } from 'react-router-dom';
 
 import ax from 'axios';
@@ -18,8 +18,14 @@ function LandingPage({ history }) {
           history.push('/home');
         else
           history.push(`/fbRegister?email=${result.user.email}`);
-      }).catch(error => alert(error));
-    }).catch(error => alert(error));
+      }).catch(error => notification.error({
+        message: 'Auth Error',
+        description: error.message,
+      }));
+    }).catch(error => notification.error({
+      message: 'Auth Error',
+      description: error.message,
+    }));
   };
 
   return (

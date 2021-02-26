@@ -83,10 +83,21 @@ const api = {
         for (let i = 0; i < result.users.length; i++) {
             let u = result.users[i];
 
-            if (u.email === email) return api.createSuccess();
+            if (u.email.toLowerCase() === email.toLowerCase()) return api.createSuccess();
         }
 
         return api.createError(`Email "${email}" is not registered.`);
+    },
+    isUsernameTaken: async (username) => {
+        let result = await api.getUsers();
+
+        for (let i = 0; i < result.users.length; i++) {
+            let u = result.users[i];
+
+            if (u.username.toLowerCase() === username.toLowerCase()) return api.createSuccess();
+        }
+
+        return api.createError(`Username "${username}" is not taken.`);
     }
 };
 

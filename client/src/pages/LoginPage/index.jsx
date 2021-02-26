@@ -22,9 +22,14 @@ function LoginPage({ history }) {
               message: 'Success!',
               description: 'Search for shows and movies now!',
             });
+
             history.push('/home');
           },
-          (error) => alert(error)
+          (error) =>
+            notification.error({
+              message: 'Auth Error',
+              description: error.message,
+            })
         );
       } else {
         notification.error({

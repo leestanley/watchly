@@ -18,6 +18,7 @@ function RegisterPage({ history }) {
       if (username && username.trim().length > 0) {
         if (password && password.trim().length > 0) {
           if (confirmPassword && confirmPassword.length > 0) {
+            // passwords should match
             if (password === confirmPassword) {
               fbase.register(
                 username,
@@ -27,14 +28,21 @@ function RegisterPage({ history }) {
                   if (res.data.success) {
                     notification.success({
                       message: 'Success!',
-                      description: 'Search for shows and movies now!',
+                      description: 'You can now login with your new account!',
                     });
+
                     history.push('/');
                   } else {
-                    alert(res.data.message);
+                    notification.error({
+                      message: 'Auth Error',
+                      description: res.data.message
+                    });
                   }
                 },
-                (error) => alert(error)
+                (error) => notification.error({
+                  message: 'Auth Error',
+                  description: error.message
+                })
               );
             } else {
               notification.error({
