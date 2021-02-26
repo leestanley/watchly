@@ -5,13 +5,13 @@
                 "name": "Jeffrey Ha",
                 "email": "jha@ucsd.edu",
                 "date": "Posted 10m ago",
-                "pfp": "../../assets/tmpprofilepic.jpg"
+                "pfp": "https://i.imgur.com/bXB7AWx.jpg"
             },
             "movie": {
                 "name": "Space Jam",
                 "date": 2018,
-                "rating": 7.2,
-                "poster": "../../assets/spacejam.jpg"
+                "rating": 7,
+                "poster": "https://i.imgur.com/pNTI29P.jpeg"
             },
             "content": "I really liked how Henry Chan dunked on Danny Nguyen in this one. Like who would have expected that omega fire 2 pointer on that poggers jump. Overall, good movie, I would recommend it to friends who love volleyball and cooking. Animation: 9/10 Story: 8/10 Acting: 4/10",
             "tags": [
@@ -22,7 +22,7 @@
                 {
                     "uuid": 1,
                     "profile": {
-                        "pfp": "../../assets/tmpprofilepic.jpg",
+                        "pfp": "https://i.imgur.com/bXB7AWx.jpg",
                         "name": "Alan Cao"
                     },
                     "content": "Completely disagree, msg me on DM we can fite.",
@@ -31,7 +31,7 @@
                 {
                     "uuid": 2,
                     "profile": {
-                        "pfp": "../../assets/tmpprofilepic.jpg",
+                        "pfp": "https://i.imgur.com/bXB7AWx.jpg",
                         "name": "Henry Luu"
                     },
                     "content": "Tbh Henry Chan shoulda won the oscar instead.",
