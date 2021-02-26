@@ -15,7 +15,7 @@ function FacebookRegisterPage({ history }) {
   let search = window.location.search;
   let params = new URLSearchParams(search);
 
-  if (!params.has('email') && (params.get('email').trim().length === 0)) {
+  if (!params.has('email') || (params.get('email').trim().length === 0)) {
     history.push('/');
     return (<div>
       <h3>Redirecting...</h3>
