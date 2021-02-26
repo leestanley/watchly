@@ -3,9 +3,9 @@ const router = express.Router();
 const f = require('../system');
 
 router.post('/createUser', async (req, res) => {
-    let username = req.query.username;
-    let name = req.query.name;
-    let email = req.query.email;
+    let username = req.body.username;
+    let name = req.body.name;
+    let email = req.body.email;
     
     if (username && username.length > 0)
         if (name && name.length > 0)
