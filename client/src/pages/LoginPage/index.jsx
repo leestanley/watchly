@@ -14,7 +14,7 @@ function LoginPage({ history }) {
   const onLogin = () => {
     if (email && email.trim().length > 0) {
       if (password && password.trim().length > 0) {
-        fbase.login(email, password, data => {
+        fbase.login(email, password, res => {
           if (res.data.success) {
             alert('Successfully logged in!');
             history.push('/home');
