@@ -51,8 +51,11 @@ function LoginPage({ history }) {
         <div className="log-in">
           <Link to="/home">
             <p>
-              For demo purposes click here to skip or use <br /> "test@test.com
-              : 123test"
+              For demo purposes click here to skip or use
+              <br /> <b>email: </b>
+              test@test.com
+              <br />
+              <b>pass:</b> 123test
             </p>
           </Link>
           <h3>Email</h3>
