@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Input, Button } from 'antd';
+import { Input, Button, notification } from 'antd';
 import { Link } from 'react-router-dom';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import fbase from '../../firebase';
@@ -8,28 +8,42 @@ import './style.scss';
 import background from '../../assets/formlogin.png';
 
 function LoginPage({ history }) {
-  const [ email, setEmail ] = useState('');
-  const [ password, setPassword ] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const onLogin = () => {
     if (email && email.trim().length > 0) {
       if (password && password.trim().length > 0) {
-        fbase.login(email, password, res => {
-          alert('Successfully logged in!');
-          history.push('/home');
-        }, error => alert(error));
+        fbase.login(
+          email,
+          password,
+          (res) => {
+            notification.success({
+              message: 'Success!',
+              description: 'Search for shows and movies now!',
+            });
+            history.push('/home');
+          },
+          (error) => alert(error)
+        );
       } else {
-        alert('Please provide a password!');
+        notification.error({
+          message: 'Auth Error',
+          description: 'Please provide a password!',
+        });
       }
     } else {
-      alert('Please provide an email!');
+      notification.error({
+        message: 'Auth Error',
+        description: 'Please provide an email!',
+      });
     }
   };
 
   return (
     <div className="LoginPage">
-      <div className="log-in">
-        <form>
+      <form>
+        <div className="log-in">
           <h3>Email</h3>
           <Input
             className="input"
@@ -52,11 +66,11 @@ function LoginPage({ history }) {
           <Button className="l-styles" onClick={onLogin} type="submit">
             Submit
           </Button>
-        </form>
-        <Link to="/">
-          <p>Go Back</p>
-        </Link>
-      </div>
+          <Link to="/">
+            <p>Go Back</p>
+          </Link>
+        </div>
+      </form>
       <img src={background} alt="background" className="background" />
     </div>
   );

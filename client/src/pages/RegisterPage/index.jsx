@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Input, Button } from 'antd';
+import { Input, Button, notification } from 'antd';
 import { Link } from 'react-router-dom';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import fbase from '../../firebase';
@@ -8,10 +8,10 @@ import './style.scss';
 import background from '../../assets/formlogin.png';
 
 function RegisterPage({ history }) {
-  const [ email, setEmail ] = useState('');
-  const [ username, setUsername ] = useState('');
-  const [ password, setPassword ] = useState('');
-  const [ confirmPassword, setConfirmPassword ] = useState('');
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const onRegister = () => {
     if (email && email.trim().length > 0) {
@@ -19,28 +19,53 @@ function RegisterPage({ history }) {
         if (password && password.trim().length > 0) {
           if (confirmPassword && confirmPassword.length > 0) {
             if (password === confirmPassword) {
-              fbase.register(username, email, password, (res) => {
-                if (res.data.success) {
-                  alert('Successfully registered!');
-                  history.push('/');
-                } else {
-                  alert(res.data.message);
-                }
-              }, (error) => alert(error));
+              fbase.register(
+                username,
+                email,
+                password,
+                (res) => {
+                  if (res.data.success) {
+                    notification.success({
+                      message: 'Success!',
+                      description: 'Search for shows and movies now!',
+                    });
+                    history.push('/');
+                  } else {
+                    alert(res.data.message);
+                  }
+                },
+                (error) => alert(error)
+              );
             } else {
-              alert('Please correctly confirm your password, it should be the same!')
+              notification.error({
+                message: 'Auth Error',
+                description:
+                  'Please correctly confirm your password, it should be the same!',
+              });
             }
           } else {
-            alert('Please confirm your password.');
+            notification.error({
+              message: 'Auth Error',
+              description: 'Please confirm your password.',
+            });
           }
         } else {
-          alert('Please provide a password.');
+          notification.error({
+            message: 'Auth Error',
+            description: 'Please provide a password.',
+          });
         }
       } else {
-        alert('Please provide a valid username.');
+        notification.error({
+          message: 'Auth Error',
+          description: 'Please provide a valid username.',
+        });
       }
     } else {
-      alert('Please provide an email!');
+      notification.error({
+        message: 'Auth Error',
+        description: 'Please provide an email!',
+      });
     }
   };
 
@@ -48,9 +73,17 @@ function RegisterPage({ history }) {
     <div className="RegisterPage">
       <div className="log-in">
         <h3>Email</h3>
-        <Input className="input" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <Input
+          className="input"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
         <h3>Username</h3>
-        <Input className="input" value={username} onChange={(e) => setUsername(e.target.value)} />
+        <Input
+          className="input"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
         <h3>Password</h3>
         <Input.Password
           className="input"
@@ -77,7 +110,9 @@ function RegisterPage({ history }) {
             )
           }
         />
-        <Button className="l-styles" onClick={onRegister}>Submit</Button>
+        <Button className="l-styles" onClick={onRegister}>
+          Submit
+        </Button>
         <Link to="/">
           <p>Go Back</p>
         </Link>
