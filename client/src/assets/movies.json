@@ -1,0 +1,36 @@
+{
+    "movies": [
+        {
+            "title": "Space Jam",
+            "date": "2018",
+            "img": "https://i.imgur.com/pNTI29P.jpeg",
+            "ranking": 1,
+            "rating": 9,
+            "content": "Swackhammer (Danny DeVito), an evil alien theme park owner, needs a new attraction at Moron Mountain. When his gang, the Nerdlucks, heads to Earth to kidnap Bugs Bunny (Billy West) and the Looney Tunes, Bugs challenges them to a basketball game to determine their fate."
+        },
+        {
+            "title": "iCarly",
+            "date": "2007-2018",
+            "img": "https://i.imgur.com/pNTI29P.jpeg",
+            "ranking": 2,
+            "rating": 8,
+            "content": "Carly Shay finds her previously \"normal\" life turned upside down when her Internet show, \"iCarly,\" becomes an instant smash with young Web heads. With her parents traveling abroad, Carly must rely on the help of friends Sam and Freddie, and her quirky older brother, Spencer, to cope with the newfound success."
+        },
+        {
+            "title": "Avengers",
+            "date": "2012",
+            "img": "https://i.imgur.com/pNTI29P.jpeg",
+            "ranking": 3,
+            "rating": 6,
+            "content": "When Thor's evil brother, Loki(Tom Hiddleston), gains access to the unlimited power of the energy cube called the Tesseract, Nick Fury(Samuel L.Jackson), director of S.H.I.E.L.D., initiates a superhero recruitment effort to defeat the unprecedented threat to Earth."
+        },
+        {
+            "title": "Man of Steel",
+            "date": "2013",
+            "img": "https://i.imgur.com/pNTI29P.jpeg",
+            "ranking": 4,
+            "rating": 4,
+            "content": "Man of Steel is a reboot of the Superman film series that portrays the character's origin story.In the film, Clark Kent learns that he is a superpowered alien from the planet Krypton.He assumes the role of mankind's protector as Superman, making the choice to face General Zod and prevent him from destroying humanity."
+        }
+    ]
+}
