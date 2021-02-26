@@ -15,6 +15,7 @@ const HomePage = () => {
         <div className="HomePage">
             <WritePost />
             {renderPosts()}
+            <div style={{ height: '75px' }} />
         </div>
     );
 }

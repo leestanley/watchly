@@ -6,6 +6,7 @@ import {
   DatabaseOutlined,
   HomeOutlined,
   UserOutlined,
+  SearchOutlined,
 } from '@ant-design/icons';
 
 // const icons = [
@@ -52,10 +53,13 @@ function Navbar(props) {
         <Link to="/list">
           <DatabaseOutlined className="nav-icons" />
         </Link>
-        <Link to="/">
+        <Link to="/home">
           <HomeOutlined className="nav-icons" />
         </Link>
         <Link to="/search">
+          <SearchOutlined className="nav-icons" />
+        </Link>
+        <Link to="/profile">
           <UserOutlined className="nav-icons" />
         </Link>
       </div>
