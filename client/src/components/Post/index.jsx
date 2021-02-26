@@ -1,11 +1,34 @@
 import { Button } from 'antd';
 import { EllipsisOutlined } from '@ant-design/icons';
+import CommentSection from '../CommentSection';
 import pfp from '../../assets/tmpprofilepic.jpg';
 import movieimg from '../../assets/spacejam.jpg';
 
 import './style.scss';
 
 const Post = () => {
+    // remove later
+    const commentList = [
+        {
+            uuid: 1,
+            profile: {
+                pfp: pfp,
+                name: 'Alan Cao'
+            },
+            content: 'Completely disagree, msg me on DM we can fite.',
+            replies: []
+        },
+        {
+            uuid: 2,
+            profile: {
+                pfp: pfp,
+                name: 'Henry Luu'
+            },
+            content: 'Tbh Henry Chan shoulda won the oscar instead.',
+            replies: []
+        },
+    ];
+
     return(
         <div className="post-container">
             <div className="post-header">
@@ -40,33 +63,7 @@ const Post = () => {
                     <Button shape="round" size="small">Sci-Fi</Button>
                 </div>
             </div>
-            <div className="comment-section">
-                <div className="comment">
-                    <div className="comment-info">
-                        <img className="commenter-pic" src={pfp} alt="Profile"></img>
-                        <div className="comment-details">
-                            <p className="commenter-name">Alan Cao</p>
-                            <p className="comment-content">Completely disagree, msg me on DM we can fite.</p>
-                            <p className="comment-reply"><span className="bold-reply">Reply</span> | 3m</p>
-                        </div>
-                    </div>
-                    <EllipsisOutlined className="comment-more-icon" />
-                </div>
-                <div className="comment">
-                    <div className="comment-info">
-                        <img className="commenter-pic" src={pfp} alt="Profile"></img>
-                        <div className="comment-details">
-                            <p className="commenter-name">Henry Luu</p>
-                            <p className="comment-content">Tbh Henry Chan shoulda won the oscar instead.</p>
-                            <p className="comment-reply"><span className="bold-reply">Reply</span> | 5m</p>
-                        </div>
-                    </div>
-                    <EllipsisOutlined className="comment-more-icon" />
-                </div>
-                <div className="write-comment">
-                    <input className="comment-input" placeholder="Write a comment"></input>
-                </div>
-            </div>
+            <CommentSection commentList={commentList} />
         </div>
     );
 };
