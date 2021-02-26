@@ -33,5 +33,14 @@ router.get('/emailRegistered', async (req, res) => {
         res.json(f.createError(`Please provide an email.`));
 });
 
+router.get('/usernameTaken', async (req, res) => {
+    let username = req.query.username;
+
+    if (username && username.length > 0)
+        res.json(await f.isUsernameTaken(username));
+    else
+        res.json(f.createError(`Please provide a username.`));
+});
+
 router.get('/', async (req, res) => res.json(await f.getUsers()));
 module.exports = router;
