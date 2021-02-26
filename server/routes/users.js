@@ -28,5 +28,5 @@ router.get('/u/:username', async (req, res) => {
         res.json(f.createError(`Please provide a username.`));
 });
 
-router.get('/', async (req, res) => res.json(await f.getUsers(true)));
+router.get('/', async (req, res) => res.json(await f.getUsers()));
 module.exports = router;
