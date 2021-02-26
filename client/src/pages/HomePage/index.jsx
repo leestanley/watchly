@@ -6,7 +6,8 @@ const HomePage = () => {
         <div className="HomePage">
             <WritePost />
             <Post />
-        </div>
+            <div style={{height: '75px'}} />
+         </div>
     );
 }
 

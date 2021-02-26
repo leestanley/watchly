@@ -13,6 +13,7 @@ function SearchPage() {
       <FriendCard />
       <h2 style={{"marginTop": "2vh"}}>Global Reviews</h2>
       <Post />
+      <div style={{height: '75px'}} />
     </div>
   );
 }
