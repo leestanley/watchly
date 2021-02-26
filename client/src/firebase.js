@@ -24,8 +24,8 @@ class Firebase {
 
     login = (email, password, onSuccess = undefined, onError = undefined) => {
         this.auth.signInWithEmailAndPassword(email, password)
-            .then((data) => {
-                if (onSuccess !== undefined) onSuccess(data);
+            .then((res) => {
+                if (onSuccess !== undefined) onSuccess(res);
             })
             .catch(onError);
     }

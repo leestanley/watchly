@@ -30,12 +30,8 @@ function App() {
             <HomePage />
             <Navbar />
           </Route>
-          <Route path="/register">
-            <RegisterPage />
-          </Route>
-          <Route path="/login">
-            <LoginPage />
-          </Route>
+          <Route path="/register" component={RegisterPage} />
+          <Route path="/login" component={LoginPage} />
           <Route path="/">
             <LandingPage />
           </Route>

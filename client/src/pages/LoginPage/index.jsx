@@ -15,12 +15,8 @@ function LoginPage({ history }) {
     if (email && email.trim().length > 0) {
       if (password && password.trim().length > 0) {
         fbase.login(email, password, res => {
-          if (res.data.success) {
-            alert('Successfully logged in!');
-            history.push('/home');
-          } else {
-            alert(res.data.message);
-          }
+          alert('Successfully logged in!');
+          history.push('/home');
         }, error => alert(error));
       } else {
         alert('Please provide a password!');
