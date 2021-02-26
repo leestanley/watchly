@@ -1,4 +1,12 @@
 .comment-form {
     display: flex;
     margin: 1vw;
+
+    .ant-form-item {
+        margin-bottom: 12px;
+    }
+}
+
+.comment-list {
+    margin-top: 1.3vh;
 }

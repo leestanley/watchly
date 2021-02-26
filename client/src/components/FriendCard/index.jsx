@@ -10,20 +10,14 @@ const FriendCard = () => {
         <Friend
           pic={defaultProfilePic}
           name="Jeffrey Ha"
-          season={3}
-          episode={2}
         />
         <Friend
           pic={defaultProfilePic}
           name="Alan Cao"
-          season={23}
-          episode={9}
         />
         <Friend
           pic={defaultProfilePic}
           name="Danny Nguyen"
-          season={1}
-          episode={2}
         />
       </div>
     </div>
@@ -35,8 +29,6 @@ const Friend = (props) => {
     <div className="Friend">
       <img className="profilePicture" src={props.pic} alt="profile" />
       <h4>{props.name}</h4>
-      <p>season {props.season}</p>
-      <p>season {props.episode}</p>
     </div>
   );
 };

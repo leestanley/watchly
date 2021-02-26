@@ -40,7 +40,7 @@
         .post-main {
             display: flex;
             justify-content: space-around;
-            align-items: center;
+            margin-top: 12px;
 
             .post-img {
                 border-radius: 12px;
@@ -79,7 +79,11 @@
         }
 
         .post-tags {
-            margin: 3px 0;
+            margin: 5px 0px;
+
+            .tags {
+                margin: 0px 2px;
+            }
         }
     }
 

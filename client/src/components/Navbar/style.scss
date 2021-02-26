@@ -3,22 +3,23 @@
 .navbar-container {
   position: fixed;
   bottom: -1px;
-  left: .33px;
+  left: 0.33px;
   width: 100vw;
   height: 65px;
   border: 1px solid rgba(51, 51, 51, 0.2);
   border-radius: 60px 60px 0px 0px;
   background-color: #fff;
 
-    .row {
-        display: flex;
-      justify-content: space-around;
-      align-items: center;
-      height: 100%;
+  .row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    padding: 15px;
 
-      .nav-icons {
-          font-size: 32px;
-          color: $black;
-      }
+    .nav-icons {
+      font-size: 32px;
+      color: $black;
+    }
   }
 }

@@ -54,7 +54,7 @@ const CommentSection = ({ commentList }) => {
                 {renderComments()}
             </div>
             <Form onFinish={handleCreateComment} className="comment-form">
-                <Form.Item name="comment">
+                <Form.Item className="form-item" name="comment">
                     <Input placeholder="Write a comment..." style={{ width: 280 }} />
                 </Form.Item>
                 <Form.Item>

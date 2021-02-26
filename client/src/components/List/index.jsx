@@ -45,7 +45,7 @@ const List = ({ list }) => {
         <div className="List">
             <div className="filter-bar">
                 <h2 className="filter-title">Filter</h2>
-                <Select defaultValue="highest" style={{ width: 100 }} onChange={handleFilterRating}>
+                <Select defaultValue="highest" style={{ width: 100, height: 30 }} onChange={handleFilterRating}>
                     <Option value="highest">Highest</Option>
                     <Option value="lowest">Lowest</Option>
                 </Select>
