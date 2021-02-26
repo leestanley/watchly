@@ -28,7 +28,7 @@ function RegisterPage({ history }) {
                   if (res.data.success) {
                     notification.success({
                       message: 'Success!',
-                      description: 'Search for shows and movies now!',
+                      description: 'You can now login with your new account!',
                     });
 
                     history.push('/');

@@ -38,15 +38,29 @@ class Firebase {
     }
 
     register = (username, email, password, onSuccess = undefined, onError = undefined) => {
-        this.auth.createUserWithEmailAndPassword(email, password)
-            .then((data) => {
-                // create new entry in database
-                ax.post(`${BASE_API}/users/createUser`, {
-                    username,
-                    email
-                }).then((res) => {
-                    if (onSuccess !== undefined) onSuccess(res);
-                }).catch(onError);
+        // before registering, check if the username is not taken
+        ax.get(`${BASE_API}/users/usernameTaken?username=${username}`)
+            .then((res) => {
+                if (!res.data.success) {
+                    // username not taken!
+                    this.auth.createUserWithEmailAndPassword(email, password)
+                        .then((data) => {
+                            // create new entry in database
+                            ax.post(`${BASE_API}/users/createUser`, {
+                                username,
+                                email
+                            }).then((res) => {
+                                if (onSuccess !== undefined) onSuccess(res);
+                            }).catch(onError);
+                        })
+                        .catch(onError);
+                } else {
+                    // unfortunately taken :(
+                    if (onError !== undefined)
+                        onError({
+                            message: `Username "${username} is already taken!`
+                        });
+                }
             })
             .catch(onError);
     }
