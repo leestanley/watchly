@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { Input, Button, notification } from 'antd';
 import { Link } from 'react-router-dom';
-import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import ax from 'axios';
-import fbase from '../../firebase';
 import './style.scss';
 
 import background from '../../assets/formlogin.png';
