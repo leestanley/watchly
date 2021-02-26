@@ -17,6 +17,7 @@ function FacebookRegisterPage({ history }) {
 
   if (!params.has('email') || params.get('email').trim().length === 0) {
     history.push('/');
+
     return (
       <div>
         <h3>Redirecting...</h3>
@@ -36,12 +37,19 @@ function FacebookRegisterPage({ history }) {
             notification.open({
               message: 'Successfully created an account through Facebook!',
             });
+
             history.push('/home');
           } else {
-            alert(res.data.message);
+            notification.error({
+              message: 'Auth Error',
+              description: res.data.message
+            });
           }
         })
-        .catch((err) => alert(err));
+        .catch((error) => notification.error({
+          message: 'Auth Error',
+          description: error.message
+        }));
     } else {
       notification.error({
         message: 'Auth Error',
@@ -54,7 +62,7 @@ function FacebookRegisterPage({ history }) {
     <div className="FacebookRegisterPage">
       <div className="sign-up">
         <h3>
-          Complete your Facebook registration by completing the field below!
+          Complete your registration by completing the field below!
         </h3>
         <br />
         <h3>Username</h3>
