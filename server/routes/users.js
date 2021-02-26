@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const f = require('../system');
 
-router.get('/createUser', async (req, res) => {
+router.post('/createUser', async (req, res) => {
     let username = req.query.username;
     let name = req.query.name;
     let email = req.query.email;
