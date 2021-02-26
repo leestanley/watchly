@@ -44,6 +44,12 @@ function LoginPage({ history }) {
     <div className="LoginPage">
       <form>
         <div className="log-in">
+          <Link to="/home">
+            <p>
+              For demo purposes click here to skip or use <br /> "test@test.com
+              : 123test"
+            </p>
+          </Link>
           <h3>Email</h3>
           <Input
             className="input"
