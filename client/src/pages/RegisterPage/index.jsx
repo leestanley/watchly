@@ -7,7 +7,7 @@ import './style.scss';
 
 import background from '../../assets/formlogin.png';
 
-function RegisterPage() {
+function RegisterPage({ history }) {
   const [ email, setEmail ] = useState('');
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
@@ -19,8 +19,13 @@ function RegisterPage() {
         if (password && password.trim().length > 0) {
           if (confirmPassword && confirmPassword.length > 0) {
             if (password === confirmPassword) {
-              fbase.register(username, email, password, (data) => {
-                console.log(data);
+              fbase.register(username, email, password, (res) => {
+                if (res.data.success) {
+                  alert('Successfully registered!');
+                  history.push('/');
+                } else {
+                  alert(res.data.message);
+                }
               }, (error) => alert(error));
             } else {
               alert('Please correctly confirm your password, it should be the same!')
