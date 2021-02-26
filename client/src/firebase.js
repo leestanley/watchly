@@ -3,7 +3,7 @@ import 'firebase/firebase-auth';
 import 'firebase/database';
 import ax from 'axios';
 
-const BASE_API = 'https://watchly-snu.herokuapp.com/api';
+const BASE_API = process.env.REACT_APP_API_URL;
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_API_KEY,
     authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -35,7 +35,7 @@ class Firebase {
         this.auth.signOut();
     }
 
-    register = (name, email, password, onSuccess = undefined, onError = undefined) => {
+    register = (username, email, password, onSuccess = undefined, onError = undefined) => {
         this.auth.createUserWithEmailAndPassword(email, password)
             .then((data) => {
                 // create new entry in database
