@@ -1,6 +1,7 @@
 import app from 'firebase/app';
 import 'firebase/firebase-auth';
 import 'firebase/database';
+
 import ax from 'axios';
 
 const BASE_API = process.env.REACT_APP_API_URL;
@@ -14,12 +15,14 @@ const firebaseConfig = {
     appId: process.env.REACT_APP_APP_ID,
     measurementId: process.env.REACT_APP_MEASUREMENT_ID
 };
+
 class Firebase {
     constructor() {
         app.initializeApp(firebaseConfig);
 
         this.auth = app.auth();
         this.db = app.database();
+        this.fb = new app.auth.FacebookAuthProvider();
     }
 
     login = (email, password, onSuccess = undefined, onError = undefined) => {

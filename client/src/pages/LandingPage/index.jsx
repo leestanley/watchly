@@ -1,19 +1,34 @@
 import { Button } from 'antd';
 import { Link } from 'react-router-dom';
 
+import ax from 'axios';
+import fbase from '../../firebase';
 import './style.scss';
 
 import facebook from '../../assets/facebook.svg';
 import background from '../../assets/formlogin.png';
 
-function LandingPage() {
+const BASE_API = process.env.REACT_APP_API_URL;
+function LandingPage({ history }) {
+  const onFacebookLogin = () => {
+    fbase.auth.signInWithPopup(fbase.fb).then(result => {
+      // need to check if this email has an account associated already
+      ax.get(`${BASE_API}/users/emailRegistered?email=${result.user.email}`).then(res => {
+        if (res.data.success)
+          history.push('/home');
+        else
+          history.push(`/fbRegister?email=${result.user.email}`);
+      }).catch(error => alert(error));
+    }).catch(error => alert(error));
+  };
+
   return (
     <div className="LandingPage">
       <div className="log-in">
         <Link to="/register">
           <Button className="l-styles">Register Today</Button>
         </Link>
-        <Button className="l-styles">
+        <Button className="l-styles" onClick={onFacebookLogin}>
           <img src={facebook} style={{ marginRight: '10px' }} />
           Facebook Login
         </Button>
