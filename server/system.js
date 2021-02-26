@@ -77,6 +77,17 @@ const api = {
             });
         }
     },
+    isEmailRegistered: async (email) => {
+        let result = await api.getUsers();
+
+        for (let i = 0; i < result.users.length; i++) {
+            let u = result.users[i];
+
+            if (u.email === email) return api.createSuccess();
+        }
+
+        return api.createError(`Email "${email}" is not registered.`);
+    }
 };
 
 module.exports = api;

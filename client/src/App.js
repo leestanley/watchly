@@ -9,6 +9,7 @@ import ListPage from './pages/ListPage';
 import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import FacebookRegisterPage from './pages/FacebookRegisterPage';
 
 function App() {
   return (
@@ -30,15 +31,10 @@ function App() {
             <HomePage />
             <Navbar />
           </Route>
-          <Route path="/register">
-            <RegisterPage />
-          </Route>
-          <Route path="/login">
-            <LoginPage />
-          </Route>
-          <Route path="/">
-            <LandingPage />
-          </Route>
+          <Route path="/register" component={RegisterPage} />
+          <Route path="/fbRegister" component={FacebookRegisterPage} />
+          <Route path="/login" component={LoginPage} />
+          <Route exact path="/" component={LandingPage} />
         </Switch>
       </div>
     </Router>

@@ -1,6 +1,7 @@
 import app from 'firebase/app';
 import 'firebase/firebase-auth';
 import 'firebase/database';
+
 import ax from 'axios';
 
 const BASE_API = process.env.REACT_APP_API_URL;
@@ -21,12 +22,13 @@ class Firebase {
 
         this.auth = app.auth();
         this.db = app.database();
+        this.fb = new app.auth.FacebookAuthProvider();
     }
 
     login = (email, password, onSuccess = undefined, onError = undefined) => {
         this.auth.signInWithEmailAndPassword(email, password)
-            .then((data) => {
-                if (onSuccess !== undefined) onSuccess(data);
+            .then((res) => {
+                if (onSuccess !== undefined) onSuccess(res);
             })
             .catch(onError);
     }

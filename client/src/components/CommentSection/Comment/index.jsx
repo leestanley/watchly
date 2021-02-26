@@ -78,7 +78,7 @@ const Comment = ({ comment }) => {
                         <p className="comment-reply"><a className="bold-reply" onClick={openReply} href="/#">Reply</a></p>
                     </div>
                 </div>
-                <EllipsisOutlined className="comment-more-icon" />
+                {/* <EllipsisOutlined className="comment-more-icon" /> */}
             </div>
             {renderReplies()}
             {renderReplyEditor()}

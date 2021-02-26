@@ -7,21 +7,17 @@ import './style.scss';
 
 import background from '../../assets/formlogin.png';
 
-function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+function LoginPage({ history }) {
+  const [ email, setEmail ] = useState('');
+  const [ password, setPassword ] = useState('');
 
   const onLogin = () => {
     if (email && email.trim().length > 0) {
       if (password && password.trim().length > 0) {
-        fbase.login(
-          email,
-          password,
-          (data) => {
-            console.log(data);
-          },
-          (error) => alert(error)
-        );
+        fbase.login(email, password, res => {
+          alert('Successfully logged in!');
+          history.push('/home');
+        }, error => alert(error));
       } else {
         alert('Please provide a password!');
       }
