@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Input, Button, notification } from 'antd';
 import { Link } from 'react-router-dom';
 import ax from 'axios';
-import { decode, isValid } from 'js-base64';
+import { decode } from 'js-base64';
 import './style.scss';
 
 import background from '../../assets/formlogin.png';
@@ -14,7 +14,7 @@ function FacebookRegisterPage({ history }) {
   let search = window.location.search;
   let params = new URLSearchParams(search);
 
-  if (!params.has('email') || (params.get('email').trim().length === 0) || !isValid(params.get('email'))) {
+  if (!params.has('email') || params.get('email').trim().length === 0) {
     history.push('/');
 
     return (
@@ -24,7 +24,7 @@ function FacebookRegisterPage({ history }) {
     );
   }
 
-  if (!params.has('profilePic') || (params.get('profilePic').trim().length === 0) || !isValid(params.get('profilePic'))) {
+  if (!params.has('profilePic') || params.get('profilePic').trim().length === 0) {
     history.push('/');
 
     return (
@@ -34,11 +34,22 @@ function FacebookRegisterPage({ history }) {
     );
   }
 
-  console.log(`is email valid: ${isValid(params.get('email'))}`)
-  console.log(`is pfp valid: ${isValid(params.get('pfp'))}`)
+  let email = null;
+  let profilePic = null;
 
-  let email = decode(params.get('email'));
-  let profilePic = decode(params.get('profilePic'));
+  try {
+    email = decode(params.get('email'));
+    profilePic = decode(params.get('profilePic'));
+  } catch (e) {
+    history.push('/');
+
+    return (
+      <div>
+        <h3>Redirecting...</h3>
+      </div>
+    );
+  }
+  
   console.log(`email: ${email}`);
   console.log(`pfp: ${profilePic}`);
 
