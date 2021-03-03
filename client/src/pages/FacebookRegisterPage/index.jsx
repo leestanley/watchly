@@ -50,9 +50,6 @@ function FacebookRegisterPage({ history }) {
     );
   }
   
-  console.log(`email: ${email}`);
-  console.log(`pfp: ${profilePic}`);
-
   const onRegister = () => {
     if (username && username.trim().length > 0) {
       ax.post(`${BASE_API}/users/createUser`, {
