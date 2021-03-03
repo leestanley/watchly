@@ -34,11 +34,14 @@ function FacebookRegisterPage({ history }) {
     );
   }
 
+  console.log(`is email valid: ${isValid(params.get('email'))}`)
+  console.log(`is pfp valid: ${isValid(params.get('pfp'))}`)
+
   let email = decode(params.get('email'));
   let profilePic = decode(params.get('profilePic'));
   console.log(`email: ${email}`);
   console.log(`pfp: ${profilePic}`);
-  
+
   const onRegister = () => {
     if (username && username.trim().length > 0) {
       ax.post(`${BASE_API}/users/createUser`, {
