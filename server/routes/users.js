@@ -5,10 +5,11 @@ const f = require('../system');
 router.post('/createUser', async (req, res) => {
     let username = req.body.username;
     let email = req.body.email;
+    let profilePic = req.body.profilePic || undefined;
     
     if (username && username.length > 0)
         if (email && email.length > 0)
-            res.json(await f.createUser(username, email));
+            res.json(await f.createUser(username, email, profilePic));
         else
             res.json(`Please provide an email.`);
     else

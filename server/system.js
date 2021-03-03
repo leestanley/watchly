@@ -59,7 +59,7 @@ const api = {
             return 0;
         }
     },
-    createUser: async (username, email, name, profilePicture=undefined) => {
+    createUser: async (username, email, profilePicture=undefined) => {
         let result = await api.getUser(username);
         if (result.success)
             return api.createError(`User "${username}" already exists.`);
