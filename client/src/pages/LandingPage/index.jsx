@@ -1,7 +1,8 @@
 import { Button, notification } from 'antd';
 import { Link } from 'react-router-dom';
-
+import { encode } from 'js-base64';
 import ax from 'axios';
+
 import fbase from '../../firebase';
 import './style.scss';
 
@@ -13,11 +14,12 @@ function LandingPage({ history }) {
   const onFacebookLogin = () => {
     fbase.auth.signInWithPopup(fbase.fb).then(result => {
       // need to check if this email has an account associated already
+      
       ax.get(`${BASE_API}/users/emailRegistered?email=${result.user.email}`).then(res => {
         if (res.data.success)
           history.push('/home');
         else
-          history.push(`/fbRegister?email=${result.user.email}`);
+          history.push(`/fbRegister?email=${encode(result.user.email)}&profilePic=${encode(result.user.photoURL)}`);
       }).catch(error => notification.error({
         message: 'Auth Error',
         description: error.message,

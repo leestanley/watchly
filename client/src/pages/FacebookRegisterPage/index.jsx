@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Input, Button, notification } from 'antd';
 import { Link } from 'react-router-dom';
 import ax from 'axios';
+import { decode } from 'js-base64';
 import './style.scss';
 
 import background from '../../assets/formlogin.png';
@@ -23,12 +24,39 @@ function FacebookRegisterPage({ history }) {
     );
   }
 
-  const email = params.get('email');
+  if (!params.has('profilePic') || params.get('profilePic').trim().length === 0) {
+    history.push('/');
+
+    return (
+      <div>
+        <h3>Redirecting...</h3>
+      </div>
+    );
+  }
+
+  let email = null;
+  let profilePic = null;
+
+  // decode base64
+  try {
+    email = decode(params.get('email'));
+    profilePic = decode(params.get('profilePic'));
+  } catch (e) {
+    history.push('/');
+
+    return (
+      <div>
+        <h3>Redirecting...</h3>
+      </div>
+    );
+  }
+
   const onRegister = () => {
     if (username && username.trim().length > 0) {
       ax.post(`${BASE_API}/users/createUser`, {
         username,
         email,
+        profilePic,
       })
         .then((res) => {
           if (res.data.success) {
