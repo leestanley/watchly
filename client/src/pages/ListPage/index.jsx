@@ -34,7 +34,7 @@ const ListPage = ({ history }) => {
   
     if (!user) {
       // not logged in
-      history.push('/home');
+      history.push('/');
   
       // we have to return something so we'll return an empty page.
       return <div></div>;
