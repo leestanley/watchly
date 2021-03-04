@@ -29,10 +29,10 @@ router.post('/', async (req, res) => {
                                 res.json(f.createError('Please provide a valid rating for the movie, from [0.0 to 10.0].'))
                             }
                         } else {
-                            res.json(f.createError(`Please provide a valid rating for the movie, from [0.0 to 10.0]..`));
+                            res.json(f.createError(`Please provide a valid rating for the movie, from [0.0 to 10.0].`));
                         }
                     } else {
-                        res.json(f.createError(`Please provide a valid rating for the movie, from [0.0 to 10.0]..`));
+                        res.json(f.createError(`Please provide a valid rating for the movie, from [0.0 to 10.0].`));
                     }
                 } else {
                     res.json(f.createError(`Please provide a valid id.`));
@@ -44,7 +44,7 @@ router.post('/', async (req, res) => {
             res.json(f.createError(`Please provide content for the post.`));
         }
     } else {
-        res.json(f.createError(`Please provide a username!`));
+        res.json(f.createError(`Please provide a username.`));
     }
 });
 

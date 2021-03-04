@@ -222,6 +222,7 @@ const api = {
             details,
             content
         });
+        
         return api.createSuccess();
     },
     getPostsById: async (id) => {
