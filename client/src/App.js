@@ -10,12 +10,17 @@ import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import FacebookRegisterPage from './pages/FacebookRegisterPage';
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Switch>
+          <Route path="/profile">
+            <ProfilePage />
+            <Navbar />
+          </Route>
           <Route path="/list">
             <Title />
             <ListPage />

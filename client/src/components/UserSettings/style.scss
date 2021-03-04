@@ -1,0 +1,16 @@
+.UserSettings {
+  .Row {
+    display: flex;
+    justify-content: space-between;
+
+    .edit {
+      background-color: rgb(255, 255, 255, .2);
+      border-radius: 33px;
+      width: 155px;
+    }
+  }
+
+  .header {
+    height: 30vh;
+  }
+}
