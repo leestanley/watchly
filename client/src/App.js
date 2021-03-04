@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';
 import ListPage from './pages/ListPage';
 import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
+import LogoutPage from './pages/LogoutPage';
 import RegisterPage from './pages/RegisterPage';
 import FacebookRegisterPage from './pages/FacebookRegisterPage';
 import ProfilePage from './pages/ProfilePage';
@@ -21,6 +22,7 @@ function App() {
           <Route path="/register" component={RegisterPage} />
           <Route path="/fbRegister" component={FacebookRegisterPage} />
           <Route path="/login" component={LoginPage} />
+          <Route path="/logout" component={LogoutPage} />
           <Route exact path="/" component={LandingPage} />
         </Switch>
       </div>

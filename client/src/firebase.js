@@ -33,8 +33,11 @@ class Firebase {
             .catch(onError);
     }
 
-    logout = () => {
-        this.auth.signOut();
+    logout = (onSuccess = undefined, onError = undefined) => {
+        this.auth.signOut().then((res) => {
+            if (onSuccess !== undefined) onSuccess(res);
+        })
+        .catch(onError);
     }
 
     register = (username, email, password, onSuccess = undefined, onError = undefined) => {
