@@ -14,31 +14,10 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
-<<<<<<< HEAD
+          <Route path="/profile" component={ProfilePage} />
           <Route path="/list" component={ListPage} />
           <Route path="/search" component={SearchPage} />
           <Route path="/home" component={HomePage} />
-=======
-          <Route path="/profile">
-            <ProfilePage />
-            <Navbar />
-          </Route>
-          <Route path="/list">
-            <Title />
-            <ListPage />
-            <Navbar />
-          </Route>
-          <Route path="/search">
-            <Title />
-            <SearchPage />
-            <Navbar />
-          </Route>
-          <Route path="/home">
-            <Title />
-            <HomePage />
-            <Navbar />
-          </Route>
->>>>>>> 3082b0744b425982ebfe16c64277ae69f82e2d00
           <Route path="/register" component={RegisterPage} />
           <Route path="/fbRegister" component={FacebookRegisterPage} />
           <Route path="/login" component={LoginPage} />
