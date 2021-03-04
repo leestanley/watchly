@@ -7,8 +7,8 @@ const LogoutPage = ({ history }) => {
     const [user, loading, error] = useAuthState(fbase.auth);
 
     useEffect(() => {
-        if (!user) return;
-        
+        if (!loading) return;
+
         fbase.logout(() => {
             // successfully logged out!
             notification.success({
@@ -23,7 +23,7 @@ const LogoutPage = ({ history }) => {
                 description: err.message
             });
         });
-    }, []);
+    }, [loading]);
 
     if (loading) {
         // can replace?
