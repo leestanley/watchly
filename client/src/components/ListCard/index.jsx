@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Modal, Button, Slider, InputNumber } from 'antd';
+import movieJSON from '../../assets/movies.json';
 import './style.scss';
 
-const ListCard = ({ card }) => {
+const ListCard = ({ card, ranking, updateList }) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isFavorite, setIsFavorite] = useState(false);
     const [rating, setRating] = useState(card.rating);
@@ -21,8 +22,21 @@ const ListCard = ({ card }) => {
         setIsModalVisible(true);
     };
 
+    const handleRemove = () => {
+        // add stuff to remove
+        movieJSON.movies = movieJSON.movies.filter((movie) => movie.title !== card.title);
+        updateList();
+        setIsModalVisible(false);
+    };
+
     const handleSave = () => {
         // add stuff to save
+        movieJSON.movies.forEach((movie) => {
+            if (movie.title === card.title) {
+                movie.rating = rating;
+            }
+        });
+        updateList();
         setIsModalVisible(false);
     };
 
@@ -54,7 +68,7 @@ const ListCard = ({ card }) => {
         <>
             <div className="ListCard" onClick={showModal}>
                 <div className="card-left">
-                    <p className="card-ranking">{card.ranking}.</p>
+                    <p className="card-ranking">{ranking}.</p>
                     <img className="card-img" src={card.img} alt="card"></img>
                     <div className="card-info">
                         <p className="card-title">{card.title}</p>
@@ -73,6 +87,9 @@ const ListCard = ({ card }) => {
                 footer={[
                     <Button key="Cancel" shape="round" onClick={handleCancel}>
                         Cancel
+                    </Button>,
+                    <Button key="submit" type="primary" shape="round" onClick={handleRemove}>
+                        Remove from list
                     </Button>,
                     <Button key="submit" type="primary" shape="round" onClick={handleSave}>
                         Save
@@ -100,13 +117,13 @@ const ListCard = ({ card }) => {
                                 min={0}
                                 max={10}
                                 marks={marks}
-                                defaultValue={rating}
+                                defaultValue={card.rating}
                                 onChange={handleRating}
                                 style={{ width: 330 }}
                                 value={rating}
                             />
                         </div>
-                        <InputNumber min={0} max={10} value={rating} onChange={handleRating} />
+                        <InputNumber min={0} max={10} defaultValue={card.rating} value={rating} onChange={handleRating} />
                     </div>
                 </div>
             </Modal>
