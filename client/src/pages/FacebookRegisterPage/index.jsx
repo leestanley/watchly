@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { Input, Button, notification } from 'antd';
 import { Link } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import ax from 'axios';
 import { decode } from 'js-base64';
+
+import fbase from '../../firebase';
 import './style.scss';
 
 import background from '../../assets/formlogin.png';
@@ -10,6 +13,35 @@ import background from '../../assets/formlogin.png';
 const BASE_API = process.env.REACT_APP_API_URL;
 function FacebookRegisterPage({ history }) {
   const [username, setUsername] = useState('');
+  const [user, loading, error] = useAuthState(fbase.auth);
+
+  if (loading) {
+    // can replace?
+    return (
+      <div>
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    // can replace?
+    return (
+      <div>
+        <p>
+          Error: <b>{error}</b>
+        </p>
+      </div>
+    );
+  }
+
+  if (user) {
+    // logged in already
+    history.push('/home');
+
+    // we have to return something so we'll return an empty page.
+    return <div></div>;
+  }
 
   let search = window.location.search;
   let params = new URLSearchParams(search);

@@ -1,8 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import Title from './components/Title';
-import Navbar from './components/Navbar';
-
 import SearchPage from './pages/SearchPage';
 import HomePage from './pages/HomePage';
 import ListPage from './pages/ListPage';
@@ -17,6 +14,11 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
+<<<<<<< HEAD
+          <Route path="/list" component={ListPage} />
+          <Route path="/search" component={SearchPage} />
+          <Route path="/home" component={HomePage} />
+=======
           <Route path="/profile">
             <ProfilePage />
             <Navbar />
@@ -36,6 +38,7 @@ function App() {
             <HomePage />
             <Navbar />
           </Route>
+>>>>>>> 3082b0744b425982ebfe16c64277ae69f82e2d00
           <Route path="/register" component={RegisterPage} />
           <Route path="/fbRegister" component={FacebookRegisterPage} />
           <Route path="/login" component={LoginPage} />
