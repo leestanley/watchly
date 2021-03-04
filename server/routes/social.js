@@ -49,7 +49,7 @@ router.post('/', async (req, res) => {
 });
 
 router.get('/get_posts_with_id', async (req, res) => {
-    let id = req.params.id;
+    let id = req.query.id;
 
     if (id && id.length > 0)
         res.json(await f.getPostsById(id));
