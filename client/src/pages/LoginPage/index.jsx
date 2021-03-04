@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Input, Button, notification } from 'antd';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import fbase from '../../firebase';
@@ -10,6 +11,35 @@ import background from '../../assets/formlogin.png';
 function LoginPage({ history }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [user, loading, error] = useAuthState(fbase.auth);
+
+  if (loading) {
+    // can replace?
+    return (
+      <div>
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    // can replace?
+    return (
+      <div>
+        <p>
+          Error: <b>{error}</b>
+        </p>
+      </div>
+    );
+  }
+
+  if (user) {
+    // logged in already
+    history.push('/home');
+
+    // we have to return something so we'll return an empty page.
+    return <div></div>;
+  }
 
   const onLogin = () => {
     if (email && email.trim().length > 0) {

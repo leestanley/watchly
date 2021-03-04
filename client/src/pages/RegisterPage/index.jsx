@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Input, Button, notification } from 'antd';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import fbase from '../../firebase';
@@ -12,6 +13,35 @@ function RegisterPage({ history }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [user, loading, error] = useAuthState(fbase.auth);
+
+  if (loading) {
+    // can replace?
+    return (
+      <div>
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    // can replace?
+    return (
+      <div>
+        <p>
+          Error: <b>{error}</b>
+        </p>
+      </div>
+    );
+  }
+
+  if (user) {
+    // logged in already
+    history.push('/home');
+
+    // we have to return something so we'll return an empty page.
+    return <div></div>;
+  }
 
   const onRegister = () => {
     if (email && email.trim().length > 0) {
