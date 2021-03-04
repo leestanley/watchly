@@ -1,3 +1,4 @@
+import { Button } from 'antd';
 import UserSettings from '../../components/UserSettings';
 
 import './style.scss';
@@ -9,6 +10,7 @@ function ProfilePage(props) {
   return (
     <div className="ProfilePage">
       <Title />
+      <Button>ADD SHIT HERE</Button>
       <div className="header">
         <h1>Your Profile</h1>
         <UserSettings self={true} />
