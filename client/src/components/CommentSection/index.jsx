@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Comment from './Comment';
 import { Form, Input, Button, notification } from 'antd';
 import { MessageOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 import fbase from '../../firebase';

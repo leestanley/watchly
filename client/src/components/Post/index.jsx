@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { EllipsisOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { notification } from 'antd';
 import CommentSection from '../CommentSection';
@@ -72,7 +73,11 @@ const Post = ({ post, updatePosts }) => {
     <div className="post-container">
       <div className="post-header">
         <div className="poster-info">
-          <img className="poster-pic" src={post.user_info.profilePicture} alt="Profile"></img>
+          {loadingData ? <img className="poster-pic" src={post.user_info.profilePicture} alt="Profile"></img> : <>
+            <Link to={(post.user_info.username === selfUsername) ? '/profile' : `/profile/${post.user_info.username}`}>
+              <img className="poster-pic" src={post.user_info.profilePicture} alt="Profile"></img>
+            </Link>
+          </>}
           <div className="poster-details">
             <p className="poster-name">{post.user_info.username}</p>
           </div>
