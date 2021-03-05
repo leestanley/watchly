@@ -19,6 +19,28 @@ export default {
             }
         };
         return axios(config);
+    },
+    createComment: function (user, content, postID) {
+        const config = {
+            method: 'post',
+            url: `${baseURL}/posts/p/${postID}/comment`,
+            data: {
+                username: user,
+                content: content
+            }
+        };
+        return axios(config);
+    },
+    createReply: function (user, content, postID, commentID) {
+        const config = {
+            method: 'post',
+            url: `${baseURL}/posts/p/${postID}/comment/${commentID}/reply`,
+            data: {
+                username: user,
+                content: content
+            }
+        };
+        return axios(config);
     }
 };
 

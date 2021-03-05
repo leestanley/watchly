@@ -38,7 +38,7 @@ const Post = ({ post }) => {
           </div>
         </div>
       </div>
-      <CommentSection commentList={post.comments} />
+      <CommentSection commentList={post.comments} postID={post.post_id} />
     </div>
   );
 };
