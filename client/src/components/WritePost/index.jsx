@@ -10,17 +10,27 @@ const { TextArea } = Input;
 
 const WritePost = ({ updatePosts }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [loadingData, setLoadingData] = useState(false);
   const [rating, setRating] = useState(5);
   const [show, setShow] = useState('');
-  const [options, setOptions] = useState([]);
+  const [options, setOptions] = useState(['meow', 'meow']);
   const [id, setId] = useState('');
 
   const [form] = Form.useForm();
 
-  const onSearch = (searchText) => {
-    setOptions(
-      !searchText ? [] : loadSearchResults(searchText),
-    );
+  const onSearch = async (searchText) => {
+    console.log('active');
+    if (searchText.length > 2) {
+      let data = await loadSearchResults(searchText);
+      console.log(data);
+      //   let options = [];
+      //   for(let i = 0; i < data.length; i++) {
+      //       options.push(data[i].title)
+      //   }
+    //   setOptions();
+    } else {
+      setOptions([]);
+    }
   };
 
   const onSelect = (data) => {
@@ -35,12 +45,9 @@ const WritePost = ({ updatePosts }) => {
       if (data.success) {
         let list = [];
         data.list.forEach((d) => {
-          list.push({
-            id: d.id,
-            title: d.title
-          });
+          list.push(d.title);
         });
-        console.log(list)
+        return list;
       } else {
         notification.error({
           message: 'Error',
@@ -53,7 +60,6 @@ const WritePost = ({ updatePosts }) => {
         description: e.message,
       });
     }
-
   };
 
   const marks = {
@@ -81,7 +87,6 @@ const WritePost = ({ updatePosts }) => {
   const handleRating = (value) => {
     setRating(value);
   };
-
 
   const handleCreate = (values) => {
     // add api call
