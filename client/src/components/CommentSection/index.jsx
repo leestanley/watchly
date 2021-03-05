@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Comment from './Comment';
 import { Form, Input, Button } from 'antd';
 import { MessageOutlined } from '@ant-design/icons';
-import pfp from '../../assets/tmpprofilepic.jpg';
 import './style.scss';
 import API from '../../API';
 
@@ -30,7 +29,7 @@ const CommentSection = ({ commentList, postID }) => {
     const renderComments = () => {
         return comments.map((comment) => {
             return (
-                <Comment key={comment.comment_id} comment={comment} />
+                <Comment key={comment.comment_id} comment={comment} commentID={comment.comment_id} postID={postID} />
             );
         });
     };
