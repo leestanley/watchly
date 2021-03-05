@@ -71,17 +71,17 @@ router.get('/search', async (req, res) => {
                             let entry = {
                                 id: d.id,
                                 voteAverage: d['vote_average'],
-                                poster: (d['poster_path'] === null) ? 'https://i.imgur.com/zKZTtMn.png' : f.BASE_THUMBNAIL_URL + d['poster_path'],
+                                poster: (d['poster_path'] === undefined) ? 'https://i.imgur.com/zKZTtMn.png' : f.BASE_THUMBNAIL_URL + d['poster_path'],
                                 description: d.overview
                             };
                             
                             if (d['media_type'] === 'movie') {
                                 entry.title = d.title;
-                                entry.releaseDate = d['release_date'];
+                                entry.releaseDate = (d['release_date'] || '');
                             } else {
                                 // assume it's a tv show
                                 entry.title = d.name;
-                                entry.releaseDate = d['first_air_date'];
+                                entry.releaseDate = (d['first_air_date'] || '');
                             }
 
                             list.push(entry);
