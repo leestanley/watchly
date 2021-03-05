@@ -94,7 +94,7 @@ function ProfilePage({ history, match: {params: {id}} }) {
           <h2 className="spacer">Currently Watching</h2>
           <div className="Row-Watched">
             <WatchedCard image={spongebob} title={'Spongebob'} date={'2004'} />
-            <Link to="/view">
+            <Link to="/trending">
               <img src={addshow} alt="addshow" className="addshow" />
             </Link>
           </div>
