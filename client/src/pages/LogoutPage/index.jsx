@@ -7,7 +7,8 @@ const LogoutPage = ({ history }) => {
     const [user, loading, error] = useAuthState(fbase.auth);
 
     useEffect(() => {
-        if (!loading) return;
+        // make sure they're logged in
+        if (loading || !user) return;
 
         fbase.logout(() => {
             // successfully logged out!
