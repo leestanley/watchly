@@ -36,9 +36,9 @@ function FacebookRegisterPage({ history }) {
     );
   }
 
-  if (user) {
-    // logged in already
-    history.push('/home');
+  if (!user) {
+    // user is not logged in already
+    history.push('/');
 
     // we have to return something so we'll return an empty page.
     return <div></div>;
@@ -141,7 +141,7 @@ function FacebookRegisterPage({ history }) {
           <Button disabled={registering} className="l-styles" onClick={onRegister}>
             Submit
           </Button>
-          <Link to="/">
+          <Link to="/logout">
             <p>Go Back</p>
           </Link>
       </div>
