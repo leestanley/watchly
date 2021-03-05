@@ -240,8 +240,10 @@ const api = {
             }
         }
 
+        // sort by most recent
+        new_edited.sort((a, b) => (b.post_id - a.post_id));
         return api.createSuccess({
-            posts: new_edited.reverse()
+            posts: new_edited
         });
     },
     createPost: async (username, rating, id, content) => {
