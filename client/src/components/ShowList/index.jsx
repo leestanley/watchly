@@ -1,53 +1,49 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Select } from 'antd';
 import ListCard from '../ListCard';
 import './style.scss';
 
 const { Option } = Select;
 
-const ShowList = ({ list, handleUpdate }) => {
-  const [sortRating, setSortRating] = useState('Movie');
+const ShowList = ({ list, handleMediaChange, type }) => {
+  const [mediaType, setMediaType] = useState(type);
 
-  // function for setting sort for ratings
-  const handleSortRating = (value) => {
-    setSortRating(value);
+  // function for setting media type
+  const handleMediaTypeChange = (value) => {
+    // call callback
+    if (handleMediaChange)
+      handleMediaChange(value);
   };
 
-  // function for rendering prop for list of shows/movies watched
-//   const renderList = () => {
-//     let cards;
-//     if (sortRating === 'Movie') {
-//       cards = list.slice().sort((a, b) => b.rating - a.rating);
-//     } else {
-//       cards = list.slice().sort((a, b) => a.rating - b.rating);
-//     }
-
-//     return cards.map((card, index) => {
-//       return (
-//         <ListCard
-//           card={card}
-//           key={index}
-//           ranking={index + 1}
-//           updateList={handleUpdate}
-//         />
-//       );
-//     });
-//   };
+  const renderList = () => {
+    return list.map((card, i) => {
+      return (
+        <Link to={`/results?id=${card.id}`}>
+          <ListCard
+            key={i}
+            ranking={i + 1}
+            card={card}
+            disableModal={true}
+          />
+        </Link>);
+    });
+  };
 
   return (
     <div className="List">
       <div className="sort-bar">
-        <h2 className="sort-title">Sort</h2>
+        <h2 className="sort-title">Trending</h2>
         <Select
-          defaultValue="Movie"
+          defaultValue={mediaType}
           style={{ width: 100, height: 30 }}
-          onChange={handleSortRating}
+          onChange={handleMediaTypeChange}
         >
-          <Option value="Movie">Movie</Option>
-          <Option value="TV Show">TV Show</Option>
+          <Option value="movie">Movie</Option>
+          <Option value="tv">TV Show</Option>
         </Select>
       </div>
-      {/* <div className="list-cards">{renderList()}</div> */}
+      {<div className="list-cards">{renderList()}</div>}
     </div>
   );
 };
