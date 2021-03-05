@@ -65,7 +65,7 @@ const api = {
             return api.createError(`User "${username}" already exists.`);
         
         if (profilePicture === undefined)
-            profilePicture = `https://ui-avatars.com/api/?name=${username.substring(0, 1).toUpperCase()}&background=random`
+            profilePicture = `https://avatars.dicebear.com/api/avataaars/${Math.random()}.svg`
 
         let ref = db.ref(`users/${username}`);
         try {
