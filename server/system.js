@@ -190,13 +190,29 @@ const api = {
             posts = curr.val();
         
         // define the comments field, if not already
+        // but also add the user info
         let new_edited = [];
-        posts.forEach(p => {
-            if (p !== null) {
+        for (let i = 0; i < posts.length; i++) {
+            let p = posts[i];
+            if ((p !== null) && (p !== undefined)) {
+                let userResult = await api.getUser(p.username);
+                if (!userResult.success) continue; // if they don't exist anymore, then rip their post
+                p['user_info'] = userResult.user;
+
+                // add user info for each comment as well
                 p.comments = (p.comments || []);
+                for (let j = 0; j < p.comments.length; j++) {
+                    let c = p.comments[j];
+                    if ((c !== null) && (c !== undefined)) {
+                        userResult = await api.getUser(c.username);
+                        if (!userResult.success) continue; // if they don't exist anymore, then rip their comment
+                        c['user_info'] = userResult.user;
+                    }
+                }
+                
                 new_edited.push(p);
             }
-        });
+        }
 
         return api.createSuccess({
             posts: new_edited
