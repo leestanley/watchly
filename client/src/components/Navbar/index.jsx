@@ -56,7 +56,7 @@ function Navbar(props) {
         <Link to="/home">
           <HomeOutlined className="nav-icons" />
         </Link>
-        <Link to="/search">
+        <Link to="/searchlanding">
           <SearchOutlined className="nav-icons" />
         </Link>
         <Link to="/profile">
