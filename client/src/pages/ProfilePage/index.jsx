@@ -19,7 +19,28 @@ import drakejosh from '../../assets/movies/drakejosh.png';
 import blackmirror from '../../assets/movies/blackmirror.png';
 import startup from '../../assets/movies/startup.png';
 
+import profileJSON from '../../assets/profiles.json';
 import './style.scss';
+
+const getProfileByEmail = (email) => {
+  for (let i = 0; i < profileJSON.profiles.length; i++) {
+    let profile = profileJSON.profiles[i];
+    if (profile.email === email) return profile;
+  }
+
+  // return the default
+  return profileJSON.profiles[profileJSON.profiles.length - 1];
+};
+
+const getProfileByUsername = (username) => {
+  for (let i = 0; i < profileJSON.profiles.length; i++) {
+    let profile = profileJSON.profiles[i];
+    if (profile.username === username) return profile;
+  }
+
+  // return the default
+  return profileJSON.profiles[profileJSON.profiles.length - 1];
+};
 
 function ProfilePage({
   history,
@@ -28,7 +49,7 @@ function ProfilePage({
   },
 }) {
   const [user, loading, error] = useAuthState(fbase.auth);
-  const isAdmin = id === undefined;
+  const isAdmin = (id === undefined);
 
   if (loading) {
     // can replace?
@@ -58,6 +79,7 @@ function ProfilePage({
     return <div></div>;
   }
 
+  const profile = (isAdmin ? getProfileByEmail(user.email) : getProfileByUsername(id));
   return (
     <>
       <div className="ProfilePage">
@@ -72,32 +94,39 @@ function ProfilePage({
         </div>
         <div className="header">
           <UserSettings self={false} />
-          <h2 className="t-friends">Friends (231)</h2>
+          <h2 className="t-friends">Friends ({profile.friendCount})</h2>
           <img src={friends} alt="friends" />
         </div>
         <div className="profile-body">
           <h2>Watched Stats</h2>
           <div className="Row-Stats">
-            <Statistics color="orange" number={2223} name="Hours Watched" />
-            <Statistics color="blue" number={62} name="Shows Watched" />
-            <Statistics color="pink" number={12} name="Movies Watched" />
-            <Statistics color="green" number={8} name="Genres" />
+            <Statistics color="orange" number={profile.watchedStats.hours} name="Hours Watched" />
+            <Statistics color="blue" number={profile.watchedStats.shows} name="Shows Watched" />
+            <Statistics color="pink" number={profile.watchedStats.movies} name="Movies Watched" />
+            <Statistics color="green" number={profile.watchedStats.genres} name="Genres" />
           </div>
           <h2 className="spacer">Favorite Movies & Shows</h2>
           <div className="Row-Watched">
-            <WatchedCard
-              image={blackmirror}
-              title={'Black Mirror'}
-              date={'2016'}
-            />
-            <WatchedCard image={startup} title={'Start Up'} date={'2020'} />
-            <WatchedCard image={yourname} title={'Your Name'} date={'2016'} />
-            <WatchedCard image={yourname} title={'Your Name'} date={'2016'} />
+            {profile.favorites.map((m, idx) => {
+              return <WatchedCard 
+                image={m.poster}
+                title={m.title}
+                date={m.releaseDate.substring(0, 4)}
+                key={idx}
+              />;
+            })}
           </div>
 
           <h2 className="spacer">Currently Watching</h2>
           <div className="Row-Watched">
-            <WatchedCard image={spongebob} title={'Spongebob'} date={'2004'} />
+            {profile.currently.map((m, idx) => {
+              return <WatchedCard
+                image={m.poster}
+                title={m.title}
+                date={m.releaseDate.substring(0, 4)}
+                key={idx}
+              />;
+            })}
             <Link to="/trending">
               <img src={addshow} alt="addshow" className="addshow" />
             </Link>
