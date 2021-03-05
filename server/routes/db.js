@@ -4,7 +4,6 @@ const router = express.Router();
 const f = require('../system');
 
 const API_KEY = process.env.MOVIE_DB_API_KEY;
-
 router.get('/trending', async (req, res) => {
     let type = req.query.type;
 
