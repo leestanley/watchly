@@ -13,20 +13,6 @@ import SearchCard from '../../components/SearchCard';
 function ResultsPage({ history }) {
   const [user, loading, error] = useAuthState(fbase.auth);
 
-  
-  let search = window.location.search;
-  let params = new URLSearchParams(search);
-
-  if (!params.has('q') || params.get('q').trim().length === 0) {
-    history.push('/home');
-
-    return (
-      <div>
-        <h3>Redirecting...</h3>
-      </div>
-    );
-  }
-
   useEffect(() => {
     // make sure they're logged in
     if (loading || !user) return;
@@ -66,22 +52,32 @@ function ResultsPage({ history }) {
     let cards;
 
     return cards.map((card, index) => {
-        return <ListCard card={card} key={index} ranking={index + 1} />
+      return <ListCard card={card} key={index} ranking={index + 1} />;
     });
-};
+  };
 
+  let search = window.location.search;
+  let params = new URLSearchParams(search);
 
+  if (!params.has('q') || params.get('q').trim().length === 0) {
+    history.push('/home');
+
+    return (
+      <div>
+        <h3>Redirecting...</h3>
+      </div>
+    );
+  }
 
   const onSearch = (value) => {
-    if (value.trim().length > 0)
-      history.push(`/results?q=${value}`);
+    if (value.trim().length > 0) history.push(`/results?q=${value}`);
   };
 
   return (
     <>
       <Title />
       <div className="ResultPage">
-        <SearchCard title="Search for a TV Show or Movie" onSubmit={onSearch}/>
+        <SearchCard title="Search for a TV Show or Movie" onSubmit={onSearch} />
         <div className="sort-bar">
           <h2 className="sort-title">Results</h2>
         </div>
