@@ -38,13 +38,12 @@
 
   .Row-Watched {
     display: flex;
-
+    flex-wrap: wrap;
   }
   .addshow {
     margin-bottom: 16px;
     padding: 12px;
   }
-
 
   .profilebg {
     left: 0;

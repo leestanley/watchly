@@ -21,9 +21,14 @@ import startup from '../../assets/movies/startup.png';
 
 import './style.scss';
 
-function ProfilePage({ history, match: {params: {id}} }) {
+function ProfilePage({
+  history,
+  match: {
+    params: { id },
+  },
+}) {
   const [user, loading, error] = useAuthState(fbase.auth);
-  const isAdmin = (id === undefined);
+  const isAdmin = id === undefined;
 
   if (loading) {
     // can replace?
@@ -52,16 +57,18 @@ function ProfilePage({ history, match: {params: {id}} }) {
     // we have to return something so we'll return an empty page.
     return <div></div>;
   }
-  
+
   return (
     <>
       <div className="ProfilePage">
         <Title username={id} />
         <div className="Row">
           <h1>{isAdmin ? 'Your' : `${id}'s`} Profile</h1>
-          {isAdmin && <a href="/logout">
-            <Button className="logout">Logout</Button>
-          </a>}
+          {isAdmin && (
+            <a href="/logout">
+              <Button className="logout">Logout</Button>
+            </a>
+          )}
         </div>
         <div className="header">
           <UserSettings self={false} />
@@ -84,11 +91,8 @@ function ProfilePage({ history, match: {params: {id}} }) {
               date={'2016'}
             />
             <WatchedCard image={startup} title={'Start Up'} date={'2020'} />
-            <WatchedCard
-              image={yourname}
-              title={'Your Name'}
-              date={'2016'}
-            />
+            <WatchedCard image={yourname} title={'Your Name'} date={'2016'} />
+            <WatchedCard image={yourname} title={'Your Name'} date={'2016'} />
           </div>
 
           <h2 className="spacer">Currently Watching</h2>
