@@ -105,4 +105,42 @@ router.delete('/p/:id/comment/:comment_id', async (req, res) => {
         res.json(f.createError(`Please provide a valid id.`));
 });
 
+router.post('/p/:id/comment/:comment_id/reply', async (req, res) => {
+    let id = req.params.id;
+    let comment_id = req.params.comment_id;
+    let user = req.body.username;
+    let content = req.body.content;
+
+    if (id && id.length > 0)
+        if (comment_id && comment_id.length > 0)
+            if (user && user.length > 0)
+                if (content && content.length > 0)
+                    res.json(await f.replyToComment(id, comment_id, user, content));
+                else
+                    res.json(f.createError(`Please provide content for the comment.`));
+            else
+                res.json(f.createError(`Please provide a username.`));
+        else
+            res.json(f.createError(`Please provide a valid comment id.`));
+    else
+        res.json(f.createError(`Please provide a valid id.`));
+});
+
+router.delete('/p/:id/comment/:comment_id/reply/:reply_id', async (req, res) => {
+    let id = req.params.id;
+    let comment_id = req.params.comment_id;
+    let reply_id = req.params.reply_id;
+
+    if (id && id.length > 0)
+        if (comment_id && comment_id.length > 0)
+            if (reply_id && reply_id.length > 0)
+                res.json(await f.deleteReply(id, comment_id, reply_id));
+            else
+                res.json(f.createError(`Please provide a valid reply id.`));
+        else
+            res.json(f.createError(`Please provide a valid comment id.`));
+    else
+        res.json(f.createError(`Please provide a valid id.`));
+});
+
 module.exports = router;
