@@ -20,7 +20,9 @@ function ResultsPage({ history }) {
   let search = window.location.search;
   let params = new URLSearchParams(search);
 
+  let q = undefined;
   const loadSearchResults = async () => {
+<<<<<<< HEAD
     setLoadingData(true);
     try {
       let searchResults = await API.search(q);
@@ -52,6 +54,9 @@ function ResultsPage({ history }) {
       });
     }
     setLoadingData(false);
+=======
+    console.log(q);
+>>>>>>> 74d018ffeba974f14d42c6b0cbd153c5ec580220
   };
 
   useEffect(() => {
@@ -62,7 +67,6 @@ function ResultsPage({ history }) {
     loadSearchResults();
   }, [loading]);
 
-  let q = undefined;
   if (!params.has('q') || params.get('q').trim().length === 0) {
     history.push('/home');
 
@@ -72,6 +76,8 @@ function ResultsPage({ history }) {
       </div>
     );
   }
+
+  q = params.get('q');
 
   if (loading) {
     // can replace?

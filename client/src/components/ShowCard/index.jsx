@@ -5,7 +5,7 @@ import movieJSON from '../../assets/movies.json';
 
 import './style.scss';
 
-const ShowCard = () => {
+const ShowCard = ({ card }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const [rating, setRating] = useState(5);
@@ -27,12 +27,11 @@ const ShowCard = () => {
   const handleAdd = () => {
     // add stuff to save
     movieJSON.movies.push({
-      title: 'Man of Steel',
-      date: '2013',
-      img: 'https://i.imgur.com/pNTI29P.jpeg',
+      title: card.title,
+      date: card.releaseDate.slice(0, 4),
+      img: card.poster,
       rating: rating,
-      content:
-        "Man of Steel is a reboot of the Superman film series that portrays the character's origin story.In the film, Clark Kent learns that he is a superpowered alien from the planet Krypton.He assumes the role of mankind's protector as Superman, making the choice to face General Zod and prevent him from destroying humanity.",
+      content: card.description,
     });
     setIsModalVisible(false);
   };
@@ -74,7 +73,7 @@ const ShowCard = () => {
       <div className="post-body">
         <div className="post-main">
           <div>
-            <img className="post-img" src={movieimg} alt="Title poster" />
+            <img className="post-img" src={card.poster} alt="Title poster" />
             <Button
               className="addlist"
               shape="round"
@@ -87,22 +86,17 @@ const ShowCard = () => {
           <div className="post-content">
             <div className="content-header">
               <div className="content-details">
-                <p className="content-title">Man of Steel</p>
-                <p className="content-date">2013</p>
+                <p className="content-title">{card.title}</p>
+                <p className="content-date">{card.releaseDate.slice(0, 4)}</p>
               </div>
               <div className="show-rating">
-                <p className="post-rating">7.2/10</p>
+                <p className="post-rating">{card.voteAverage}/10</p>
                 <p className="sub-rating">global avg.</p>
               </div>
             </div>
             <div className="post-text">
               <p>
-                Man of Steel is a reboot of the Superman film series that
-                portrays the character's origin story.In the film, Clark Kent
-                learns that he is a superpowered alien from the planet
-                Krypton.He assumes the role of mankind's protector as Superman,
-                making the choice to face General Zod and prevent him from
-                destroying humanity.
+                {card.description}
               </p>
             </div>
           </div>
@@ -124,21 +118,16 @@ const ShowCard = () => {
       >
         <div className="Modal">
           <div className="modal-body">
-            <img className="modal-img" src={movieimg} alt="modal img"></img>
+            <img className="modal-img" src={card.poster} alt="modal img"></img>
             <div className="modal-content">
               <div className="modal-content-header">
                 <div className="modal-content-title">
-                  <p className="content-title">Man of Steel</p>
-                  <p className="content-date">2013</p>
+                  <p className="content-title">{card.title}</p>
+                  <p className="content-date">{card.releaseDate.slice(0, 4)}</p>
                 </div>
               </div>
               <p className="modal-content-text">
-                Man of Steel is a reboot of the Superman film series that
-                portrays the character's origin story.In the film, Clark Kent
-                learns that he is a superpowered alien from the planet
-                Krypton.He assumes the role of mankind's protector as Superman,
-                making the choice to face General Zod and prevent him from
-                destroying humanity.
+                {card.description}
               </p>
               {renderFavorite()}
             </div>

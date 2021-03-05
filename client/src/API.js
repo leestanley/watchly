@@ -14,6 +14,12 @@ export default {
     getPosts: function () {
         return axios.get(`${baseURL}/posts`);
     },
+    getMedia: function (id) {
+        return axios.get(`${baseURL}/database/getMedia?id=${id}`);
+    },
+    getPostsWithMedia: function (id) {
+        return axios.get(`${baseURL}/posts/get_posts_with_id?id=${id}`);
+    },
     createPost: function (user, content, id, rating) {
         const config = {
             method: 'post',
