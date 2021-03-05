@@ -8,7 +8,7 @@ import './style.scss';
 
 import Title from '../../components/Title';
 import Navbar from '../../components/Navbar';
-import ShowList from '../../components/ShowList';
+import TrendingList from '../../components/TrendingList';
 
 import SearchCard from '../../components/SearchCard';
 
@@ -18,17 +18,13 @@ function SearchLandingPage({ history }) {
   const [trendingData, setTrendingData] = useState([]);
   const [user, loading, error] = useAuthState(fbase.auth);
 
-  const mediaTypeChanged = (value) => {
-    console.log(`type: ${value}`);
-    setMediaType(value);
-    loadTrending();
-  };
-
-  const loadTrending = async () => {
+  const mediaTypeChanged = (value) => loadTrending(value);
+  const loadTrending = async (value) => {
     setLoadingData(true);
+    setMediaType(value);
 
     try {
-      let trendingResult = await API.getTrendingMedia(mediaType);
+      let trendingResult = await API.getTrendingMedia(value);
       let data = trendingResult.data;
 
       if (data.success) {
@@ -37,9 +33,9 @@ function SearchLandingPage({ history }) {
           list.push({
             id: d.id,
             title: d.title,
-            date: d.releaseDate,
+            date: (d.releaseDate.length > 0) ? d.releaseDate.substring(0, 4) : "N/A",
             img: d.poster,
-            rating: d.voteAverage
+            rating: (d.voteAverage == 0) ? "N/A" : d.voteAverage
           });
         });
 
@@ -65,7 +61,7 @@ function SearchLandingPage({ history }) {
     if (loading || !user) return;
 
     // retrieve trending data
-    loadTrending();
+    loadTrending('movie');
   }, [loading]);
 
   if (loading) {
@@ -101,7 +97,10 @@ function SearchLandingPage({ history }) {
       <Title />
       <div className="SearchLandingPage">
         <SearchCard title="Search for a TV Show or Movie" />
-        { loadingData ? <p>Loading trends...</p> : <ShowList list={trendingData} handleMediaChange={mediaTypeChanged} type={mediaType} />}
+        { loadingData ? <div id="loading">
+          <br />
+          <p>Loading trends...</p>
+        </div> : <TrendingList list={trendingData} handleMediaChange={mediaTypeChanged} type={mediaType} />}
         <div style={{ height: '75px' }} />
       </div>
       <Navbar />
