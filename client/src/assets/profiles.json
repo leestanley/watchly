@@ -74,6 +74,46 @@
                     "poster": "https://www.themoviedb.org/t/p/w220_and_h330_face/kf7aiSIFDP1tkxsqckgWxIyuumw.jpg"
                 }
             ]
+        },
+        {
+            "username": "testtesttest",
+            "email": "test@test.com",
+            "friendCount": 45,
+            "watchedStats": {
+                "hours": 1831,
+                "shows": 22,
+                "movies": 14,
+                "genres": 4
+            },
+            "favorites": [
+                {
+                    "title": "Family Guy",
+                    "releaseDate": "1999-01-31",
+                    "poster": "https://www.themoviedb.org/t/p/w220_and_h330_face/eWWCRjBfLyePh2tfZdvNcIvKSJe.jpg"
+                },
+                {
+                    "title": "The Cleveland Show",
+                    "releaseDate": "2009-09-27",
+                    "poster": "https://www.themoviedb.org/t/p/w220_and_h330_face/mY4aZL7aIyUXWwK1UaOsS1bleBv.jpg"
+                },
+                {
+                    "title": "Gravity Falls",
+                    "releaseDate": "2012-06-15",
+                    "poster": "https://www.themoviedb.org/t/p/w220_and_h330_face/dNxEEK5CdNQbp4YcEtICXelRqvP.jpg"
+                },
+                {
+                    "title": "Ant-Man and the Wasp",
+                    "releaseDate": "2018-07-04",
+                    "poster": "https://www.themoviedb.org/t/p/w220_and_h330_face/eivQmS3wqzqnQWILHLc4FsEfcXP.jpg"
+                }
+            ],
+            "currently": [
+                {
+                    "title": "WandaVision",
+                    "releaseDate": "2021-01-15",
+                    "poster": "https://www.themoviedb.org/t/p/w220_and_h330_face/glKDfE6btIRcVB5zrjspRIs4r52.jpg"
+                }
+            ]
         }
     ]
 }
