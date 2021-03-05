@@ -11,9 +11,7 @@ import Navbar from '../../components/Navbar';
 
 import SearchCard from '../../components/SearchCard';
 import ShowCard from '../../components/ShowCard';
-import FriendCard from '../../components/FriendCard';
 import Post from '../../components/Post';
-import postJSON from '../../assets/posts.json';
 
 const useForceUpdate = () => {
   const [value, setValue] = useState(0);

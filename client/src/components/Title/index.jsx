@@ -18,7 +18,6 @@ function Title() {
         
         if (profileData.success) {
             profileData = profileData.data;
-
             setProfilePicture(profileData.profilePicture);
         } else {
             setProfilePicture(defaultProfilePic);

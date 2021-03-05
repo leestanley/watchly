@@ -1,12 +1,21 @@
+import React, { useState, useEffect } from 'react';
 import { EllipsisOutlined } from '@ant-design/icons';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { notification } from 'antd';
 import CommentSection from '../CommentSection';
 import { Menu, Dropdown } from 'antd';
 
-import './style.scss';
+import fbase from '../../firebase';
 import API from '../../API';
 
-const Post = ({ post, updatePosts }) => {
+import './style.scss';
 
+const Post = ({ post, updatePosts }) => {
+  const [user, loading, error] = useAuthState(fbase.auth);
+  const [selfUsername, setSelfUsername] = useState('');
+  const [loadingData, setLoadingData] = useState(true);
+  const [postMenu, setPostMenu] = useState(null);
+  
   const handlePostMenu = ({ key }) => {
     if (key === 'delete') {
       API.deletePost(post.post_id).then(response => {
@@ -15,24 +24,49 @@ const Post = ({ post, updatePosts }) => {
     }
   };
 
-  let postMenu;
+  const loadUsername = async () => {
+    setLoadingData(true);
+    let userResult = await API.getInfoFromEmail(user.email);
+    let profileData = userResult.data;
 
-  if (post.username === 'testtesttest') {
-    let postMenuItems = (
-      <Menu onClick={handlePostMenu}>
-        <Menu.Item danger key="delete">
-          Delete Post
-        </Menu.Item>
-      </Menu>
-    );
-    postMenu = (
-      <Dropdown overlay={postMenuItems}>
-        <EllipsisOutlined className="more-icon" />
-      </Dropdown>
-    );
-  } else {
-    postMenu = null;
-  }
+    if (profileData.success) {
+      profileData = profileData.data;
+      setSelfUsername(profileData.username);
+
+      if (post.username === profileData.username) {
+        // it's the user!
+        let postMenuItems = (
+          <Menu onClick={handlePostMenu}>
+            <Menu.Item danger key="delete">
+              Delete Post
+            </Menu.Item>
+          </Menu>
+        );
+
+        setPostMenu(
+          <Dropdown overlay={postMenuItems}>
+            <EllipsisOutlined className="more-icon" />
+          </Dropdown>
+        );
+      }
+    } else {
+      setSelfUsername('');
+      notification.error({
+        message: 'Error loading username',
+        description: profileData.message
+      });
+    }
+
+    setLoadingData(false);
+  };
+
+  useEffect(() => {
+    // make sure they're logged in
+    if (loading || !user) return;
+
+    // retrieve user's username
+    loadUsername();
+  }, [loading]);
 
   return (
     <div className="post-container">
@@ -43,7 +77,7 @@ const Post = ({ post, updatePosts }) => {
             <p className="poster-name">{post.user_info.username}</p>
           </div>
         </div>
-        {postMenu}
+        {!loadingData && postMenu}
       </div>
       <div className="post-body">
         <div className="post-main">

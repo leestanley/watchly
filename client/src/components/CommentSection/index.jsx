@@ -1,11 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import Comment from './Comment';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, notification } from 'antd';
 import { MessageOutlined } from '@ant-design/icons';
-import './style.scss';
+import { useAuthState } from 'react-firebase-hooks/auth';
+
+import fbase from '../../firebase';
 import API from '../../API';
+import './style.scss';
 
 const CommentSection = ({ commentList, postID, updateComments }) => {
+    const [user, loading, error] = useAuthState(fbase.auth);
+    const [comments, setComments] = useState(commentList);
+
+    useEffect(() => {
+        setComments(commentList);
+    }, [commentList]);
+
+    if (loading) return <></>;
+    
     /*
     const [comments, setComments] = useState([{ uuid: "loading", author: "Loading", time: Date.now(), content: "Loading", childList: [], score: 0 }]);
 
@@ -20,12 +32,6 @@ const CommentSection = ({ commentList, postID, updateComments }) => {
     }, [newComment, refreshComments])
     */
 
-    const [comments, setComments] = useState(commentList);
-
-    useEffect(() => {
-        setComments(commentList);
-    }, [commentList]);
-
     const renderComments = () => {
         return comments.map((comment) => {
             return (
@@ -34,21 +40,21 @@ const CommentSection = ({ commentList, postID, updateComments }) => {
         });
     };
 
-    const handleCreateComment = (values) => {
-        let user = 'testtesttest';
-        API.createComment(user, values.comment, postID).then(response => {
-            updateComments();
-        });
-        /*setComments(comments => [...comments, {
-            uuid: 3,
-            profile: {
-                pfp: pfp,
-                name: 'Stanley Lee'
-            },
-            content: values.comment,
-            replies: []
-        }]);*/
-        // console.log(commentList);
+    const handleCreateComment = async (values) => {
+        let userResult = await API.getInfoFromEmail(user.email);
+        let profileData = userResult.data;
+
+        if (profileData.success) {
+            profileData = profileData.data;
+            API.createComment(profileData.username, values.comment, postID).then(response => {
+                updateComments();
+            });
+        } else {
+            notification.error({
+                message: 'Error posting comment',
+                description: profileData.message
+            });
+        }
     }
 
     // add check for empty comment later on, disable form submit if empty
@@ -59,7 +65,7 @@ const CommentSection = ({ commentList, postID, updateComments }) => {
             </div>
             <Form onFinish={handleCreateComment} className="comment-form">
                 <Form.Item className="form-item" name="comment">
-                    <Input placeholder="Write a comment..." style={{ width: 280 }} />
+                    <Input autoComplete={false} placeholder="Write a comment..." style={{ width: 280 }} />
                 </Form.Item>
                 <Form.Item>
                     <Button htmlType="submit">
