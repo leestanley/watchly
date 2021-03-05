@@ -8,7 +8,7 @@ import './style.scss';
 
 import Title from '../../components/Title';
 import Navbar from '../../components/Navbar';
-import ShowList from '../../components/ShowList';
+import TrendingList from '../../components/TrendingList';
 
 import SearchCard from '../../components/SearchCard';
 
@@ -100,7 +100,7 @@ function SearchLandingPage({ history }) {
         { loadingData ? <div id="loading">
           <br />
           <p>Loading trends...</p>
-        </div> : <ShowList list={trendingData} handleMediaChange={mediaTypeChanged} type={mediaType} />}
+        </div> : <TrendingList list={trendingData} handleMediaChange={mediaTypeChanged} type={mediaType} />}
         <div style={{ height: '75px' }} />
       </div>
       <Navbar />
