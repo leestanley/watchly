@@ -1,0 +1,38 @@
+{
+    "profiles": [
+        {
+            "username": "jeff",
+            "friendCount": 257,
+            "watchedStats": {
+                "hours": 2531,
+                "shows": 78,
+                "movies": 15,
+                "genres": 10
+            },
+            "favorites": [
+                {
+                    "title": "Black Mirror: Bandersnatch",
+                    "releaseDate": "2018-12-28",
+                    "poster": "https://www.themoviedb.org/t/p/w220_and_h330_face/fR0VZ0VE598zl1lrYf7IfBqEwQ2.jpg"
+                },
+                {
+                    "title": "Start Up",
+                    "releaseDate": "2020-10-17",
+                    "poster": "https://www.themoviedb.org/t/p/w220_and_h330_face/hxJQ3A2wtreuWDnVBbzzXI3YlOE.jpg"
+                },
+                {
+                    "title": "Your Name",
+                    "releaseDate": "2016-08-26",
+                    "poster": "https://www.themoviedb.org/t/p/w220_and_h330_face/q719jXXEzOoYaps6babgKnONONX.jpg"
+                }
+            ],
+            "currently": [
+                {
+                    "title": "The SpongeBob Movie: Sponge on the Run",
+                    "releaseDate": "2020-08-14",
+                    "poster": "https://www.themoviedb.org/t/p/w220_and_h330_face/jlJ8nDhMhCYJuzOw3f52CP1W8MW.jpg"
+                }
+            ]
+        }
+    ]
+}

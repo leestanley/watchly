@@ -50,14 +50,14 @@ function Navbar(props) {
   return (
     <div className="navbar-container">
       <div className="row">
-        <Link to="/list">
-          <DatabaseOutlined className="nav-icons" />
-        </Link>
         <Link to="/home">
           <HomeOutlined className="nav-icons" />
         </Link>
         <Link to="/trending">
           <SearchOutlined className="nav-icons" />
+        </Link>
+        <Link to="/list">
+          <DatabaseOutlined className="nav-icons" />
         </Link>
         <Link to="/profile">
           <UserOutlined className="nav-icons" />

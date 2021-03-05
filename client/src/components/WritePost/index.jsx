@@ -89,21 +89,10 @@ const WritePost = ({ updatePosts }) => {
     },
   };
 
-  const showChange = (data) => {
-    setShow(data);
-  };
-
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleRating = (value) => {
-    setRating(value);
-  };
+  const showChange = (data) => setShow(data);
+  const showModal = () => setIsModalVisible(true);
+  const handleCancel = () => setIsModalVisible(false);
+  const handleRating = (value) => setRating(value);
 
   const handleCreate = async (values) => {
     values.title = show; // override
@@ -122,8 +111,6 @@ const WritePost = ({ updatePosts }) => {
       profileData = profileData.data;
       API.createPost(profileData.username, values.content, mediaId.toString().trim(), values.sliderval + '').then(
         (response) => {
-          console.log(response.data);
-
           if (response.data.success) {
             setIsModalVisible(false);
             updatePosts();

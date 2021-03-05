@@ -8,6 +8,9 @@ export default {
     getInfoFromEmail: function (email) {
         return axios.get(`${baseURL}/users/getInfoFromEmail?email=${email}`);
     },
+    getUser: function (username) {
+        return axios.get(`${baseURL}/users/u/${username}/`);
+    },
     search: function (query, page = 1) {
         return axios.get(`${baseURL}/database/search?query=${query}&page=${page}`);
     },

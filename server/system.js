@@ -199,15 +199,14 @@ const api = {
         let ref = db.ref('posts');
         let curr = await ref.once('value');
 
-        let posts = [];
+        let posts = {};
         if (curr.exists())
             posts = curr.val();
         
         // define the comments field, if not already
         // but also add the user info
         let new_edited = [];
-        for (let i = 0; i < posts.length; i++) {
-            let p = posts[i];
+        for (let [key, p] of Object.entries(posts)) {
             if ((p !== null) && (p !== undefined)) {
                 if (p.details.poster.length === 0)
                     p.details.poster = 'https://i.imgur.com/zKZTtMn.png';
@@ -255,7 +254,7 @@ const api = {
             return api.createError(`Invalid id.`);
         
         let newId = await api.getNextPostId(); // assign a post id to this new post
-        let ref = db.ref(`posts/${newId}`);
+        let ref = db.ref(`posts/post-${newId}`);
 
         await ref.set({
             username,
@@ -289,7 +288,7 @@ const api = {
             return api.createError(`Cannot find post of post id "${id}".`);
     },
     deletePost: async(id) => {
-        let ref = db.ref(`posts/${id}`);
+        let ref = db.ref(`posts/post-${id}`);
         let result = await ref.once('value');
 
         if (!result.exists())
@@ -303,7 +302,7 @@ const api = {
         if (!userResult.success)
             return api.createError(`User "${username}" does not exist.`);
 
-        let ref = db.ref(`posts/${id}`);
+        let ref = db.ref(`posts/post-${id}`);
         let result = await ref.once('value');
 
         if (!result.exists())
@@ -325,7 +324,7 @@ const api = {
         return api.createSuccess();
     },
     deleteComment: async (id, comment_id) => {
-        let ref = db.ref(`posts/${id}`);
+        let ref = db.ref(`posts/post-${id}`);
         let result = await ref.once('value');
 
         if (!result.exists())
@@ -345,7 +344,7 @@ const api = {
         if (!userResult.success)
             return api.createError(`User "${username}" does not exist.`);
 
-        let ref = db.ref(`posts/${id}`);
+        let ref = db.ref(`posts/post-${id}`);
         let result = await ref.once('value');
 
         if (!result.exists())
@@ -379,7 +378,7 @@ const api = {
         }
     },
     deleteReply: async (id, comment_id, reply_id) => {
-        let ref = db.ref(`posts/${id}`);
+        let ref = db.ref(`posts/post-${id}`);
         let result = await ref.once('value');
 
         if (!result.exists())

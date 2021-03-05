@@ -6,25 +6,42 @@ import API from '../../API';
 import './style.scss';
 
 import defaultProfilePic from '../../assets/default_profile.png';
-function Title() {
+function Title({ username }) {
     const [user, loading, error] = useAuthState(fbase.auth);
     const [profilePicture, setProfilePicture] = useState('');
     const [loadingData, setLoadingData] = useState(true);
 
     const loadProfilePicture = async () => {
         setLoadingData(true);
-        let userResult = await API.getInfoFromEmail(user.email);
-        let profileData = userResult.data;
-        
-        if (profileData.success) {
-            profileData = profileData.data;
-            setProfilePicture(profileData.profilePicture);
+
+        if (username === undefined) {
+            let userResult = await API.getInfoFromEmail(user.email);
+            let profileData = userResult.data;
+            
+            if (profileData.success) {
+                profileData = profileData.data;
+                setProfilePicture(profileData.profilePicture);
+            } else {
+                setProfilePicture(defaultProfilePic);
+                notification.error({
+                    message: 'Error loading profile picture',
+                    description: profileData.message
+                });
+            }
         } else {
-            setProfilePicture(defaultProfilePic);
-            notification.error({
-                message: 'Error loading profile picture',
-                description: profileData.message
-            });
+            let userResult = await API.getUser(username);
+            let profileData = userResult.data;
+            
+            if (profileData.success) {
+                profileData = profileData.user;
+                setProfilePicture(profileData.profilePicture);
+            } else {
+                setProfilePicture(defaultProfilePic);
+                notification.error({
+                    message: 'Error loading profile picture',
+                    description: profileData.message
+                });
+            }
         }
         
         setLoadingData(false);
@@ -36,8 +53,8 @@ function Title() {
     
         // retrieve profile picture
         loadProfilePicture();
-      }, [loading]);
-    
+      }, [loading, username]);
+
     return (
         <div className="TitleCard">
             <h2>Watchly</h2>
