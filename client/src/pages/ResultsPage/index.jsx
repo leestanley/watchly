@@ -22,7 +22,6 @@ function ResultsPage({ history }) {
 
   let q = undefined;
   const loadSearchResults = async () => {
-<<<<<<< HEAD
     setLoadingData(true);
     try {
       let searchResults = await API.search(q);
@@ -54,9 +53,6 @@ function ResultsPage({ history }) {
       });
     }
     setLoadingData(false);
-=======
-    console.log(q);
->>>>>>> 74d018ffeba974f14d42c6b0cbd153c5ec580220
   };
 
   useEffect(() => {
