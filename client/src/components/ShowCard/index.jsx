@@ -2,18 +2,37 @@ import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Modal, Button, Slider, InputNumber } from 'antd';
 
+import fbase from '../../firebase';
 import profileJSON from '../../assets/profiles.json';
 import movieJSON from '../../assets/movies.json';
 
 import './style.scss';
 
+const getProfile = (email) => {
+  for (let i = 0; i < profileJSON.profiles.length; i++) {
+    let profile = profileJSON.profiles[i];
+    if (profile.email === email) return profile;
+  }
+
+  return null;
+};
+
 const ShowCard = ({ card }) => {
   const [user, loading, error] = useAuthState(fbase.auth);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
+
   const [rating, setRating] = useState(5);
 
   if (loading) return <></>;
+
+  // load favorite value, if possible
+  let profile = getProfile(user.email);
+  if (profile !== null) {
+    let val = profile.favorites.some(m => m.title === card.title);
+    if (val !== isFavorite)
+      setIsFavorite(val);
+  }
 
   const marks = {
     0: '0',
@@ -28,15 +47,6 @@ const ShowCard = ({ card }) => {
   const showModal = () => setIsModalVisible(true);
   const handleCancel = () => setIsModalVisible(false);
   const handleRating = (value) => setRating(value);
-
-  const getProfile = () => {
-    for (let i = 0; i < profileJSON.profiles.length; i++) {
-      let profile = profileJSON.profiles[i];
-      if (profile.email === user.email) return profile;
-    }
-
-    return null;
-  };
 
   const handleAdd = () => {
     // add stuff to save
@@ -54,20 +64,22 @@ const ShowCard = ({ card }) => {
   const handleFavorite = () => {
     if (isFavorite) {
       // remove favorite
-      let profile = getProfile();
+      profile = getProfile(user.email);
       if (profile !== null)
         profile.favorites = (profile.favorites.filter(m => m.title !== card.title));
-
+      console.log(profile.favorites);
       setIsFavorite(false);
     } else {
       // add favorite
-      let profile = getProfile();
+      profile = getProfile(user.email);
       if (profile !== null)
         profile.favorites.push({
           title: card.title,
           releaseDate: card.releaseDate,
           poster: card.poster
         });
+      
+      console.log(profile.favorites);
 
       setIsFavorite(true);
     }

@@ -17,7 +17,7 @@
                     "poster": "https://www.themoviedb.org/t/p/w220_and_h330_face/fR0VZ0VE598zl1lrYf7IfBqEwQ2.jpg"
                 },
                 {
-                    "title": "Start Up",
+                    "title": "Start-Up",
                     "releaseDate": "2020-10-17",
                     "poster": "https://www.themoviedb.org/t/p/w220_and_h330_face/hxJQ3A2wtreuWDnVBbzzXI3YlOE.jpg"
                 },
@@ -32,6 +32,46 @@
                     "title": "The SpongeBob Movie: Sponge on the Run",
                     "releaseDate": "2020-08-14",
                     "poster": "https://www.themoviedb.org/t/p/w220_and_h330_face/jlJ8nDhMhCYJuzOw3f52CP1W8MW.jpg"
+                }
+            ]
+        },
+        {
+            "username": "snuuuu",
+            "email": "stanleylee6900@yahoo.com",
+            "friendCount": 175,
+            "watchedStats": {
+                "hours": 5831,
+                "shows": 132,
+                "movies": 34,
+                "genres": 15
+            },
+            "favorites": [
+                {
+                    "title": "A Silent Voice: The Movie",
+                    "releaseDate": "2016-09-17",
+                    "poster": "https://www.themoviedb.org/t/p/w220_and_h330_face/tuFaWiqX0TXoWu7DGNcmX3UW7sT.jpg"
+                },
+                {
+                    "title": "Food Wars! Shokugeki no Soma",
+                    "releaseDate": "2015-04-04",
+                    "poster": "https://www.themoviedb.org/t/p/w220_and_h330_face/aUKsUFkr0i9aBzODkBvNMgOHLzq.jpg"
+                },
+                {
+                    "title": "Fairy Tale",
+                    "releaseDate": "2009-10-12",
+                    "poster": "https://www.themoviedb.org/t/p/w220_and_h330_face/1T6XCwWpmg1B4jrzAlcFCnJGQVD.jpg"
+                },
+                {
+                    "title": "Non Non Biyori",
+                    "releaseDate": "2013-10-08",
+                    "poster": "https://www.themoviedb.org/t/p/w220_and_h330_face/uEFfrd2xBV2XEGkbNtMrHgLXFM1.jpg"
+                }
+            ],
+            "currently": [
+                {
+                    "title": "Cory in the House",
+                    "releaseDate": "2007-01-12",
+                    "poster": "https://www.themoviedb.org/t/p/w220_and_h330_face/kf7aiSIFDP1tkxsqckgWxIyuumw.jpg"
                 }
             ]
         }
