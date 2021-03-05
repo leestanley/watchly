@@ -190,13 +190,39 @@ const api = {
             posts = curr.val();
         
         // define the comments field, if not already
+        // but also add the user info
         let new_edited = [];
-        posts.forEach(p => {
-            if (p !== null) {
+        for (let i = 0; i < posts.length; i++) {
+            let p = posts[i];
+            if ((p !== null) && (p !== undefined)) {
+                let userResult = await api.getUser(p.username);
+                if (!userResult.success) continue; // if they don't exist anymore, then rip their post
+                p['user_info'] = userResult.user;
+
+                // add user info for each comment & reply as well
                 p.comments = (p.comments || []);
+                for (let j = 0; j < p.comments.length; j++) {
+                    let c = p.comments[j];
+                    if ((c !== null) && (c !== undefined)) {
+                        userResult = await api.getUser(c.username);
+                        if (!userResult.success) continue; // if they don't exist anymore, then rip their comment
+                        c['user_info'] = userResult.user;
+
+                        c.replies = (c.replies || []);
+                        for (let k = 0; k < c.replies.length; k++) {
+                            let r = c.replies[k];
+                            if ((r !== null) && (r !== undefined)) {
+                                userResult = await api.getUser(r.username);
+                                if (!userResult.success) continue; // if they don't exist anymore, then rip their reply
+                                r['user_info'] = userResult.user;
+                            }
+                        }
+                    }
+                }
+                
                 new_edited.push(p);
             }
-        });
+        }
 
         return api.createSuccess({
             posts: new_edited
@@ -289,13 +315,80 @@ const api = {
             return api.createError(`Cannot find post of post id "${id}".`);
 
         let post = result.val();
-        post.comments = (post.comments || []); // in case it's not defined already
+        post.comments = (post.comments || []); // in case it's not already defined
 
         await ref.update({
             comments: post.comments.filter(p => p['comment_id'] != comment_id)
         });
 
         return api.createSuccess();
+    },
+    replyToComment: async (id, comment_id, username, content) => {
+        let userResult = await api.getUser(username);
+        if (!userResult.success)
+            return api.createError(`User "${username}" does not exist.`);
+
+        let ref = db.ref(`posts/${id}`);
+        let result = await ref.once('value');
+
+        if (!result.exists())
+            return api.createError(`Cannot find post of post id "${id}".`);
+
+        let post = result.val();
+        post.comments = (post.comments || []); // in case it's not already defined
+
+        let found = false;
+        for (let i = 0; i < post.comments.length; i++) {
+            let c = post.comments[i];
+            if (c['comment_id'] != comment_id) continue;
+            
+            found = true;
+            c.replies = (c.replies || []); // in case it's not already defined
+            c.replies.push({
+                comment_id: await api.getNextCommentId(),
+                username,
+                content
+            });
+        }
+
+        if (found) {
+            await ref.update({
+                comments: post.comments
+            });
+    
+            return api.createSuccess();
+        } else {
+            return api.createError(`Cannot find comment of comment id "${comment_id}".`);
+        }
+    },
+    deleteReply: async (id, comment_id, reply_id) => {
+        let ref = db.ref(`posts/${id}`);
+        let result = await ref.once('value');
+
+        if (!result.exists())
+            return api.createError(`Cannot find post of post id "${id}".`);
+
+        let post = result.val();
+        post.comments = (post.comments || []); // in case it's not already defined
+
+        let found = false;
+        for (let i = 0; i < post.comments.length; i++) {
+            let c = post.comments[i];
+            if (c['comment_id'] != comment_id) continue;
+
+            found = true;
+            c.replies = (c.replies || []).filter(p => p['comment_id'] != reply_id);
+        }
+
+        if (found) {
+            await ref.update({
+                comments: post.comments
+            });
+    
+            return api.createSuccess();
+        } else {
+            return api.createError(`Cannot find comment of comment id "${comment_id}".`);
+        }
     }
 };
 

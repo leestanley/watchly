@@ -17,14 +17,14 @@ router.post('/', async (req, res) => {
                     if (rating && rating.length > 0) {
                         // check if number
                         if (!isNaN(rating)) {
-                            let ratingParsed = parseFloat(rating);
+                            let ratingParsed = parseInt(rating);
 
-                            if ((ratingParsed >= 0.0) && (ratingParsed <= 10.0)) {
+                            if ((ratingParsed >= 0) && (ratingParsed <= 10)) {
                                 // pad it if it's not a float
-                                if (rating.indexOf('.') === -1)
-                                    rating = rating + '.0';
+                                /* if (rating.indexOf('.') === -1)
+                                    rating = rating + '.0'; */
                             
-                                res.json(await f.createPost(user, rating, id, content));
+                                res.json(await f.createPost(user, ratingParsed, id, content));
                             } else {
                                 res.json(f.createError('Please provide a valid rating for the movie, from [0.0 to 10.0].'))
                             }
@@ -99,6 +99,44 @@ router.delete('/p/:id/comment/:comment_id', async (req, res) => {
     if (id && id.length > 0)
         if (comment_id && comment_id.length > 0)
             res.json(await f.deleteComment(id, comment_id));
+        else
+            res.json(f.createError(`Please provide a valid comment id.`));
+    else
+        res.json(f.createError(`Please provide a valid id.`));
+});
+
+router.post('/p/:id/comment/:comment_id/reply', async (req, res) => {
+    let id = req.params.id;
+    let comment_id = req.params.comment_id;
+    let user = req.body.username;
+    let content = req.body.content;
+
+    if (id && id.length > 0)
+        if (comment_id && comment_id.length > 0)
+            if (user && user.length > 0)
+                if (content && content.length > 0)
+                    res.json(await f.replyToComment(id, comment_id, user, content));
+                else
+                    res.json(f.createError(`Please provide content for the comment.`));
+            else
+                res.json(f.createError(`Please provide a username.`));
+        else
+            res.json(f.createError(`Please provide a valid comment id.`));
+    else
+        res.json(f.createError(`Please provide a valid id.`));
+});
+
+router.delete('/p/:id/comment/:comment_id/reply/:reply_id', async (req, res) => {
+    let id = req.params.id;
+    let comment_id = req.params.comment_id;
+    let reply_id = req.params.reply_id;
+
+    if (id && id.length > 0)
+        if (comment_id && comment_id.length > 0)
+            if (reply_id && reply_id.length > 0)
+                res.json(await f.deleteReply(id, comment_id, reply_id));
+            else
+                res.json(f.createError(`Please provide a valid reply comment id.`));
         else
             res.json(f.createError(`Please provide a valid comment id.`));
     else
