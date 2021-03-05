@@ -2,6 +2,7 @@
     "profiles": [
         {
             "username": "jeff",
+            "email": "jha@ucsd.edu",
             "friendCount": 257,
             "watchedStats": {
                 "hours": 2531,
