@@ -17,6 +17,7 @@ const useForceUpdate = () => {
 
 const ListPage = ({ history }) => {
     const [user, loading, error] = useAuthState(fbase.auth);
+    const [movies, setMovies] = useState(movieJSON.movies);
 
     const forceUpdate = useForceUpdate();
 
@@ -48,12 +49,24 @@ const ListPage = ({ history }) => {
       return <div></div>;
     }
 
+    const onSearch = (value) => {
+      if (value.trim().length === 0) {
+        setMovies(movieJSON.movies); // reset
+      } else {
+        value = value.toUpperCase();
+
+        // now we search for potential results
+        let results = movieJSON.movies.filter(m => (m.title.toUpperCase().indexOf(value) > -1));
+        setMovies(results);
+      }
+    };
+
     return (<>
         <Title />
 
         <div className="ListPage">
-            <SearchCard title="Your TV Shows and Movies" />
-            <List list={movieJSON.movies} handleUpdate={forceUpdate} />
+            <SearchCard title="Your TV Shows and Movies" onSubmit={onSearch} />
+            <List list={movies} handleUpdate={forceUpdate} />
         </div>
 
         <Navbar />
