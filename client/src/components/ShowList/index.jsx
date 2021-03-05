@@ -16,20 +16,20 @@ const ShowList = ({ list, handleUpdate }) => {
   // function for rendering prop for list of shows/movies watched
 //   const renderList = () => {
 //     let cards;
-    // if (sortRating === 'highest') {
-    //   cards = list.slice().sort((a, b) => b.rating - a.rating);
-    // } else {
-    //   cards = list.slice().sort((a, b) => a.rating - b.rating);
-    // }
+//     if (sortRating === 'Movie') {
+//       cards = list.slice().sort((a, b) => b.rating - a.rating);
+//     } else {
+//       cards = list.slice().sort((a, b) => a.rating - b.rating);
+//     }
 
-    // return cards.map((card, index) => {
-    //   return (
-    //     <ListCard
-    //       card={card}
-    //       key={index}
-    //       ranking={index + 1}
-    //       updateList={handleUpdate}
-    //     />
+//     return cards.map((card, index) => {
+//       return (
+//         <ListCard
+//           card={card}
+//           key={index}
+//           ranking={index + 1}
+//           updateList={handleUpdate}
+//         />
 //       );
 //     });
 //   };

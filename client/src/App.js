@@ -10,12 +10,14 @@ import LogoutPage from './pages/LogoutPage';
 import RegisterPage from './pages/RegisterPage';
 import FacebookRegisterPage from './pages/FacebookRegisterPage';
 import ProfilePage from './pages/ProfilePage';
+import ResultsPage from './pages/ResultsPage';
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Switch>
+          <Route path="/results" component={ResultsPage} />
           <Route path="/profile" component={ProfilePage} />
           <Route path="/list" component={ListPage} />
           <Route path="/search" component={SearchPage} />

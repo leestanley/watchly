@@ -1,78 +1,56 @@
-import React, { useState, useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import fbase from '../../firebase';
-import API from '../../API';
 
-import Post from '../../components/Post';
-import WritePost from '../../components/WritePost';
-import postJSON from '../../assets/posts.json';
+import './style.scss';
 
 import Title from '../../components/Title';
 import Navbar from '../../components/Navbar';
+import ShowList from '../../components/ShowList';
 
-const HomePage = ({ history }) => {
-    const [user, loading, error] = useAuthState(fbase.auth);
-    const [posts, setPosts] = useState([]);
-    const [postsLoading, setPostsLoading] = useState(true);
+import SearchCard from '../../components/SearchCard';
 
-    useState(() => {
-      if (loading) {
-        // can replace?
-        return (
-          <div>
-            <p>Loading...</p>
-          </div>
-        );
-      }
+function ResultsPage({ history }) {
+  const [user, loading, error] = useAuthState(fbase.auth);
 
-      if (error) {
-        // can replace?
-        return (
-          <div>
-            <p>
-              Error: <b>{error}</b>
-            </p>
-          </div>
-        );
-      }
+  if (loading) {
+    // can replace?
+    return (
+      <div>
+        <p>Loading...</p>
+      </div>
+    );
+  }
 
-      if (!user) {
-        // not logged in
-        history.push('/');
+  if (error) {
+    // can replace?
+    return (
+      <div>
+        <p>
+          Error: <b>{error}</b>
+        </p>
+      </div>
+    );
+  }
 
-        // we have to return something so we'll return an empty page.
-        return <div></div>;
-      }
+  if (!user) {
+    // not logged in
+    history.push('/');
 
-      API.getPosts().then(response => {
-        setPosts(response.data.posts);
-        setPostsLoading(false);
-      });
-    });
+    // we have to return something so we'll return an empty page.
+    return <div></div>;
+  }
 
-    let renderPosts;
-
-    if (postsLoading) {
-      renderPosts = <p>Loading...</p>;
-    } else {
-      renderPosts = posts.map((post) => {
-        return (
-          <Post post={post} key={post.id} />
-        );
-      });
-    }
-
-    return (<>
-        <Title />
-
-        <div className="HomePage">
-            <WritePost />
-            {renderPosts}
-            <div style={{ height: '75px' }} />
-        </div>
-
-        <Navbar />
-    </>);
+  return (
+    <>  
+      <Title />
+      <div className="ResultsPage">
+        <SearchCard title="Search for a TV Show or Movie" />
+        <ShowList />
+        <div style={{ height: '75px' }} />
+      </div>
+      <Navbar />
+    </>
+  );
 }
 
-export default HomePage;
+export default ResultsPage;
