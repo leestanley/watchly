@@ -1,28 +1,16 @@
-import { Button } from 'antd';
 import { EllipsisOutlined } from '@ant-design/icons';
 import CommentSection from '../CommentSection';
 
 import './style.scss';
 
 const Post = ({ post }) => {
-  const renderPostTags = () => {
-    return post.tags.map((tag) => {
-      return (
-        <Button style={{ marginRight: '3px' }} shape="round" size="small">
-          {tag}
-        </Button>
-      );
-    });
-  };
-
   return (
     <div className="post-container">
       <div className="post-header">
         <div className="poster-info">
-          <img className="poster-pic" src={post.user.pfp} alt="Profile"></img>
+          <img className="poster-pic" src={post.user_info.profilePicture} alt="Profile"></img>
           <div className="poster-details">
-            <p className="poster-name">{post.user.name}</p>
-            <p className="post-time">{post.user.date}</p>
+            <p className="poster-name">{post.user_info.username}</p>
           </div>
         </div>
         <EllipsisOutlined className="more-icon" />
@@ -32,20 +20,17 @@ const Post = ({ post }) => {
           <div>
             <img
               className="post-img"
-              src={post.movie.poster}
+              src={post.details.poster}
               alt="Title poster"
             />
-            <div className="post-tags">
-              {renderPostTags()}
-            </div>
           </div>
           <div className="post-content">
             <div className="content-header">
               <div className="content-details">
-                <p className="content-title">{post.movie.name}</p>
-                <p className="content-date">{post.movie.date}</p>
+                <p className="content-title">{post.details.title}</p>
+                <p className="content-date">{post.details.releaseDate}</p>
               </div>
-              <p className="post-rating">{post.movie.rating}/10</p>
+              <p className="post-rating">{post.rating}/10</p>
             </div>
             <div className="post-text">
               <p>{post.content}</p>

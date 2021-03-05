@@ -52,11 +52,11 @@ const Comment = ({ comment }) => {
     const renderReplies = () => {
         return replies.map((reply) => {
             return (
-                <div className="Reply" key={reply.uuid}>
+                <div className="Reply" key={reply.comment_id}>
                     <div className="comment-info">
-                        <img className="commenter-pic" src={reply.profile.pfp} alt="Profile"></img>
+                        <img className="commenter-pic" src={reply.user_info.profilePicture} alt="Profile"></img>
                         <div className="comment-details">
-                            <p className="commenter-name">{reply.profile.name}</p>
+                            <p className="commenter-name">{reply.user_info.username}</p>
                             <p className="comment-content">{reply.content}</p>
                             <p className="comment-reply"><a className="bold-reply" onClick={openReply} href="/#">Reply</a></p>
                         </div>
@@ -71,9 +71,9 @@ const Comment = ({ comment }) => {
         <div className="Comment">
             <div className="main-comment">
                 <div className="comment-info">
-                    <img className="commenter-pic" src={comment.profile.pfp} alt="Profile"></img>
+                    <img className="commenter-pic" src={comment.user_info.profilePicture} alt="Profile"></img>
                     <div className="comment-details">
-                        <p className="commenter-name">{comment.profile.name}</p>
+                        <p className="commenter-name">{comment.user_info.username}</p>
                         <p className="comment-content">{comment.content}</p>
                         <p className="comment-reply"><a className="bold-reply" onClick={openReply} href="/#">Reply</a></p>
                     </div>

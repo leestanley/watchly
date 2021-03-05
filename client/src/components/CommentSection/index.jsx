@@ -29,7 +29,7 @@ const CommentSection = ({ commentList }) => {
     const renderComments = () => {
         return comments.map((comment) => {
             return (
-                <Comment key={comment.uuid} comment={comment} />
+                <Comment key={comment.comment_id} comment={comment} />
             );
         });
     };
