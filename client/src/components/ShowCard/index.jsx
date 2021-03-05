@@ -96,7 +96,7 @@ const ShowCard = ({ card }) => {
             </div>
             <div className="post-text">
               <p>
-                {card.description}
+                {card.description < 220 ? card.description : card.description.slice(0, 210).trim() + '...'}
               </p>
             </div>
           </div>

@@ -17,12 +17,14 @@ const WritePost = ({ updatePosts }) => {
   const [show, setShow] = useState('');
   const [options, setOptions] = useState([]);
   const [mediaId, setMediaId] = useState('');
+  const [selected, setSelected] = useState(null);
 
   const [form] = Form.useForm();
 
   if (loading) return <></>;
 
   const onSelect = (data) => {
+    setSelected(data);
     for (let i = 0; i < options.length; i++) {
         if(options[i].value === data) {
             setMediaId(options[i].category)
@@ -62,6 +64,8 @@ const WritePost = ({ updatePosts }) => {
 
   const onSearch = async (searchText) => {
     if (searching) return;
+    setSelected(null)
+    // setShow('')
 
     setSearching(true);
     if (searchText.length > 2) {
@@ -106,6 +110,13 @@ const WritePost = ({ updatePosts }) => {
     
     let userResult = await API.getInfoFromEmail(user.email);
     let profileData = userResult.data;
+
+    if(selected === null) {
+        notification.error({
+            message: 'Selection Issue',
+            description: "Please hit enter and select from the dropdown"
+          });
+    }
 
     if (profileData.success) {
       profileData = profileData.data;
@@ -178,6 +189,7 @@ const WritePost = ({ updatePosts }) => {
                   onChange={showChange}
                   onSearch={onSearch}
                   onSelect={onSelect}
+                  selected={selected}
                 />
               </Form.Item>
             </div>
