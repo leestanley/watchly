@@ -4,8 +4,9 @@ import { Form, Input, Button } from 'antd';
 import { MessageOutlined } from '@ant-design/icons';
 import pfp from '../../assets/tmpprofilepic.jpg';
 import './style.scss';
+import API from '../../API';
 
-const CommentSection = ({ commentList }) => {
+const CommentSection = ({ commentList, postID }) => {
     /*
     const [comments, setComments] = useState([{ uuid: "loading", author: "Loading", time: Date.now(), content: "Loading", childList: [], score: 0 }]);
 
@@ -35,7 +36,9 @@ const CommentSection = ({ commentList }) => {
     };
 
     const handleCreateComment = (values) => {
-        setComments(comments => [...comments, {
+        let user = 'testtesttest';
+        API.createComment(user, values.comment, postID);
+        /*setComments(comments => [...comments, {
             uuid: 3,
             profile: {
                 pfp: pfp,
@@ -43,7 +46,7 @@ const CommentSection = ({ commentList }) => {
             },
             content: values.comment,
             replies: []
-        }]);
+        }]);*/
         // console.log(commentList);
     }
 
