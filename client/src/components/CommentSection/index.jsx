@@ -5,7 +5,7 @@ import { MessageOutlined } from '@ant-design/icons';
 import './style.scss';
 import API from '../../API';
 
-const CommentSection = ({ commentList, postID }) => {
+const CommentSection = ({ commentList, postID, updateComments }) => {
     /*
     const [comments, setComments] = useState([{ uuid: "loading", author: "Loading", time: Date.now(), content: "Loading", childList: [], score: 0 }]);
 
@@ -29,14 +29,16 @@ const CommentSection = ({ commentList, postID }) => {
     const renderComments = () => {
         return comments.map((comment) => {
             return (
-                <Comment key={comment.comment_id} comment={comment} commentID={comment.comment_id} postID={postID} />
+                <Comment key={comment.comment_id} comment={comment} commentID={comment.comment_id} postID={postID} updateReplies={updateComments} />
             );
         });
     };
 
     const handleCreateComment = (values) => {
         let user = 'testtesttest';
-        API.createComment(user, values.comment, postID);
+        API.createComment(user, values.comment, postID).then(response => {
+            updateComments();
+        });
         /*setComments(comments => [...comments, {
             uuid: 3,
             profile: {

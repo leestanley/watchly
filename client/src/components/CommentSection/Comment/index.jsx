@@ -4,7 +4,7 @@ import { MessageOutlined, EllipsisOutlined } from '@ant-design/icons';
 import './style.scss';
 import API from '../../../API';
 
-const Comment = ({ comment, commentID, postID }) => {
+const Comment = ({ comment, commentID, postID, updateReplies }) => {
     const [newReply, setNewReply] = useState(false);
 
     const [replies, setReplies] = useState(comment.replies);
@@ -28,7 +28,9 @@ const Comment = ({ comment, commentID, postID }) => {
             content: values.reply
         }]);*/
         let user = 'testtesttest';
-        API.createReply(user, values.reply, postID, commentID);
+        API.createReply(user, values.reply, postID, commentID).then(response => {
+            updateReplies();
+        });
     };
 
     // later add check for empty reply

@@ -10,12 +10,19 @@ import postJSON from '../../assets/posts.json';
 import Title from '../../components/Title';
 import Navbar from '../../components/Navbar';
 
+const useForceUpdate = () => {
+  const [value, setValue] = useState(0);
+  return () => setValue(value => value + 1);
+};
+
 const HomePage = ({ history }) => {
     const [user, loading, error] = useAuthState(fbase.auth);
     const [posts, setPosts] = useState([]);
     const [postsLoading, setPostsLoading] = useState(true);
 
-    useState(() => {
+    const forceUpdate = useForceUpdate();
+
+    useEffect(() => {
       if (loading) {
         // can replace?
         return (
@@ -57,7 +64,7 @@ const HomePage = ({ history }) => {
     } else {
       renderPosts = posts.map((post) => {
         return (
-          <Post post={post} key={post.id} />
+          <Post post={post} key={post.id} updatePosts={forceUpdate} />
         );
       });
     }
@@ -66,7 +73,7 @@ const HomePage = ({ history }) => {
         <Title />
 
         <div className="HomePage">
-            <WritePost />
+            <WritePost updatePosts={forceUpdate} />
             {renderPosts}
             <div style={{ height: '75px' }} />
         </div>
