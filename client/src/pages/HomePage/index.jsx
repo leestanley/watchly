@@ -55,7 +55,7 @@ const HomePage = ({ history }) => {
         setPosts(response.data.posts);
         setPostsLoading(false);
       });
-    }, []);
+    }, [posts]);
 
     let renderPosts;
 

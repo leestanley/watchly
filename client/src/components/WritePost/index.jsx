@@ -37,7 +37,6 @@ const WritePost = ({ updatePosts }) => {
 
     const handleCreate = (values) => {
         // add api call
-        console.log(values);
         let user = 'testtesttest';
         let id = '372058';
         API.createPost(user, values.content, id, values.sliderval + '').then((response) => {
@@ -61,7 +60,6 @@ const WritePost = ({ updatePosts }) => {
                     form
                         .validateFields()
                         .then((values) => {
-                            console.log(values);
                             handleCreate(values);
                         })
                         .catch((info) => {
