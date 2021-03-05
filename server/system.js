@@ -195,6 +195,9 @@ const api = {
         for (let i = 0; i < posts.length; i++) {
             let p = posts[i];
             if ((p !== null) && (p !== undefined)) {
+                if (p.details.poster.length === 0)
+                    p.details.poster = 'https://i.imgur.com/zKZTtMn.png';
+                
                 let userResult = await api.getUser(p.username);
                 if (!userResult.success) continue; // if they don't exist anymore, then rip their post
                 p['user_info'] = userResult.user;
