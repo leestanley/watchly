@@ -123,6 +123,20 @@ const api = {
             });
         }
     },
+    getInfoFromEmail: async (email) => {
+        let result = await api.getUsers();
+
+        for (let i = 0; i < result.users.length; i++) {
+            let u = result.users[i];
+
+            if (u.email.toLowerCase() === email.toLowerCase())
+                return api.createSuccess({
+                    data: u
+                });
+        }
+
+        return api.createError(`Email "${email}" is not registered.`);
+    },
     isEmailRegistered: async (email) => {
         let result = await api.getUsers();
 
