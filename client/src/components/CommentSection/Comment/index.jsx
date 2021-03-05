@@ -55,6 +55,14 @@ const Comment = ({ comment, commentID, postID, updateReplies }) => {
 
     const renderReplies = () => {
         return replies.map((reply) => {
+            let replyMenu;
+
+            if (reply.username === 'testtesttest') {
+                replyMenu = <EllipsisOutlined className="comment-more-icon" />;
+            } else {
+                replyMenu = null;
+            }
+
             return (
                 <div className="Reply" key={reply.comment_id}>
                     <div className="comment-info">
@@ -65,10 +73,18 @@ const Comment = ({ comment, commentID, postID, updateReplies }) => {
                             <p className="comment-reply"><a className="bold-reply" onClick={openReply} href="/#">Reply</a></p>
                         </div>
                     </div>
-                    <EllipsisOutlined className="comment-more-icon" />
+                    {replyMenu}
                 </div>
             );
         });
+    }
+
+    let commentMenu;
+
+    if (comment.username === 'testtesttest') {
+        commentMenu = <EllipsisOutlined className="comment-more-icon" />;
+    } else {
+        commentMenu = null;
     }
 
     return (
@@ -82,7 +98,7 @@ const Comment = ({ comment, commentID, postID, updateReplies }) => {
                         <p className="comment-reply"><a className="bold-reply" onClick={openReply} href="/#">Reply</a></p>
                     </div>
                 </div>
-                {/* <EllipsisOutlined className="comment-more-icon" /> */}
+                {commentMenu}
             </div>
             {renderReplies()}
             {renderReplyEditor()}

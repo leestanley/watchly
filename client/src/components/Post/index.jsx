@@ -4,6 +4,14 @@ import CommentSection from '../CommentSection';
 import './style.scss';
 
 const Post = ({ post, updatePosts }) => {
+  let menu;
+
+  if (post.username === 'testtesttest') {
+    menu = <EllipsisOutlined className="more-icon" />
+  } else {
+    menu = null;
+  }
+
   return (
     <div className="post-container">
       <div className="post-header">
@@ -13,7 +21,7 @@ const Post = ({ post, updatePosts }) => {
             <p className="poster-name">{post.user_info.username}</p>
           </div>
         </div>
-        <EllipsisOutlined className="more-icon" />
+        {menu}
       </div>
       <div className="post-body">
         <div className="post-main">
@@ -28,7 +36,7 @@ const Post = ({ post, updatePosts }) => {
             <div className="content-header">
               <div className="content-details">
                 <p className="content-title">{post.details.title}</p>
-                <p className="content-date">{post.details.releaseDate}</p>
+                <p className="content-date">{post.details.releaseDate.slice(0, 4)}</p>
               </div>
               <p className="post-rating">{post.rating}/10</p>
             </div>
