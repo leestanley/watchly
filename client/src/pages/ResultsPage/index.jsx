@@ -57,11 +57,11 @@ function ResultsPage({ history }) {
 
   useEffect(() => {
     // make sure they're logged in
-    if (loading || !user) return;
+    if (loading || !user || !q) return;
 
     // retrieve search data
     loadSearchResults();
-  }, [loading]);
+  }, [loading, q]);
 
   if (!params.has('q') || params.get('q').trim().length === 0) {
     history.push('/home');
