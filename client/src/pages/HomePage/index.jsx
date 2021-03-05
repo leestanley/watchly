@@ -55,7 +55,7 @@ const HomePage = ({ history }) => {
         setPosts(response.data.posts);
         setPostsLoading(false);
       });
-    });
+    }, []);
 
     let renderPosts;
 
@@ -64,7 +64,7 @@ const HomePage = ({ history }) => {
     } else {
       renderPosts = posts.map((post) => {
         return (
-          <Post post={post} key={post.id} updatePosts={forceUpdate} />
+          <Post post={post} key={post.post_id} updatePosts={forceUpdate} />
         );
       });
     }

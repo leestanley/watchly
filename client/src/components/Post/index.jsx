@@ -1,15 +1,37 @@
 import { EllipsisOutlined } from '@ant-design/icons';
 import CommentSection from '../CommentSection';
+import { Menu, Dropdown } from 'antd';
 
 import './style.scss';
+import API from '../../API';
 
 const Post = ({ post, updatePosts }) => {
-  let menu;
+
+  const handlePostMenu = ({ key }) => {
+    if (key === 'delete') {
+      API.deletePost(post.post_id).then(response => {
+        updatePosts();
+      })
+    }
+  };
+
+  let postMenu;
 
   if (post.username === 'testtesttest') {
-    menu = <EllipsisOutlined className="more-icon" />
+    let postMenuItems = (
+      <Menu onClick={handlePostMenu}>
+        <Menu.Item danger key="delete">
+          Delete Post
+        </Menu.Item>
+      </Menu>
+    );
+    postMenu = (
+      <Dropdown overlay={postMenuItems}>
+        <EllipsisOutlined className="more-icon" />
+      </Dropdown>
+    );
   } else {
-    menu = null;
+    postMenu = null;
   }
 
   return (
@@ -21,7 +43,7 @@ const Post = ({ post, updatePosts }) => {
             <p className="poster-name">{post.user_info.username}</p>
           </div>
         </div>
-        {menu}
+        {postMenu}
       </div>
       <div className="post-body">
         <div className="post-main">

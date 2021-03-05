@@ -47,6 +47,15 @@ export default {
             }
         };
         return axios(config);
+    },
+    deletePost: function (postID) {
+        return axios.delete(`${baseURL}/posts/p/${postID}`);
+    },
+    deleteComment: function (postID, commentID) {
+        return axios.delete(`${baseURL}/posts/p/${postID}/comment/${commentID}`);
+    },
+    deleteReply: function (postID, commentID, replyID) {
+        return axios.delete(`${baseURL}/posts/p/${postID}/comment/${commentID}/reply/${replyID}`);
     }
 };
 

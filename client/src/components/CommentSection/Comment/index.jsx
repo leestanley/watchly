@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, Menu, Dropdown } from 'antd';
 import { MessageOutlined, EllipsisOutlined } from '@ant-design/icons';
 import './style.scss';
 import API from '../../../API';
@@ -53,12 +53,45 @@ const Comment = ({ comment, commentID, postID, updateReplies }) => {
         }
     };
 
+    const handleCommentMenu = ({ key }) => {
+        // check if equal to delete
+        // make api call
+        if (key === 'delete') {
+            API.deleteComment(postID, commentID).then(response => {
+                updateReplies();
+            });
+        }
+    };
+
+    const handleReplyMenu = (key, replyID) => {
+        // check if equal to delete
+        // make API call
+        if (key.key === 'delete') {
+            API.deleteReply(postID, commentID, replyID).then(response => {
+                updateReplies();
+            });
+        }
+    };
+
     const renderReplies = () => {
         return replies.map((reply) => {
             let replyMenu;
 
             if (reply.username === 'testtesttest') {
-                replyMenu = <EllipsisOutlined className="comment-more-icon" />;
+                let replyMenuItems = (
+                    <Menu onClick={(key) => {
+                        handleReplyMenu(key, reply.comment_id);
+                    }}>
+                        <Menu.Item danger key="delete">
+                            Delete Reply
+                        </Menu.Item>
+                    </Menu>
+                );
+                replyMenu = (
+                    <Dropdown overlay={replyMenuItems}>
+                        <EllipsisOutlined className="comment-more-icon" />
+                    </Dropdown>
+                );
             } else {
                 replyMenu = null;
             }
@@ -82,7 +115,18 @@ const Comment = ({ comment, commentID, postID, updateReplies }) => {
     let commentMenu;
 
     if (comment.username === 'testtesttest') {
-        commentMenu = <EllipsisOutlined className="comment-more-icon" />;
+        let commentMenuItems = (
+            <Menu onClick={handleCommentMenu}>
+                <Menu.Item danger key="delete">
+                    Delete Comment
+                </Menu.Item>
+            </Menu>
+        );
+        commentMenu = (
+            <Dropdown overlay={commentMenuItems}>
+                <EllipsisOutlined className="comment-more-icon" />
+            </Dropdown>
+        );
     } else {
         commentMenu = null;
     }
