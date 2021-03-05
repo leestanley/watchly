@@ -13,21 +13,19 @@ const WritePost = ({ updatePosts }) => {
   const [loadingData, setLoadingData] = useState(false);
   const [rating, setRating] = useState(5);
   const [show, setShow] = useState('');
-  const [options, setOptions] = useState(['meow', 'meow']);
+  const [options, setOptions] = useState([]);
   const [id, setId] = useState('');
 
   const [form] = Form.useForm();
 
+
   const onSearch = async (searchText) => {
-    console.log('active');
     if (searchText.length > 2) {
       let data = await loadSearchResults(searchText);
-      console.log(data);
-      //   let options = [];
-      //   for(let i = 0; i < data.length; i++) {
-      //       options.push(data[i].title)
-      //   }
-    //   setOptions();
+      setOptions([]);
+      
+      setOptions(data);
+      console.log(options)  
     } else {
       setOptions([]);
     }
@@ -45,8 +43,12 @@ const WritePost = ({ updatePosts }) => {
       if (data.success) {
         let list = [];
         data.list.forEach((d) => {
-          list.push(d.title);
+          list.push({
+            category: d.id,
+            value: d.title,
+          });
         });
+
         return list;
       } else {
         notification.error({
