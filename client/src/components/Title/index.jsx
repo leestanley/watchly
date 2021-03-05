@@ -1,12 +1,48 @@
+import React, { useState, useEffect } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { notification } from 'antd';
+import fbase from '../../firebase';
+import API from '../../API';
 import './style.scss';
 
-import defaultProfilePic from '../../assets/default_profile.png'
-
+import defaultProfilePic from '../../assets/default_profile.png';
 function Title() {
+    const [user, loading, error] = useAuthState(fbase.auth);
+    const [profilePicture, setProfilePicture] = useState('');
+    const [loadingData, setLoadingData] = useState(true);
+
+    const loadProfilePicture = async () => {
+        setLoadingData(true);
+        let userResult = await API.getInfoFromEmail(user.email);
+        let profileData = userResult.data;
+        
+        if (profileData.success) {
+            profileData = profileData.data;
+
+            setProfilePicture(profileData.profilePicture);
+        } else {
+            setProfilePicture(defaultProfilePic);
+            notification.error({
+                message: 'Error loading profile picture',
+                description: profileData.message
+            });
+        }
+        
+        setLoadingData(false);
+    };
+
+    useEffect(() => {
+        // make sure they're logged in
+        if (loading || !user) return;
+    
+        // retrieve profile picture
+        loadProfilePicture();
+      }, [loading]);
+    
     return (
         <div className="TitleCard">
             <h2>Watchly</h2>
-            <img src={defaultProfilePic} className="profilePicture" alt="profile-pic" />
+            {!loadingData && <img src={profilePicture} className="profilePicture" alt="profile-pic" />}
         </div>
     );
 }

@@ -118,11 +118,17 @@ function SearchPage({ history }) {
   }
 
   const renderPosts = () => {
-    return resultPostData.map((post) => {
-      return (
-        <Post post={post} key={post.post_id} updatePosts={forceUpdate} />
-      )
-    });
+    if (resultPostData && resultPostData.length > 0) {
+      return resultPostData.map((post) => {
+        return (
+          <Post post={post} key={post.post_id} updatePosts={forceUpdate} />
+        )
+      });
+    } else {
+      return (<div id="error">
+        <p>No global reviews found.</p>
+      </div>);
+    }
   };
 
   const onSearch = (value) => {

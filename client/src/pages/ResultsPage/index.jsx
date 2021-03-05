@@ -33,12 +33,12 @@ function ResultsPage({ history }) {
           list.push({
             id: d.id,
             title: d.title,
-            date:
-              d.releaseDate.length > 0 ? d.releaseDate.substring(0, 4) : 'N/A',
+            date: d.releaseDate.length > 0 ? d.releaseDate.substring(0, 4) : 'N/A',
             img: d.poster,
             rating: d.voteAverage == 0 ? 'N/A' : d.voteAverage,
           });
         });
+        
         setResultsData(list);
       } else {
         notification.error({

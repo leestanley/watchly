@@ -5,6 +5,9 @@ import axios from 'axios';
 const baseURL = process.env.REACT_APP_API_URL;
 
 export default {
+    getInfoFromEmail: function (email) {
+        return axios.get(`${baseURL}/users/getInfoFromEmail?email=${email}`);
+    },
     search: function (query, page = 1) {
         return axios.get(`${baseURL}/database/search?query=${query}&page=${page}`);
     },

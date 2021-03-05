@@ -36,7 +36,7 @@ const ShowList = ({ list, handleMediaChange, type }) => {
         <h2 className="sort-title">Trending</h2>
         <Select
           defaultValue={mediaType}
-          style={{ width: 100, height: 30 }}
+          style={{ width: 125, height: 30 }}
           onChange={handleMediaTypeChange}
         >
           <Option value="movie">Movie</Option>
