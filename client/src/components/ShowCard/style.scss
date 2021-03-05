@@ -1,6 +1,12 @@
 .show-container {
   margin: 3vh 0vw;
 
+  .addlist {
+    background-color: #C62E65;
+    color: white;
+    stroke: 1px solid #E84F86;
+  }
+
   .post-header {
     display: flex;
     justify-content: space-between;

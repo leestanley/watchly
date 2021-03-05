@@ -31,7 +31,7 @@ const ShowCard = () => {
           </div>
         </div>
         <div className="post-tags">
-          <Button shape="round" size="medium">
+          <Button className="addlist" shape="round" size="medium">
             Add to List >
           </Button>
         </div>

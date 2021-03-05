@@ -7,12 +7,8 @@ import Title from '../../components/Title';
 import Navbar from '../../components/Navbar';
 
 import SearchCard from '../../components/SearchCard';
-import ShowCard from '../../components/ShowCard';
-import FriendCard from '../../components/FriendCard';
-import Post from '../../components/Post';
-import postJSON from '../../assets/posts.json';
 
-function SearchPage({ history }) {
+function SearchLandingPage({ history }) {
   const [user, loading, error] = useAuthState(fbase.auth);
 
   if (loading) {
@@ -43,27 +39,18 @@ function SearchPage({ history }) {
     return <div></div>;
   }
 
-  const renderPosts = () => {
-    return postJSON.posts.map((post) => {
-      return (
-        <Post post={post} />
-      )
-    });
-  };
+  return (
+    <>
+      <Title />
 
-  return (<>
-    <Title />
+      <div className="SearchPage">
+        <SearchCard title="Search for a TV Show or Movie" />
+        <div style={{ height: '75px' }} />
+      </div>
 
-    <div className="SearchPage">
-      <SearchCard title="Search for a TV Show or Movie" />
-      <ShowCard />
-      <h2 style={{ marginTop: '2vh' }}>Global Reviews</h2>
-      {renderPosts()}
-      <div style={{ height: '75px' }} />
-    </div>
-
-    <Navbar />
-  </>);
+      <Navbar />
+    </>
+  );
 }
 
-export default SearchPage;
+export default SearchLandingPage;
