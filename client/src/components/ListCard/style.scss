@@ -15,7 +15,7 @@
         }
 
         .card-img {
-            border-radius: 12px;
+            border-radius: 6px;
             height: 9.375vh;
             width: 15vw;
             margin: 0 2vh;
@@ -52,10 +52,10 @@
 .Modal {
     display: flex;
     flex-direction: column;
+    padding: 18px;
 
     .modal-body {
         display: flex;
-        justify-content: space-around;
 
         .modal-img {
             border-radius: 12px;
@@ -99,5 +99,9 @@
 
     .modal-input {
         margin: 1vh;
+    }
+
+    .ant-input-number {
+        width: 50px;
     }
 }

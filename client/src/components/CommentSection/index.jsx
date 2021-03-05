@@ -59,7 +59,7 @@ const CommentSection = ({ commentList, postID, updateComments }) => {
             </div>
             <Form onFinish={handleCreateComment} className="comment-form">
                 <Form.Item className="form-item" name="comment">
-                    <Input placeholder="Write a comment..." style={{ width: 280 }} />
+                    <Input placeholder="Write a comment..." style={{ width: 280 }}  autocomplete="off" />
                 </Form.Item>
                 <Form.Item>
                     <Button htmlType="submit">
