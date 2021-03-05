@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
                                 /* if (rating.indexOf('.') === -1)
                                     rating = rating + '.0'; */
                             
-                                res.json(await f.createPost(user, rating, id, content));
+                                res.json(await f.createPost(user, ratingParsed, id, content));
                             } else {
                                 res.json(f.createError('Please provide a valid rating for the movie, from [0.0 to 10.0].'))
                             }
