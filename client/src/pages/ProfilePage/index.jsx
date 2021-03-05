@@ -21,8 +21,9 @@ import startup from '../../assets/movies/startup.png';
 
 import './style.scss';
 
-function ProfilePage({ history }) {
+function ProfilePage({ history, match: {params: {id}} }) {
   const [user, loading, error] = useAuthState(fbase.auth);
+  const isAdmin = (id === undefined);
 
   if (loading) {
     // can replace?
@@ -51,19 +52,19 @@ function ProfilePage({ history }) {
     // we have to return something so we'll return an empty page.
     return <div></div>;
   }
-
+  
   return (
     <>
       <div className="ProfilePage">
-        <Title />
+        <Title username={id} />
         <div className="Row">
-          <h1>Your Profile</h1>
-          <a href="/logout">
+          <h1>{isAdmin ? 'Your' : `${id}'s`} Profile</h1>
+          {isAdmin && <a href="/logout">
             <Button className="logout">Logout</Button>
-          </a>
+          </a>}
         </div>
         <div className="header">
-          <UserSettings self={true} />
+          <UserSettings self={false} />
           <h2 className="t-friends">Friends (231)</h2>
           <img src={friends} alt="friends" />
         </div>

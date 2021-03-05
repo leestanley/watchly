@@ -18,6 +18,7 @@ function App() {
       <div className="App">
         <Switch>
           <Route path="/search" component={ResultsPage} />
+          <Route path="/profile/:id" component={ProfilePage} />
           <Route path="/profile" component={ProfilePage} />
           <Route path="/list" component={ListPage} />
           <Route path="/view" component={SearchPage} />
