@@ -7,7 +7,7 @@ const ResultsList = ({ list }) => {
   const renderList = () => {
     return list.map((card, i) => {
       return (
-        <Link to={`/results?id=${card.id}`} style={{ color: 'black' }}>
+        <Link to={`/view?id=${card.id}`} style={{ color: 'black' }}>
           <ListCard key={i} ranking={i + 1} card={card} disableModal={true} />
         </Link>
       );

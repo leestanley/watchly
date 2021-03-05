@@ -93,7 +93,7 @@ function ProfilePage({ history }) {
           <h2 className="spacer">Currently Watching</h2>
           <div className="Row-Watched">
             <WatchedCard image={spongebob} title={'Spongebob'} date={'2004'} />
-            <Link to="/search">
+            <Link to="/view">
               <img src={addshow} alt="addshow" className="addshow" />
             </Link>
           </div>

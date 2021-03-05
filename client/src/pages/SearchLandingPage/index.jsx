@@ -94,7 +94,7 @@ function SearchLandingPage({ history }) {
 
   const onSearch = (value) => {
     if (value.trim().length > 0)
-      history.push(`/results?q=${value}`);
+      history.push(`/search?q=${value}`);
   };
 
   return (

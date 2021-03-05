@@ -22,8 +22,8 @@ const useForceUpdate = () => {
 
 function SearchPage({ history }) {
   const [user, loading, error] = useAuthState(fbase.auth);
-  const [loadingData, setLoadingData] = useState(false);
-  const [resultData, setResultData] = useState({});
+  const [loadingData, setLoadingData] = useState(true);
+  const [resultData, setResultData] = useState(null);
   const [resultPostData, setResultPostData] = useState([]);
 
   const forceUpdate = useForceUpdate();
@@ -33,15 +33,14 @@ function SearchPage({ history }) {
 
   let id = undefined;
   const loadResults = async () => {
-    // console.log(id);
     setLoadingData(true);
 
     try {
-      console.log(id);
       let searchResult = await API.getMedia(id);
       let data = searchResult.data;
-
+      
       if (data.success) {
+        setLoadingData(false);
         setResultData(data.details);
       } else {
         notification.error({
@@ -52,7 +51,9 @@ function SearchPage({ history }) {
 
       let postResults = await API.getPostsWithMedia(id);
       data = postResults.data;
+      
       if (data.success) {
+        setLoadingData(false);
         setResultPostData(data.posts);
       } else {
         notification.error({
@@ -66,18 +67,15 @@ function SearchPage({ history }) {
         description: e.message
       });
     }
-    console.log(resultData);
-    console.log(resultPostData);
-    setLoadingData(false);
   };
 
   useEffect(() => {
     // make sure they're logged in
-    if (loading || !user) return;
+    if (loading || !user || !id) return;
 
     // retrieve results
     loadResults();
-  }, [loading]);
+  }, [loading, id]);
 
   if (!params.has('id') || params.get('id').trim().length === 0) {
     history.push('/home');
@@ -129,7 +127,7 @@ function SearchPage({ history }) {
 
   const onSearch = (value) => {
     if (value.trim().length > 0)
-      history.push(`/results?q=${value}`);
+      history.push(`/search?q=${value}`);
   };
 
   return (<>
@@ -140,7 +138,14 @@ function SearchPage({ history }) {
       {loadingData ? <div id="loading">
         <br />
         <p>Loading results...</p>
-      </div> : <ShowCard card={resultData} />}
+      </div> : <>
+        {(resultData !== null) ? <ShowCard card={resultData} /> : <>
+          <div id="error">
+            <br />
+            <p>No data found.</p>
+          </div>
+        </>}
+      </>}
       <h2 style={{ marginTop: '2vh' }}>Global Reviews</h2>
       {loadingData ? <div id="loading">
         <br />
