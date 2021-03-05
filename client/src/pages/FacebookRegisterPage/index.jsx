@@ -141,7 +141,7 @@ function FacebookRegisterPage({ history }) {
           <Button disabled={registering} className="l-styles" onClick={onRegister}>
             Submit
           </Button>
-          <Link to="/">
+          <Link to="/logout">
             <p>Go Back</p>
           </Link>
       </div>

@@ -51,7 +51,7 @@ function LandingPage({ history }) {
     fbase.auth.signInWithPopup(fbase.fb).then(result => {
       // need to check if this email has an account associated already
       ax.get(`${BASE_API}/users/emailRegistered?email=${result.user.email}`).then(res => {
-        setLoggingIn(false);
+        if (loggingIn) return;
         if (res.data.success)
           history.push('/home');
         else
