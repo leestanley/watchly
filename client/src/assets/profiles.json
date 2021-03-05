@@ -114,6 +114,45 @@
                     "poster": "https://www.themoviedb.org/t/p/w220_and_h330_face/glKDfE6btIRcVB5zrjspRIs4r52.jpg"
                 }
             ]
+        },
+        {
+            "default": true,
+            "friendCount": 143,
+            "watchedStats": {
+                "hours": 2014,
+                "shows": 29,
+                "movies": 11,
+                "genres": 6
+            },
+            "favorites": [
+                {
+                    "title": "Haikyu!!",
+                    "releaseDate": "2014-04-06",
+                    "poster": "https://www.themoviedb.org/t/p/w220_and_h330_face/pLpQZHVduTzJTOVNmWfppY9tk3W.jpg"
+                },
+                {
+                    "title": "Pokémon Detective Pikachu",
+                    "releaseDate": "2019-05-03",
+                    "poster": "https://www.themoviedb.org/t/p/w220_and_h330_face/wgQ7APnFpf1TuviKHXeEe3KnsTV.jpg"
+                },
+                {
+                    "title": "How I Met Your Mother",
+                    "releaseDate": "2005-09-19",
+                    "poster": "https://www.themoviedb.org/t/p/w220_and_h330_face/dvxSvr6OmYGvvt8Z1VdBlPfL1Lf.jpg"
+                },
+                {
+                    "title": "It's Okay to Not Be Okay",
+                    "releaseDate": "2020-06-20",
+                    "poster": "https://www.themoviedb.org/t/p/w220_and_h330_face/6CvvTWcw9vSf5Zpgeot2ppE0P2D.jpg"
+                }
+            ],
+            "currently": [
+                {
+                    "title": "Crash Landing on You",
+                    "releaseDate": "2019-12-14",
+                    "poster": "https://www.themoviedb.org/t/p/w220_and_h330_face/bXo9sDqMmo4dEOPSPLR7sdYPTvz.jpg"
+                }
+            ]
         }
     ]
 }
