@@ -47,7 +47,7 @@ const Comment = ({ comment, commentID, postID, updateReplies }) => {
                 <div className="reply-editor">
                     <Form onFinish={createReply} className="reply-form">
                         <Form.Item name="reply">
-                            <Input autoComplete={false} placeholder="Write a reply..." style={{ width: 237,}} />
+                            <Input autocomplete="off" placeholder="Write a reply..." style={{ width: 237,}} />
                         </Form.Item>
                         <Form.Item>
                             <Button htmlType="submit">
