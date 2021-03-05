@@ -15,8 +15,9 @@ function ResultsPage({ history }) {
   let search = window.location.search;
   let params = new URLSearchParams(search);
 
+  let q = undefined;
   const loadSearchResults = async () => {
-    
+    console.log(q);
   };
 
   useEffect(() => {
@@ -27,7 +28,6 @@ function ResultsPage({ history }) {
     loadSearchResults();
   }, [loading]);
 
-  let q = undefined;
   if (!params.has('q') || params.get('q').trim().length === 0) {
     history.push('/home');
 
@@ -37,6 +37,8 @@ function ResultsPage({ history }) {
       </div>
     );
   }
+
+  q = params.get('q');
 
   if (loading) {
     // can replace?
@@ -65,8 +67,6 @@ function ResultsPage({ history }) {
     // we have to return something so we'll return an empty page.
     return <div></div>;
   }
-  
-  q = params.get('q');
 
   const renderList = () => {
     let cards;

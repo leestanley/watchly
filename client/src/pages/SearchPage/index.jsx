@@ -15,6 +15,34 @@ import postJSON from '../../assets/posts.json';
 function SearchPage({ history }) {
   const [user, loading, error] = useAuthState(fbase.auth);
 
+  let search = window.location.search;
+  let params = new URLSearchParams(search);
+
+  let id = undefined;
+  const loadResults = async () => {
+    console.log(id);
+  };
+
+  useEffect(() => {
+    // make sure they're logged in
+    if (loading || !user) return;
+
+    // retrieve results
+    loadResults();
+  }, [loading]);
+
+  if (!params.has('id') || params.get('id').trim().length === 0) {
+    history.push('/home');
+
+    return (
+      <div>
+        <h3>Redirecting...</h3>
+      </div>
+    );
+  }
+
+  id = params.get('id');
+
   if (loading) {
     // can replace?
     return (
@@ -42,21 +70,6 @@ function SearchPage({ history }) {
     // we have to return something so we'll return an empty page.
     return <div></div>;
   }
-
-  let search = window.location.search;
-  let params = new URLSearchParams(search);
-
-  if (!params.has('id') || params.get('id').trim().length === 0) {
-    history.push('/home');
-
-    return (
-      <div>
-        <h3>Redirecting...</h3>
-      </div>
-    );
-  }
-
-  const id = params.get('id');
 
   const renderPosts = () => {
     return postJSON.posts.map((post) => {
