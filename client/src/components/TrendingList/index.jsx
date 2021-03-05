@@ -19,7 +19,7 @@ const ShowList = ({ list, handleMediaChange, type }) => {
   const renderList = () => {
     return list.map((card, i) => {
       return (
-        <Link to={`/results?id=${card.id}`} style={{color: 'black'}}>
+        <Link to={`/search?id=${card.id}`} style={{color: 'black'}}>
           <ListCard
             key={i}
             ranking={i + 1}
