@@ -13,6 +13,7 @@ function SearchCard({ title, onSubmit }) {
   return (
     <div className="SearchCard">
       <h2 className="title">{title}</h2>
+      {/* eslint-disable-next-line no-restricted-globals */}
       <Search placeholder="Search here" onSearch={onSearch} enterButton />
     </div>
   );
