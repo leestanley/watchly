@@ -5,13 +5,13 @@ import './style.scss';
 
 const { Option } = Select;
 
-const List = ({ list }) => {
+const List = ({ list, handleUpdate }) => {
     const [sortRating, setSortRating] = useState('highest');
 
     // function for setting sort for ratings
     const handleSortRating = (value) => {
         setSortRating(value);
-    }
+    };
 
     // function for rendering prop for list of shows/movies watched
     const renderList = () => {
@@ -23,7 +23,7 @@ const List = ({ list }) => {
         }
 
         return cards.map((card, index) => {
-            return <ListCard card={card} key={index} />
+            return <ListCard card={card} key={index} ranking={index + 1} updateList={handleUpdate} />
         });
     };
 

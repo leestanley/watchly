@@ -13,6 +13,7 @@ import background from '../../assets/formlogin.png';
 const BASE_API = process.env.REACT_APP_API_URL;
 function FacebookRegisterPage({ history }) {
   const [username, setUsername] = useState('');
+  const [registering, setRegistering] = useState(false);
   const [user, loading, error] = useAuthState(fbase.auth);
 
   if (loading) {
@@ -83,6 +84,9 @@ function FacebookRegisterPage({ history }) {
   }
   
   const onRegister = () => {
+    if (registering) return;
+
+    setRegistering(true);
     if (username && username.trim().length > 0) {
       ax.post(`${BASE_API}/users/createUser`, {
         username,
@@ -90,6 +94,7 @@ function FacebookRegisterPage({ history }) {
         profilePic,
       })
         .then((res) => {
+          setRegistering(false);
           if (res.data.success) {
             notification.open({
               message: 'Successfully created an account through Facebook!',
@@ -103,11 +108,15 @@ function FacebookRegisterPage({ history }) {
             });
           }
         })
-        .catch((error) => notification.error({
-          message: 'Auth Error',
-          description: error.message
-        }));
+        .catch((error) => {
+          setRegistering(false);
+          notification.error({
+            message: 'Auth Error',
+            description: error.message
+          })
+        });
     } else {
+      setRegistering(false);
       notification.error({
         message: 'Auth Error',
         description: 'Please provide an email!',
@@ -119,21 +128,22 @@ function FacebookRegisterPage({ history }) {
     <div className="FacebookRegisterPage">
       <div className="sign-up">
         <h3>
-          Complete your registration by completing the field below!
+          {registering ? "Registering account..." : "Complete your registration by completing the field below!"}
         </h3>
         <br />
         <h3>Username</h3>
-        <Input
-          className="input"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <Button className="l-styles" onClick={onRegister}>
-          Submit
-        </Button>
-        <Link to="/">
-          <p>Go Back</p>
-        </Link>
+          <Input
+            className="input"
+            value={username}
+            disabled={registering}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <Button disabled={registering} className="l-styles" onClick={onRegister}>
+            Submit
+          </Button>
+          <Link to="/">
+            <p>Go Back</p>
+          </Link>
       </div>
       <img src={background} alt="background" className="background" />
     </div>
