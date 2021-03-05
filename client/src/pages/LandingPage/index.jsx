@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { Button, notification } from 'antd';
 import { Link } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -12,6 +13,7 @@ import background from '../../assets/formlogin.png';
 
 const BASE_API = process.env.REACT_APP_API_URL;
 function LandingPage({ history }) {
+  const [loggingIn, setLoggingIn] = useState(false);
   const [user, loading, error] = useAuthState(fbase.auth);
 
   if (loading) {
@@ -43,22 +45,32 @@ function LandingPage({ history }) {
   }
 
   const onFacebookLogin = () => {
+    if (loggingIn) return;
+
+    setLoggingIn(true);
     fbase.auth.signInWithPopup(fbase.fb).then(result => {
       // need to check if this email has an account associated already
       
       ax.get(`${BASE_API}/users/emailRegistered?email=${result.user.email}`).then(res => {
+        setLoggingIn(false);
         if (res.data.success)
           history.push('/home');
         else
           history.push(`/fbRegister?email=${encode(result.user.email)}&profilePic=${encode(result.user.photoURL)}`);
-      }).catch(error => notification.error({
+      }).catch(error => {
+        setLoggingIn(false);
+        notification.error({
+          message: 'Auth Error',
+          description: error.message,
+        })
+      });
+    }).catch(error => {
+      setLoggingIn(false);
+      notification.error({
         message: 'Auth Error',
         description: error.message,
-      }));
-    }).catch(error => notification.error({
-      message: 'Auth Error',
-      description: error.message,
-    }));
+      })
+    });
   };
 
   return (
@@ -67,9 +79,9 @@ function LandingPage({ history }) {
         <Link to="/register">
           <Button className="l-styles">Register Today</Button>
         </Link>
-        <Button className="l-styles" onClick={onFacebookLogin}>
+        <Button disabled={loggingIn} className="l-styles" onClick={onFacebookLogin}>
           <img src={facebook} style={{ marginRight: '10px' }} />
-          Facebook Login
+          {loggingIn ? "Logging in..." : "Facebook Login"}
         </Button>
         <Link to="/login">
           <p>
