@@ -136,7 +136,7 @@ router.delete('/p/:id/comment/:comment_id/reply/:reply_id', async (req, res) => 
             if (reply_id && reply_id.length > 0)
                 res.json(await f.deleteReply(id, comment_id, reply_id));
             else
-                res.json(f.createError(`Please provide a valid reply id.`));
+                res.json(f.createError(`Please provide a valid reply comment id.`));
         else
             res.json(f.createError(`Please provide a valid comment id.`));
     else
