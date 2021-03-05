@@ -5,6 +5,7 @@ import './style.scss';
 
 import Title from '../../components/Title';
 import Navbar from '../../components/Navbar';
+import ShowList from '../../components/ShowList';
 
 import SearchCard from '../../components/SearchCard';
 
@@ -40,14 +41,13 @@ function SearchLandingPage({ history }) {
   }
 
   return (
-    <>
+    <>  
       <Title />
-
-      <div className="SearchPage">
+      <div className="SearchLandingPage">
         <SearchCard title="Search for a TV Show or Movie" />
+        <ShowList />
         <div style={{ height: '75px' }} />
       </div>
-
       <Navbar />
     </>
   );

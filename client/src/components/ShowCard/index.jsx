@@ -14,10 +14,10 @@ const ShowCard = () => {
     0: '0',
     10: {
       style: {
-        color: '#000'
+        color: '#000',
       },
-      label: '10'
-    }
+      label: '10',
+    },
   };
 
   const showModal = () => {
@@ -27,11 +27,12 @@ const ShowCard = () => {
   const handleAdd = () => {
     // add stuff to save
     movieJSON.movies.push({
-      "title": "Man of Steel",
-      "date": "2013",
-      "img": "https://i.imgur.com/pNTI29P.jpeg",
-      "rating": rating,
-      "content": "Man of Steel is a reboot of the Superman film series that portrays the character's origin story.In the film, Clark Kent learns that he is a superpowered alien from the planet Krypton.He assumes the role of mankind's protector as Superman, making the choice to face General Zod and prevent him from destroying humanity."
+      title: 'Man of Steel',
+      date: '2013',
+      img: 'https://i.imgur.com/pNTI29P.jpeg',
+      rating: rating,
+      content:
+        "Man of Steel is a reboot of the Superman film series that portrays the character's origin story.In the film, Clark Kent learns that he is a superpowered alien from the planet Krypton.He assumes the role of mankind's protector as Superman, making the choice to face General Zod and prevent him from destroying humanity.",
     });
     setIsModalVisible(false);
   };
@@ -54,9 +55,17 @@ const ShowCard = () => {
 
   const renderFavorite = () => {
     if (isFavorite) {
-      return <Button type="primary" shape="round" onClick={handleFavorite}>Remove Favorite</Button>
+      return (
+        <Button type="primary" shape="round" onClick={handleFavorite}>
+          Remove Favorite
+        </Button>
+      );
     } else {
-      return <Button type="primary" shape="round" onClick={handleFavorite}>Add Favorite</Button>
+      return (
+        <Button type="primary" shape="round" onClick={handleFavorite}>
+          Add Favorite
+        </Button>
+      );
     }
   };
 
@@ -64,7 +73,17 @@ const ShowCard = () => {
     <div className="show-container">
       <div className="post-body">
         <div className="post-main">
-          <img className="post-img" src={movieimg} alt="Title poster"></img>
+          <div>
+            <img className="post-img" src={movieimg} alt="Title poster" />
+            <Button
+              className="addlist"
+              shape="round"
+              size="medium"
+              onClick={showModal}
+            >
+              Add to List >
+            </Button>
+          </div>
           <div className="post-content">
             <div className="content-header">
               <div className="content-details">
@@ -78,15 +97,15 @@ const ShowCard = () => {
             </div>
             <div className="post-text">
               <p>
-                Man of Steel is a reboot of the Superman film series that portrays the character's origin story.In the film, Clark Kent learns that he is a superpowered alien from the planet Krypton.He assumes the role of mankind's protector as Superman, making the choice to face General Zod and prevent him from destroying humanity.
+                Man of Steel is a reboot of the Superman film series that
+                portrays the character's origin story.In the film, Clark Kent
+                learns that he is a superpowered alien from the planet
+                Krypton.He assumes the role of mankind's protector as Superman,
+                making the choice to face General Zod and prevent him from
+                destroying humanity.
               </p>
             </div>
           </div>
-        </div>
-        <div className="post-tags">
-          <Button className="addlist" shape="round" size="medium" onClick={showModal}>
-            Add to List >
-          </Button>
         </div>
       </div>
       <Modal
@@ -100,7 +119,7 @@ const ShowCard = () => {
           </Button>,
           <Button key="submit" type="primary" shape="round" onClick={handleAdd}>
             Add
-          </Button>
+          </Button>,
         ]}
       >
         <div className="Modal">
@@ -113,7 +132,14 @@ const ShowCard = () => {
                   <p className="content-date">2013</p>
                 </div>
               </div>
-              <p className="modal-content-text">Man of Steel is a reboot of the Superman film series that portrays the character's origin story.In the film, Clark Kent learns that he is a superpowered alien from the planet Krypton.He assumes the role of mankind's protector as Superman, making the choice to face General Zod and prevent him from destroying humanity.</p>
+              <p className="modal-content-text">
+                Man of Steel is a reboot of the Superman film series that
+                portrays the character's origin story.In the film, Clark Kent
+                learns that he is a superpowered alien from the planet
+                Krypton.He assumes the role of mankind's protector as Superman,
+                making the choice to face General Zod and prevent him from
+                destroying humanity.
+              </p>
               {renderFavorite()}
             </div>
           </div>
@@ -130,7 +156,12 @@ const ShowCard = () => {
                 value={rating}
               />
             </div>
-            <InputNumber min={0} max={10} value={rating} onChange={handleRating} />
+            <InputNumber
+              min={0}
+              max={10}
+              value={rating}
+              onChange={handleRating}
+            />
           </div>
         </div>
       </Modal>

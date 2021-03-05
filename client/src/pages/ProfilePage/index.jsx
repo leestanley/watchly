@@ -85,8 +85,8 @@ function ProfilePage({ history }) {
             <WatchedCard image={startup} title={'Start Up'} date={'2020'} />
             <WatchedCard
               image={yourname}
-              title={'Black Mirror'}
-              date={'2007'}
+              title={'Your Name'}
+              date={'2016'}
             />
           </div>
 
