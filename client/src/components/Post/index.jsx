@@ -3,7 +3,7 @@ import CommentSection from '../CommentSection';
 
 import './style.scss';
 
-const Post = ({ post }) => {
+const Post = ({ post, updatePosts }) => {
   return (
     <div className="post-container">
       <div className="post-header">
@@ -38,7 +38,7 @@ const Post = ({ post }) => {
           </div>
         </div>
       </div>
-      <CommentSection commentList={post.comments} postID={post.post_id} />
+      <CommentSection commentList={post.comments} postID={post.post_id} updateComments={updatePosts} />
     </div>
   );
 };

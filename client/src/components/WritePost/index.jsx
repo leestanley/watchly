@@ -7,7 +7,7 @@ import API from '../../API';
 
 const { TextArea } = Input;
 
-const WritePost = () => {
+const WritePost = ({ updatePosts }) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [rating, setRating] = useState(5);
 
@@ -42,6 +42,7 @@ const WritePost = () => {
         let id = '372058';
         API.createPost(user, values.content, id, values.sliderval + '').then((response) => {
             setIsModalVisible(false);
+            updatePosts();
         })
     };
 

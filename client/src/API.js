@@ -4,6 +4,12 @@ import axios from 'axios';
 const baseURL = process.env.REACT_APP_API_URL;
 
 export default {
+    search: function (query, page = 1) {
+        return axios.get(`${baseURL}/database/search?query=${query}&page=${page}`);
+    },
+    getTrendingMedia: function (type = 'movie') {
+        return axios.get(`${baseURL}/database/trending?type=${type}`);
+    },
     getPosts: function () {
         return axios.get(`${baseURL}/posts`);
     },
