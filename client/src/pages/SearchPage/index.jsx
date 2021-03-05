@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import fbase from '../../firebase';
 
@@ -86,7 +87,7 @@ function SearchPage({ history }) {
       <SearchCard title="Search for a TV Show or Movie" />
       <ShowCard />
       <h2 style={{ marginTop: '2vh' }}>Global Reviews</h2>
-      {renderPosts()}
+      {/* renderPosts() */}
       <div style={{ height: '75px' }} />
     </div>
 
