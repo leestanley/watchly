@@ -21,7 +21,7 @@ import {
 //         selected: HomeSelectedIcon
 //     },
 //     {
-//         link: "/search",
+//         link: "/view",
 //         image: SearchIcon,
 //         selected: SearchSelectedIcon
 //     }
@@ -56,7 +56,7 @@ function Navbar(props) {
         <Link to="/home">
           <HomeOutlined className="nav-icons" />
         </Link>
-        <Link to="/searchlanding">
+        <Link to="/trending">
           <SearchOutlined className="nav-icons" />
         </Link>
         <Link to="/profile">

@@ -80,7 +80,7 @@ const ShowCard = ({ card }) => {
               size="medium"
               onClick={showModal}
             >
-              Add to List >
+              Add to List &gt;
             </Button>
           </div>
           <div className="post-content">

@@ -1,36 +1,43 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Input, Button, Menu, Dropdown } from 'antd';
+import { Form, Input, Button, Menu, Dropdown, notification } from 'antd';
 import { MessageOutlined, EllipsisOutlined } from '@ant-design/icons';
-import './style.scss';
+import { useAuthState } from 'react-firebase-hooks/auth';
+
+import fbase from '../../../firebase';
 import API from '../../../API';
+import './style.scss';
 
 const Comment = ({ comment, commentID, postID, updateReplies }) => {
+    const [user, loading, error] = useAuthState(fbase.auth);
     const [newReply, setNewReply] = useState(false);
-
     const [replies, setReplies] = useState(comment.replies);
 
     useEffect(() => {
         setReplies(comment.replies);
     }, [comment.replies]);
 
+    if (loading) return <></>;
+
     const openReply = (e) => {
         e.preventDefault();
         setNewReply(true);
     };
 
-    const createReply = (values) => {
-        /*setReplies(replies => [...replies, {
-            uuid: 4,
-            profile: {
-                pfp: pfp,
-                name: 'Scott Klemmer'
-            },
-            content: values.reply
-        }]);*/
-        let user = 'testtesttest';
-        API.createReply(user, values.reply, postID, commentID).then(response => {
-            updateReplies();
-        });
+    const createReply = async (values) => {
+        let userResult = await API.getInfoFromEmail(user.email);
+        let profileData = userResult.data;
+
+        if (profileData.success) {
+            profileData = profileData.data;
+            API.createReply(profileData.username, values.reply, postID, commentID).then(response => {
+                updateReplies();
+            });
+        } else {
+            notification.error({
+                message: 'Error posting comment',
+                description: profileData.message
+            });
+        }
     };
 
     // later add check for empty reply
@@ -40,7 +47,7 @@ const Comment = ({ comment, commentID, postID, updateReplies }) => {
                 <div className="reply-editor">
                     <Form onFinish={createReply} className="reply-form">
                         <Form.Item name="reply">
-                            <Input placeholder="Write a reply..." style={{ width: 237,}} />
+                            <Input autoComplete={false} placeholder="Write a reply..." style={{ width: 237,}} />
                         </Form.Item>
                         <Form.Item>
                             <Button htmlType="submit">

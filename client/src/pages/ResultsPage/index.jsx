@@ -33,12 +33,12 @@ function ResultsPage({ history }) {
           list.push({
             id: d.id,
             title: d.title,
-            date:
-              d.releaseDate.length > 0 ? d.releaseDate.substring(0, 4) : 'N/A',
+            date: d.releaseDate.length > 0 ? d.releaseDate.substring(0, 4) : 'N/A',
             img: d.poster,
             rating: d.voteAverage == 0 ? 'N/A' : d.voteAverage,
           });
         });
+        
         setResultsData(list);
       } else {
         notification.error({
@@ -57,11 +57,11 @@ function ResultsPage({ history }) {
 
   useEffect(() => {
     // make sure they're logged in
-    if (loading || !user) return;
+    if (loading || !user || !q) return;
 
     // retrieve search data
     loadSearchResults();
-  }, [loading]);
+  }, [loading, q]);
 
   if (!params.has('q') || params.get('q').trim().length === 0) {
     history.push('/home');
@@ -107,7 +107,7 @@ function ResultsPage({ history }) {
 
   const onSearch = (value) => {
     if (value.trim().length > 0) {
-      history.push(`/results?q=${value}`);
+      history.push(`/search?q=${value}`);
       window.location.reload();
     }
   };

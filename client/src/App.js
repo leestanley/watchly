@@ -17,11 +17,11 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
-          <Route path="/results" component={ResultsPage} />
+          <Route path="/search" component={ResultsPage} />
           <Route path="/profile" component={ProfilePage} />
           <Route path="/list" component={ListPage} />
-          <Route path="/search" component={SearchPage} />
-          <Route path="/searchlanding" component={SearchLandingPage} />
+          <Route path="/view" component={SearchPage} />
+          <Route path="/trending" component={SearchLandingPage} />
           <Route path="/home" component={HomePage} />
           <Route path="/register" component={RegisterPage} />
           <Route path="/fbRegister" component={FacebookRegisterPage} />

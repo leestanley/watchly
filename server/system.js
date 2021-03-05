@@ -123,6 +123,20 @@ const api = {
             });
         }
     },
+    getInfoFromEmail: async (email) => {
+        let result = await api.getUsers();
+
+        for (let i = 0; i < result.users.length; i++) {
+            let u = result.users[i];
+
+            if (u.email.toLowerCase() === email.toLowerCase())
+                return api.createSuccess({
+                    data: u
+                });
+        }
+
+        return api.createError(`Email "${email}" is not registered.`);
+    },
     isEmailRegistered: async (email) => {
         let result = await api.getUsers();
 
@@ -195,6 +209,9 @@ const api = {
         for (let i = 0; i < posts.length; i++) {
             let p = posts[i];
             if ((p !== null) && (p !== undefined)) {
+                if (p.details.poster.length === 0)
+                    p.details.poster = 'https://i.imgur.com/zKZTtMn.png';
+                
                 let userResult = await api.getUser(p.username);
                 if (!userResult.success) continue; // if they don't exist anymore, then rip their post
                 p['user_info'] = userResult.user;
@@ -225,7 +242,7 @@ const api = {
         }
 
         return api.createSuccess({
-            posts: new_edited
+            posts: new_edited.reverse()
         });
     },
     createPost: async (username, rating, id, content) => {
