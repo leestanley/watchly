@@ -1,19 +1,60 @@
 .ProfilePage {
+  .Row {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
 
-    h1 {
-        color: white;
+    .logout {
+      background-color: rgb(255, 255, 255, 0.2);
+      border-radius: 33px;
+      color: white;
+      margin-bottom: 16px;
+      width: 100px;
     }
+  }
 
-    .profilebg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: -1;
-    }
+  .spacer {
+    margin-top: 2vh;
+  }
 
-    .TitleCard {
-        h2 {
-            color: white;
-        }
+  h1 {
+    color: white;
+  }
+
+  .t-friends {
+    color: white;
+    margin: 20px 0px 5px 0px;
+  }
+
+  .header {
+    height: 20vh;
+  }
+
+  .Row-Stats {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .Row-Watched {
+    display: flex;
+
+  }
+  .addshow {
+    margin-bottom: 16px;
+    padding: 12px;
+  }
+
+
+  .profilebg {
+    left: 0;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+  }
+
+  .TitleCard {
+    h2 {
+      color: white;
     }
+  }
 }

@@ -1,5 +1,9 @@
 import { Input } from 'antd';
-import { EditOutline } from '@ant-design/icons';
+import {
+  EditOutlined,
+  EyeInvisibleOutlined,
+  EyeTwoTone,
+} from '@ant-design/icons';
 
 import './style.scss';
 
@@ -8,8 +12,20 @@ function UserSettings(props) {
     <div className="UserSettings">
       {props.self && (
         <div className="Row">
-          <Input className="edit" placeholder="enter email" value="test@ucsd.edu" />
-          <Input className="edit" placeholder="enter password" />
+          <Input
+            className="edit"
+            placeholder="enter email"
+            value="test@test.com"
+            suffix={<EditOutlined />}
+          />
+          <Input.Password
+            className="edit"
+            value="123test"
+            placeholder="input password"
+            iconRender={(visible) =>
+              visible ? <EyeTwoTone style={{color: 'white'}} /> : <EyeInvisibleOutlined style={{color: 'white'}} />
+            }
+          />
         </div>
       )}
     </div>

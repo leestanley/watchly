@@ -7,10 +7,13 @@
       background-color: rgb(255, 255, 255, .2);
       border-radius: 33px;
       width: 155px;
+      color: white;
+
+      input.ant-input {
+        background-color: rgb(255, 255, 255, 0);
+        color: white;
+      }
     }
   }
 
-  .header {
-    height: 30vh;
-  }
 }

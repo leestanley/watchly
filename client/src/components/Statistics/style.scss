@@ -1,0 +1,39 @@
+.Statistics {
+  display: flex;
+  .border {
+    min-width: 5px;
+    height: 55px;
+    border-radius: 2px;
+  }
+
+  .text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 12px;
+  }
+
+  h2 {
+    line-height: 0px;
+  }
+
+  p {
+    line-height: 14px;
+  }
+
+  .orange {
+    background: linear-gradient(181.21deg, #ff8989 0%, #fff491 100%);
+  }
+
+  .blue {
+    background: linear-gradient(181.21deg, #7948e0 0%, #39a0ed 100%);
+  }
+
+  .pink {
+    background: linear-gradient(181.21deg, #de0050 0%, #ff89a8 100%);
+  }
+
+  .green {
+    background: linear-gradient(181.21deg, #67ce57 0%, #59ff3e 100%);
+  }
+}

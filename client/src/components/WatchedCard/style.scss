@@ -1,0 +1,14 @@
+.WatchedCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h3 {
+        font-size: 14px;
+        line-height: 6px;
+    }
+
+    p {
+        line-height: 8px;
+    }
+}
