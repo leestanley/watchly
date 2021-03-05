@@ -68,7 +68,7 @@ const WritePost = ({ updatePosts }) => {
     // setShow('')
 
     setSearching(true);
-    if (searchText.length > 2) {
+    if (searchText.length > 1) {
       let data = await loadSearchResults(searchText);
       setOptions(data);
       console.log(data);
