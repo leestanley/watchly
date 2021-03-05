@@ -4,6 +4,7 @@ import SearchPage from './pages/SearchPage';
 import HomePage from './pages/HomePage';
 import ListPage from './pages/ListPage';
 import LandingPage from './pages/LandingPage';
+import SearchLandingPage from './pages/SearchLandingPage';
 import LoginPage from './pages/LoginPage';
 import LogoutPage from './pages/LogoutPage';
 import RegisterPage from './pages/RegisterPage';
@@ -18,6 +19,7 @@ function App() {
           <Route path="/profile" component={ProfilePage} />
           <Route path="/list" component={ListPage} />
           <Route path="/search" component={SearchPage} />
+          <Route path="/searchlanding" component={SearchLandingPage} />
           <Route path="/home" component={HomePage} />
           <Route path="/register" component={RegisterPage} />
           <Route path="/fbRegister" component={FacebookRegisterPage} />

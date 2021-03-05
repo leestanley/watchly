@@ -3,6 +3,7 @@
     align-items: center;
     display: flex;
     justify-content: space-between;
+    overflow-x: hidden;
 
     .logout {
       background-color: rgb(255, 255, 255, 0.2);
