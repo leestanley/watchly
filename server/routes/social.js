@@ -17,12 +17,12 @@ router.post('/', async (req, res) => {
                     if (rating && rating.length > 0) {
                         // check if number
                         if (!isNaN(rating)) {
-                            let ratingParsed = parseFloat(rating);
+                            let ratingParsed = parseInt(rating);
 
-                            if ((ratingParsed >= 0.0) && (ratingParsed <= 10.0)) {
+                            if ((ratingParsed >= 0) && (ratingParsed <= 10)) {
                                 // pad it if it's not a float
-                                if (rating.indexOf('.') === -1)
-                                    rating = rating + '.0';
+                                /* if (rating.indexOf('.') === -1)
+                                    rating = rating + '.0'; */
                             
                                 res.json(await f.createPost(user, rating, id, content));
                             } else {
