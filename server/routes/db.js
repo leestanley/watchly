@@ -70,9 +70,9 @@ router.get('/search', async (req, res) => {
                         relevant.forEach(d => {
                             let entry = {
                                 id: d.id,
-                                voteAverage: d['vote_average'],
+                                voteAverage: (d['vote_average'] === undefined) ? 0 : d['vote_average'],
                                 poster: (d['poster_path'] === undefined) ? 'https://i.imgur.com/zKZTtMn.png' : f.BASE_THUMBNAIL_URL + d['poster_path'],
-                                description: d.overview
+                                description: (d.overview === undefined) ? '' : d.overview
                             };
                             
                             if (d['media_type'] === 'movie') {
