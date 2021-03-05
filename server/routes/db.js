@@ -4,6 +4,51 @@ const router = express.Router();
 const f = require('../system');
 
 const API_KEY = process.env.MOVIE_DB_API_KEY;
+router.get('/trending', async (req, res) => {
+    let type = req.query.type;
+
+    if ((type === "movie") || (type === "tv")) {
+        const url = `https://api.themoviedb.org/3/trending/${type.toLowerCase()}/week?api_key=${API_KEY}`;
+        try {
+            let response = await axios.get(url);
+            let data = response.data;
+            let list = [];
+
+            data.results.forEach(d => {
+                let entry = {
+                    id: d.id,
+                    voteAverage: d['vote_average'],
+                    poster: (d['poster_path'] === null) ? '' : f.BASE_THUMBNAIL_URL + d['poster_path'],
+                    description: d.overview
+                };
+                
+                if (d['media_type'] === 'movie') {
+                    entry.title = d.title;
+                    entry.releaseDate = d['release_date'];
+                } else {
+                    // assume it's a tv show
+                    entry.title = d.name;
+                    entry.releaseDate = d['first_air_date'];
+                }
+
+                list.push(entry);
+            });
+
+            res.json(f.createSuccess({
+                type: type.toLowerCase(),
+                list
+            }));
+        } catch (e) {
+            if (e.response)
+                res.json(f.createError(e.response.data.errors[0]));
+            else
+                res.json(f.createError(e.message));
+        }
+    } else {
+        res.json(f.createError(`Please provide the correct type of media: "movie" or "tv".`));
+    }
+});
+
 router.get('/search', async (req, res) => {
     let page = (req.query.page || '1');
     let query = req.query.query;
