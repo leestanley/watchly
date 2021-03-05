@@ -79,7 +79,7 @@ const ListCard = ({ card, ranking, updateList, disableModal }) => {
                     </div>
                 </div>
                 <div className="card-right">
-                    <p className="card-rating">{card.rating}</p>
+                    <p className="card-rating">{card.rating === 0 ? "N/A" : card.rating}</p>
                 </div>
             </div>
             <Modal
