@@ -92,11 +92,16 @@ function SearchLandingPage({ history }) {
     return <div></div>;
   }
 
+  const onSearch = (value) => {
+    if (value.trim().length > 0)
+      history.push(`/results?q=${value}`);
+  };
+
   return (
     <>  
       <Title />
       <div className="SearchLandingPage">
-        <SearchCard title="Search for a TV Show or Movie" />
+        <SearchCard title="Search for a TV Show or Movie" onSubmit={onSearch} />
         { loadingData ? <div id="loading">
           <br />
           <p>Loading trends...</p>
