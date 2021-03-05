@@ -43,6 +43,21 @@ function SearchPage({ history }) {
     return <div></div>;
   }
 
+  let search = window.location.search;
+  let params = new URLSearchParams(search);
+
+  if (!params.has('id') || params.get('id').trim().length === 0) {
+    history.push('/home');
+
+    return (
+      <div>
+        <h3>Redirecting...</h3>
+      </div>
+    );
+  }
+
+  const id = params.get('id');
+
   const renderPosts = () => {
     return postJSON.posts.map((post) => {
       return (

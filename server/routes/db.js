@@ -113,4 +113,21 @@ router.get('/search', async (req, res) => {
     }
 });
 
+router.get('/getMedia', async (req, res) => {
+    let id = req.query.id;
+
+    if (id && id.length > 0) {
+        let details = await f.getDetails(id);
+
+        if (details === null)
+            res.json(f.createError(`Please provide a valid id.`));
+        else
+            res.json(f.createSuccess({
+                details
+            }));
+    } else {
+        res.json(f.createError(`Please provide a valid id.`));
+    }
+});
+
 module.exports = router;
