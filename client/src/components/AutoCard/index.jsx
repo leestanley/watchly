@@ -6,6 +6,7 @@ function AutoCard(props) {
   return (
     <div className="AutoCard">
       <h2 className="title">{props.title}</h2>
+      {/* <p><span style={{fontWeight: 500, lineHeight: '0px'}}>Currently Selected: </span>{props.selected}</p> */}
       {/* eslint-disable-next-line no-restricted-globals */}
       <AutoComplete
         size="large"
@@ -14,10 +15,14 @@ function AutoCard(props) {
         options={props.options}
         value={props.show}
         onChange={props.onChange}
-        onSearch={props.onSearch}
         onSelect={props.onSelect}
       >
-        <Input.Search size="large" placeholder="input here" enterButton />
+        <Input.Search
+          size="large"
+          placeholder="input here"
+          onSearch={props.onSearch}
+          enterButton
+        />
       </AutoComplete>
     </div>
   );
