@@ -3,7 +3,9 @@ import { Modal, Button, Slider, InputNumber } from 'antd';
 import movieJSON from '../../assets/movies.json';
 import './style.scss';
 
-const ListCard = ({ card, ranking, updateList }) => {
+const ListCard = ({ card, ranking, updateList, disableModal }) => {
+    disableModal = (disableModal || false); // default
+
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isFavorite, setIsFavorite] = useState(false);
     const [rating, setRating] = useState(card.rating);
@@ -19,6 +21,7 @@ const ListCard = ({ card, ranking, updateList }) => {
     };
 
     const showModal = () => {
+        if (disableModal) return;
         setIsModalVisible(true);
     };
 
