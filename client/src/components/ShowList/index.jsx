@@ -22,14 +22,14 @@ const ShowList = ({ list, handleUpdate }) => {
     //   cards = list.slice().sort((a, b) => a.rating - b.rating);
     // }
 
-//     return cards.map((card, index) => {
-//       return (
-//         <ListCard
-//           card={card}
-//           key={index}
-//           ranking={index + 1}
-//           updateList={handleUpdate}
-//         />
+    // return cards.map((card, index) => {
+    //   return (
+    //     <ListCard
+    //       card={card}
+    //       key={index}
+    //       ranking={index + 1}
+    //       updateList={handleUpdate}
+    //     />
 //       );
 //     });
 //   };
