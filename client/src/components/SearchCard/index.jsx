@@ -4,8 +4,11 @@ import { Input } from 'antd';
 
 const { Search } = Input;
 
-function SearchCard({ title }) {
-  const onSearch = value => console.log(value);
+function SearchCard({ title, onSubmit }) {
+  const onSearch = (value) => {
+    if (onSubmit)
+      onSubmit(value);
+  };
 
   return (
     <div className="SearchCard">
