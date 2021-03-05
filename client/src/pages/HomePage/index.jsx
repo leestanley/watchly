@@ -23,14 +23,14 @@ const HomePage = ({ history }) => {
   const forceUpdate = useForceUpdate();
 
   useEffect(() => {
-    // make sure the user is logged in
+    // make sure user is logged in
     if (loading || !user) return;
 
     API.getPosts().then((response) => {
       setPosts(response.data.posts);
       setPostsLoading(false);
     });
-  }, [loading]);
+  }, [loading, posts]);
 
   if (loading) {
     // can replace?
@@ -60,19 +60,24 @@ const HomePage = ({ history }) => {
     return <div></div>;
   }
 
+  let renderPosts = null;
+  if (postsLoading) {
+    renderPosts = <div id="loading">
+      <br />
+      <p>Loading...</p>
+    </div>;
+  } else {
+    renderPosts = posts.map((post) => {
+      return <Post post={post} key={post.post_id} updatePosts={forceUpdate} />;
+    });
+  }
+
   return (
     <>
       <Title />
       <div className="HomePage">
         <WritePost updatePosts={forceUpdate} />
-        {postsLoading ? <div id="loading">
-          <br />
-          <p>Loading...</p>
-        </div> : <>
-          {posts.map((post) => {
-            return <Post post={post} key={post.post_id} updatePosts={forceUpdate} />;
-          })}
-        </>}
+        {renderPosts}
         <div style={{ height: '75px' }} />
       </div>
       <Navbar />
