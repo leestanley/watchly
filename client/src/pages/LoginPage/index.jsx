@@ -89,17 +89,14 @@ function LoginPage({ history }) {
         <div className="log-in">
           {loggingIn ? <p>
             Logging in...
-          </p> : <>
-            <Link to="/home">
-              <p>
-                For demo purposes click here to skip or use
-                <br /> <b>email: </b>
-                test@test.com
-                <br />
-                <b>pass:</b> 123test
-              </p>
-            </Link>
-          </>}
+          </p> : <p>
+              For demo purposes, use
+              <br /> <b>email: </b>
+              test@test.com
+              <br />
+              <b>pass:</b> 123test
+          </p>}
+          
           <h3>Email</h3>
           <Input
             className="input"
