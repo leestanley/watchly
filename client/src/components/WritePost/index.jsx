@@ -3,6 +3,7 @@ import { Form, Input, Modal, Button, Slider, InputNumber } from 'antd';
 import SearchCard from '../SearchCard';
 
 import './style.scss';
+import API from '../../API';
 
 const { TextArea } = Input;
 
@@ -37,7 +38,11 @@ const WritePost = () => {
     const handleCreate = (values) => {
         // add api call
         console.log(values);
-        setIsModalVisible(false);
+        let user = 'testtesttest';
+        let id = '372058';
+        API.createPost(user, values.content, id, values.sliderval + '').then((response) => {
+            setIsModalVisible(false);
+        })
     };
 
     return (
@@ -49,10 +54,13 @@ const WritePost = () => {
             <Modal
                 title="Write a post"
                 visible={isModalVisible}
+                okText="Create"
+                cancelText="Cancel"
                 onOk={() => {
                     form
                         .validateFields()
                         .then((values) => {
+                            console.log(values);
                             handleCreate(values);
                         })
                         .catch((info) => {
@@ -60,19 +68,10 @@ const WritePost = () => {
                         })
                 }}
                 onCancel={handleCancel}
-                footer={[
-                    <Button key="Cancel" shape="round" onClick={handleCancel}>
-                        Cancel
-                    </Button>,
-                    <Button key="submit" type="primary" shape="round" onClick={handleCreate}>
-                        Post
-                    </Button>
-                ]}
             >
                 <div className="Modal">
                     <Form name="post-form" form={form} initialValues={{
-                        'slider-val': 5,
-                        'number-val': 5
+                        sliderval: 5,
                     }}>
                         <div className="modal-body">
                             <Form.Item name="title">
@@ -82,7 +81,7 @@ const WritePost = () => {
                         <div className="modal-rating">
                             <div className="rating-top">
                                 <h2>Your Rating</h2>
-                                <Form.Item name="slider-val">
+                                <Form.Item name="sliderval">
                                     <Slider
                                         min={0}
                                         max={10}
@@ -93,9 +92,6 @@ const WritePost = () => {
                                     />
                                 </Form.Item>
                             </div>
-                            <Form.Item name="number-val">
-                                <InputNumber min={0} max={10} value={rating} onChange={handleRating} />
-                            </Form.Item>
                         </div>
                         <div className="modal-input">
                             <Form.Item name="content">

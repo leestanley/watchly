@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Input, Button } from 'antd';
 import { MessageOutlined, EllipsisOutlined } from '@ant-design/icons';
-import pfp from '../../../assets/tmpprofilepic.jpg';
 import './style.scss';
+import API from '../../../API';
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment, commentID, postID }) => {
     const [newReply, setNewReply] = useState(false);
 
     const [replies, setReplies] = useState(comment.replies);
@@ -19,14 +19,16 @@ const Comment = ({ comment }) => {
     };
 
     const createReply = (values) => {
-        setReplies(replies => [...replies, {
+        /*setReplies(replies => [...replies, {
             uuid: 4,
             profile: {
                 pfp: pfp,
                 name: 'Scott Klemmer'
             },
             content: values.reply
-        }]);
+        }]);*/
+        let user = 'testtesttest';
+        API.createReply(user, values.reply, postID, commentID);
     };
 
     // later add check for empty reply
