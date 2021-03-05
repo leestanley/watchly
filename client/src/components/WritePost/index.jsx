@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Form, Input, Modal, Button, Slider, notification } from 'antd';
 import AutoCard from '../AutoCard';
 
@@ -9,30 +10,25 @@ import API from '../../API';
 const { TextArea } = Input;
 
 const WritePost = ({ updatePosts }) => {
+  const [user, loading, error] = useAuthState(fbase.auth);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [loadingData, setLoadingData] = useState(false);
+  const [searching, setSearching] = useState(false);
   const [rating, setRating] = useState(5);
   const [show, setShow] = useState('');
   const [options, setOptions] = useState([]);
-  const [id, setId] = useState('');
+  const [mediaId, setMediaId] = useState('');
 
   const [form] = Form.useForm();
 
-
-  const onSearch = async (searchText) => {
-    if (searchText.length > 2) {
-      let data = await loadSearchResults(searchText);
-      setOptions([]);
-      
-      setOptions(data);
-      console.log(options)  
-    } else {
-      setOptions([]);
-    }
-  };
+  if (loading) return <></>;
 
   const onSelect = (data) => {
-    console.log('onSelect', data);
+    for (let i = 0; i < options.length; i++) {
+        if(options[i].value === data) {
+            setMediaId(options[i].category)
+            break;
+        }
+    }
   };
 
   const loadSearchResults = async (show) => {
@@ -64,6 +60,21 @@ const WritePost = ({ updatePosts }) => {
     }
   };
 
+  const onSearch = async (searchText) => {
+    if (searching) return;
+
+    setSearching(true);
+    if (searchText.length > 2) {
+      let data = await loadSearchResults(searchText);
+      setOptions(data);
+      console.log(data);
+    } else {
+      setOptions([]);
+    }
+
+    setSearching(false);
+  };
+  
   const marks = {
     0: '0',
     10: {
@@ -90,16 +101,35 @@ const WritePost = ({ updatePosts }) => {
     setRating(value);
   };
 
-  const handleCreate = (values) => {
-    // add api call
-    let user = 'testtesttest';
-    let id = '372058';
-    API.createPost(user, values.content, id, values.sliderval + '').then(
-      (response) => {
-        setIsModalVisible(false);
-        updatePosts();
-      }
-    );
+  const handleCreate = async (values) => {
+    values.title = show; // override
+    
+    let userResult = await API.getInfoFromEmail(user.email);
+    let profileData = userResult.data;
+
+    if (profileData.success) {
+      profileData = profileData.data;
+      API.createPost(profileData.username, values.content, mediaId.toString().trim(), values.sliderval + '').then(
+        (response) => {
+          console.log(response.data);
+
+          if (response.data.success) {
+            setIsModalVisible(false);
+            updatePosts();
+          } else {
+            notification.error({
+              message: 'Error Creating Post',
+              description: response.data.message
+            });
+          }
+        }
+      );
+    } else {
+      notification.error({
+        message: 'Error Creating Post',
+        description: profileData.message
+      });
+    }
   };
 
   return (
@@ -167,8 +197,8 @@ const WritePost = ({ updatePosts }) => {
               </div>
             </div>
             <div className="modal-input">
+              <h2>Write Review</h2>
               <Form.Item name="content">
-                <h2>Write Review</h2>
                 <TextArea rows={4} />
               </Form.Item>
             </div>
