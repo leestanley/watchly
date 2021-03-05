@@ -225,7 +225,7 @@ const api = {
         }
 
         return api.createSuccess({
-            posts: new_edited
+            posts: new_edited.reverse()
         });
     },
     createPost: async (username, rating, id, content) => {
