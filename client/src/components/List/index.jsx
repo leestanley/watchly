@@ -9,22 +9,17 @@ const List = ({ list, handleUpdate }) => {
     const [sortRating, setSortRating] = useState('highest');
 
     // function for setting sort for ratings
-    const handleSortRating = (value) => {
-        setSortRating(value);
-    };
+    const handleSortRating = (value) => setSortRating(value);
 
     // function for rendering prop for list of shows/movies watched
     const renderList = () => {
         let cards;
-        if (sortRating === 'highest') {
+        if (sortRating === 'highest')
             cards = list.slice().sort((a, b) => b.rating - a.rating);
-        } else {
+        else
             cards = list.slice().sort((a, b) => a.rating - b.rating);
-        }
 
-        return cards.map((card, index) => {
-            return <ListCard card={card} key={index} ranking={index + 1} updateList={handleUpdate} />
-        });
+        return cards.map((card, index) => <ListCard card={card} key={index} ranking={index + 1} updateList={handleUpdate} />);
     };
 
     return (

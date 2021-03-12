@@ -12,7 +12,10 @@ import Navbar from '../../components/Navbar';
 
 const useForceUpdate = () => {
   const [value, setValue] = useState(0);
-  return () => setValue(value => value + 1);
+  return () => {
+    window.location.reload(); // temp
+    setValue(value => value + 1);
+  };
 };
 
 const ListPage = ({ history }) => {

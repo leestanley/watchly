@@ -24,7 +24,7 @@ const ListCard = ({ card, ranking, updateList, disableModal }) => {
         if (disableModal) return;
         setIsModalVisible(true);
     };
-
+    
     const handleRemove = () => {
         // add stuff to remove
         movieJSON.movies = movieJSON.movies.filter((movie) => movie.title !== card.title);
@@ -35,37 +35,18 @@ const ListCard = ({ card, ranking, updateList, disableModal }) => {
     const handleSave = () => {
         // add stuff to save
         movieJSON.movies.forEach((movie) => {
-            if (movie.title === card.title) {
+            if (movie.title === card.title)
                 movie.rating = rating;
-            }
         });
+
         updateList();
         setIsModalVisible(false);
     };
 
-    const handleCancel = () => {
-        setIsModalVisible(false);
-    };
-
-    const handleFavorite = () => {
-        if (isFavorite) {
-            setIsFavorite(false);
-        } else {
-            setIsFavorite(true);
-        }
-    };
-
-    const handleRating = (value) => {
-        setRating(value);
-    };
-
-    const renderFavorite = () => {
-        if (isFavorite) {
-            return <Button type="primary" shape="round" onClick={handleFavorite}>Remove Favorite</Button>
-        } else {
-            return <Button type="primary" shape="round" onClick={handleFavorite}>Add Favorite</Button>
-        }
-    };
+    const handleCancel = () => setIsModalVisible(false);
+    const handleFavorite = () => setIsFavorite(!isFavorite);
+    const handleRating = (value) => setRating(value);
+    const renderFavorite = () => <Button type="primary" shape="round" onClick={handleFavorite}>{isFavorite ? 'Remove': 'Add'} Favorite</Button>;
 
     return (
         <>
