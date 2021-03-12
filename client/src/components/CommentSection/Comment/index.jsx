@@ -79,6 +79,7 @@ const Comment = ({ comment, commentID, postID, updateReplies }) => {
         if (profileData.success) {
             profileData = profileData.data;
             API.createReply(profileData.username, values.reply, postID, commentID).then(response => {
+                setNewReply(false);
                 updateReplies();
             });
         } else {
@@ -96,7 +97,7 @@ const Comment = ({ comment, commentID, postID, updateReplies }) => {
                 <div className="reply-editor">
                     <Form onFinish={createReply} className="reply-form">
                         <Form.Item name="reply">
-                            <Input autocomplete="off" placeholder="Write a reply..." style={{ width: 237,}} />
+                            <Input autocomplete="off" placeholder="Write a reply..." style={{ width: 237 }} />
                         </Form.Item>
                         <Form.Item>
                             <Button htmlType="submit">

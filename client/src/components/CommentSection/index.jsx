@@ -12,6 +12,7 @@ import './style.scss';
 const CommentSection = ({ commentList, postID, updateComments }) => {
     const [user, loading, error] = useAuthState(fbase.auth);
     const [comments, setComments] = useState(commentList);
+    const [currentComment, setCurrentComment] = useState('');
 
     useEffect(() => {
         setComments(commentList);
@@ -48,6 +49,7 @@ const CommentSection = ({ commentList, postID, updateComments }) => {
         if (profileData.success) {
             profileData = profileData.data;
             API.createComment(profileData.username, values.comment, postID).then(response => {
+                setCurrentComment(''); // clear field
                 updateComments();
             });
         } else {
@@ -66,7 +68,7 @@ const CommentSection = ({ commentList, postID, updateComments }) => {
             </div>
             <Form onFinish={handleCreateComment} className="comment-form">
                 <Form.Item className="form-item" name="comment">
-                    <Input placeholder="Write a comment..." style={{ width: 280 }} autocomplete="off" />
+                    <Input onChange={e => setCurrentComment(e.target.value)} value={currentComment} placeholder="Write a comment..." style={{ width: 280 }} autocomplete="off" />
                 </Form.Item>
                 <Form.Item>
                     <Button htmlType="submit">

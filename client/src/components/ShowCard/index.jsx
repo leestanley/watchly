@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Modal, Button, Slider, InputNumber } from 'antd';
+import { Modal, Button, Slider, InputNumber, notification } from 'antd';
 
 import fbase from '../../firebase';
 import profileJSON from '../../assets/profiles.json';
@@ -49,6 +49,25 @@ const ShowCard = ({ card }) => {
   const handleRating = (value) => setRating(value);
 
   const handleAdd = () => {
+    let proceed = true;
+    // check for duplicates
+    for (let i = 0; i < movieJSON.movies.length; i++) {
+      if (movieJSON.movies[i].title === card.title) {
+        proceed = false;
+        break;
+      }
+    }
+
+    if (!proceed) {
+      notification.error({
+        message: 'Error Adding',
+        description: `"${card.title}" is already in your list!`
+      });
+
+      setIsModalVisible(false);
+      return;
+    }
+
     // add stuff to save
     movieJSON.movies.push({
       title: card.title,
@@ -65,22 +84,25 @@ const ShowCard = ({ card }) => {
     if (isFavorite) {
       // remove favorite
       profile = getProfile(user.email);
-      if (profile !== null)
+      if (profile !== null) {
+        profile.favorites = (profile.favorites || []);
         profile.favorites = (profile.favorites.filter(m => m.title !== card.title));
-      console.log(profile.favorites);
+      }
+        
       setIsFavorite(false);
     } else {
       // add favorite
       profile = getProfile(user.email);
-      if (profile !== null)
+      if (profile !== null) {
+        profile.favorites = (profile.favorites || []);
+
         profile.favorites.push({
           title: card.title,
           releaseDate: card.releaseDate,
           poster: card.poster
         });
+      }
       
-      console.log(profile.favorites);
-
       setIsFavorite(true);
     }
   };
