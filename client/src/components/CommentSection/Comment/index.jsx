@@ -162,7 +162,10 @@ const Comment = ({ comment, commentID, postID, updateReplies }) => {
                             </Link>
                         </>}
                         <div className="comment-details">
-                            <p className="commenter-name">{reply.user_info.username}</p>
+                            <Link to={(reply.user_info.username === selfUsername) ? '/profile' : `/profile/${reply.user_info.username}`}>
+                                <p className="commenter-name">{reply.user_info.username}</p>
+                            </Link>
+                            
                             <p className="comment-content">{reply.content}</p>
                             <p className="comment-reply"><a className="bold-reply" onClick={openReply} href="/#">Reply</a></p>
                         </div>
