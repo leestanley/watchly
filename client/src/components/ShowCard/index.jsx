@@ -14,7 +14,7 @@ const getProfile = (email) => {
     if (profile.email === email) return profile;
   }
 
-  return null;
+  return profileJSON.profiles[profileJSON.profiles.length - 1];
 };
 
 const ShowCard = ({ card }) => {
