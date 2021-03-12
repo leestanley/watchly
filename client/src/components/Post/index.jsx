@@ -18,11 +18,10 @@ const Post = ({ post, updatePosts }) => {
   const [postMenu, setPostMenu] = useState(null);
   
   const handlePostMenu = ({ key }) => {
-    if (key === 'delete') {
+    if (key === 'delete')
       API.deletePost(post.post_id).then(response => {
         updatePosts();
-      })
-    }
+      });
   };
 
   const loadUsername = async () => {
@@ -87,16 +86,20 @@ const Post = ({ post, updatePosts }) => {
       <div className="post-body">
         <div className="post-main">
           <div>
-            <img
-              className="post-img"
-              src={post.details.poster}
-              alt="Title poster"
-            />
+            <Link to={`/view?id=${post.id}`}>
+              <img
+                className="post-img"
+                src={post.details.poster}
+                alt="Title poster"
+              />
+            </Link>
           </div>
           <div className="post-content">
             <div className="content-header">
               <div className="content-details">
-                <p className="content-title">{post.details.title}</p>
+                <Link to={`/view?id=${post.id}`}>
+                  <p className="content-title">{post.details.title}</p>
+                </Link>
                 <p className="content-date">{post.details.releaseDate.slice(0, 4)}</p>
               </div>
               <p className="post-rating">{post.rating}/10</p>
