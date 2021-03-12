@@ -78,7 +78,9 @@ const Post = ({ post, updatePosts }) => {
             </Link>
           </>}
           <div className="poster-details">
-            <p className="poster-name">{post.user_info.username}</p>
+            <Link to={(post.user_info.username === selfUsername) ? '/profile' : `/profile/${post.user_info.username}`}>
+              <p className="poster-name">{post.user_info.username}</p>
+            </Link>
           </div>
         </div>
         {!loadingData && postMenu}
