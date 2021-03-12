@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import fbase from '../../firebase';
 import API from '../../API';
+import './style.scss';
 
 import Post from '../../components/Post';
 import WritePost from '../../components/WritePost';

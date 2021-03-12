@@ -34,6 +34,7 @@ const List = ({ list, handleUpdate }) => {
             <div className="list-cards">
                 {renderList()}
             </div>
+            <div className="space" style={{height: 75}}/>
         </div>
     );
 };

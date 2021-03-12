@@ -10,17 +10,17 @@ import API from '../../API';
 import './style.scss';
 
 const CommentSection = ({ commentList, postID, updateComments }) => {
-    const [user, loading, error] = useAuthState(fbase.auth);
-    const [comments, setComments] = useState(commentList);
-    const [currentComment, setCurrentComment] = useState('');
+  const [user, loading, error] = useAuthState(fbase.auth);
+  const [comments, setComments] = useState(commentList);
+  const [currentComment, setCurrentComment] = useState('cat');
 
-    useEffect(() => {
-        setComments(commentList);
-    }, [commentList]);
+  useEffect(() => {
+    setComments(commentList);
+  }, [commentList]);
 
-    if (loading) return <></>;
-    
-    /*
+  if (loading) return <></>;
+
+  /*
     const [comments, setComments] = useState([{ uuid: "loading", author: "Loading", time: Date.now(), content: "Loading", childList: [], score: 0 }]);
 
     useEffect(() => {
@@ -34,50 +34,62 @@ const CommentSection = ({ commentList, postID, updateComments }) => {
     }, [newComment, refreshComments])
     */
 
-    const renderComments = () => {
-        return comments.map((comment) => {
-            return (
-                <Comment key={comment.comment_id} comment={comment} commentID={comment.comment_id} postID={postID} updateReplies={updateComments} />
-            );
-        });
-    };
+  const renderComments = () => {
+    return comments.map((comment) => {
+      return (
+        <Comment
+          key={comment.comment_id}
+          comment={comment}
+          commentID={comment.comment_id}
+          postID={postID}
+          updateReplies={updateComments}
+        />
+      );
+    });
+  };
 
-    const handleCreateComment = async (values) => {
-        let userResult = await API.getInfoFromEmail(user.email);
-        let profileData = userResult.data;
+  const handleCreateComment = async (values) => {
+    let userResult = await API.getInfoFromEmail(user.email);
+    let profileData = userResult.data;
 
-        if (profileData.success) {
-            profileData = profileData.data;
-            API.createComment(profileData.username, values.comment, postID).then(response => {
-                setCurrentComment(''); // clear field
-                updateComments();
-            });
-        } else {
-            notification.error({
-                message: 'Error posting comment',
-                description: profileData.message
-            });
+    if (profileData.success) {
+      profileData = profileData.data;
+      API.createComment(profileData.username, values.comment, postID).then(
+        (response) => {
+          setCurrentComment(''); // clear field
+          updateComments();
         }
+      );
+    } else {
+      notification.error({
+        message: 'Error posting comment',
+        description: profileData.message,
+      });
     }
+  };
 
-    // add check for empty comment later on, disable form submit if empty
-    return (
-        <div className="CommentSection">
-            <div className="comment-list">
-                {renderComments()}
-            </div>
-            <Form onFinish={handleCreateComment} className="comment-form">
-                <Form.Item className="form-item" name="comment">
-                    <Input onChange={e => setCurrentComment(e.target.value)} value={currentComment} placeholder="Write a comment..." style={{ width: 280 }} autocomplete="off" />
-                </Form.Item>
-                <Form.Item>
-                    <Button htmlType="submit">
-                        <MessageOutlined />
-                    </Button>
-                </Form.Item>
-            </Form>
-        </div>
-    );
+  // add check for empty comment later on, disable form submit if empty
+  return (
+    <div className="CommentSection">
+      <div className="comment-list">{renderComments()}</div>
+      <Form onFinish={handleCreateComment} className="comment-form">
+        <Form.Item className="form-item" name="comment">
+          <Input
+            onChange={(e) => setCurrentComment(e.target.value)}
+            value={currentComment}
+            placeholder="Write a comment..."
+            style={{ width: 280 }}
+            autocomplete="off"
+          />
+        </Form.Item>
+        <Form.Item>
+          <Button htmlType="submit">
+            <MessageOutlined />
+          </Button>
+        </Form.Item>
+      </Form>
+    </div>
+  );
 };
 
 export default CommentSection;
